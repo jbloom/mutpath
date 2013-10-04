@@ -2,6 +2,8 @@
 influenza NP 1918 descended
 ===========================================
 
+This analysis is found in the ``./examples/influenza_NP_1918_Descendend/`` subdirectory of the main `mutpath`_ repository.
+
 This analysis involves influenza NPs descended directly from the 1918 virus.
 These are
 human seasonal H1N1 (1918-1957, 1977-2008),
