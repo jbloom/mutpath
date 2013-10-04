@@ -1,0 +1,7 @@
+# Name : name of the node
+# MedianPersistence : posterior median time to next node
+# MinPersistenceInterval : minimum of 90.00 percent credible interval
+# MaxPersistenceInterval : maximum of 90.00 percent credible interval
+#
+#Name	MedianPersistence	MinPersistenceInterval	MaxPersistenceInterval
+Memphis/1978	2.658250	0.801100	4.892500

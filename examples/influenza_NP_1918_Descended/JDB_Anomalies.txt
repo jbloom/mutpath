@@ -1,0 +1,72 @@
+A/Siena/9/1989
+A/Philippines/WRAIR1736P/2006
+A/Sydney/5/1997
+A/Iowa/CEID23/2005
+A/swine/Wisconsin/1/1967
+A/Swine/Nebraska/209/98
+A/swine/Saskatchewan/18789/02
+A/swine/Ontario/52156/03
+A/Fukushima/114/96
+A/Korea/426/1968
+A/NWS/1934
+A/Puerto Rico/8/34
+A/Puerto Rico/8/1934
+A/Puerto Rico/8-LVD3/1934
+A/Moscow/1019/1965
+A/Nanjing/49/1977
+A/Melbourne/1/1946
+A/Netherlands/001S1/1948
+A/England/1/1961
+A/California/45/1978
+A/Iowa/07/2011
+A/Mongolia/231/85
+A/swine/Saraburi/NIAH107725-28/2008
+A/duck/Vietnam/LBM81/2012
+A/fowl/Dobson/Dutch/1927
+A/USSR/46/1979
+A/Wisconsin/3623/1988
+A/Wisconsin/10/1998
+A/California/10/1978
+A/chicken/Shanghai/C1/2012
+A/chicken/Shanghai/C2/2012
+A/chicken/Shanghai/C3/2012
+A/duck/Victoria/30a/1981
+A/duck/Victoria/23/1981
+A/ruddy turnstone/Delaware Bay/125/1994
+A/herring gull/Delaware Bay/106/1995
+A/swine/Guangdong/102/2002
+A/swine/Henan/Y1/2009
+A/canine/Guangxi/1/2011
+A/equine/Guangxi/3/2011
+A/duck/Hokkaido/8/1980
+A/chicken/Rostock/8/1934
+A/swine/HuBei/06/2009
+A/herring gull/DE/665/1988
+A/turkey/Wisconsin/1/1968
+A/swine/May/1954
+A/ruddy turnstone/DE/637/1988
+A/ruddy turnstone/Delaware/519/1988
+A/Wisconsin/3523/1988
+A/red-necked stint/Australia/5745/1981
+A/black duck/AUS/4045/1980
+A/chicken/Rostock/45/1934
+A/Maryland/12/1991
+A/turkey/Massachusetts/3740/1965
+A/Memphis/1/1979
+A/duck/Eastern China/909/2009
+A/duck/Australia/341/1983
+A/avian/Japan/8KI0040/2008
+A/duck/Vietnam/LBM1/2011
+A/quail/Nanchang/12-340/2000
+A/swine/KU/2/2001
+A/gull/Maryland/704/1977
+A/duck/Vietnam/LBM6/2011
+A/swine/Shanghai/Y1/2009
+A/Ohio/3559/1988
+A/Kiev/59/1979
+A/Mongolia/111/91 
+A/Ohio/3523/1988
+A/Mongolia/153/88
+A/swine/England/203759/1992
+A/swine/England/163266/1987
+A/swine/Italy/6/1981

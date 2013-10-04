@@ -1,0 +1,104 @@
+A/Hickox/1940
+A/FortWorth/50
+A/Alma Ata/1417/84
+A/Neimenggu/63/1997
+A/Nanjing/49/77
+A/HongKong/498/97
+A/Victoria/1968
+A/ruddy turnstone/NJ/65/1985
+A/chicken/Brescia/1902
+A/fowl/Dobson/1927
+A/wedge-tailed shearwater/Western Australia/2576/1979
+A/ruddy turnstone/NJ/47/1985
+A/duck/Taiwan/0526/72
+A/duck/Zhejiang/11/2000
+A/chicken/Hebei/1/2002
+A/tree sparrow/Henan/1/2004
+A/tree sparrow/Henan/2/2004
+A/tree sparrow/Henan/3/2004
+A/tree sparrow/Henan/4/2004
+A/chicken/Hubei/wk/1997
+A/duck/Vietnam/8/05
+A/chicken/Henan/wu/2004
+A/wild duck/Guangdong/314/2004
+A/mallard/Guangxi/wt/2004
+A/chicken/Heilongjiang/35/00
+A/goose/Vietnam/3/05
+A/grey teal/Australia/2/1979
+A/turkey/Canada/63
+A/turkey/England/N28/73
+A/mallard/Astrakhan/263/1982
+A/shearwater/Australia/1/1972
+A/shearwater/Australia//1/1973
+A/duck/Minnesota/3/1992
+A/duck/Mongolia/54/2001
+A/slaty-backed gull/Shandong/38/04
+A/chicken/Jilin/9/2004
+A/duck/Xuzhou/07/2003
+A/bird/Guangxi/A1/2006
+A/mallard/Alberta/245/2003
+A/chicken/Hebei/718/2001
+A/mallard duck/ALB/76/1985
+A/chicken/Taiwan/4801/90
+A/duck/Hubei/W1/2004
+A/duck/Ontario/05/00
+A/swine/Ontario/48235/04
+A/swine/Ontario/55383/04
+A/swine/Alberta/56626/03
+A/swine/Alberta/53518/03
+A/swine/St-Hyacinthe/148/1990
+A/swine/Ange-Gardien/150/1990
+A/swine/Heilongjiang/74/2000
+A/swine/Ontario/11112/04
+A/swine/Guangdong/4/2005
+A/swine/England/191973/92
+A/swine/Jamesburg/1942
+A/swine/41/1949
+A/swine/Iowa/1946
+A/swine/Inner Mongolia/547/2001
+A/whale/P.O./19/1976
+A/laughing gull/DE/94/2000
+A/shorebird/DE/236/2003
+A/tree sparrow/Henan/1/2004
+A/tree sparrow/Henan/2/2004
+A/tree sparrow/Henan/3/2004
+A/tree sparrow/Henan/4/2004
+A/chicken/Jilin/ha/2003
+A/chicken/Hebei/718/2001
+A/chicken/Jilin/9/2004
+A/chicken/Hebei/wi/1997
+A/grey teal/Australia/1/1979
+A/duck/Taiwan/0526/1972
+A/chicken/Taiwan/G2/87
+A/chicken/Taiwan/G23/87
+A/chicken/Jilin/hk/2004
+A/chicken/Jilin/hd/2002
+A/goose/Jilin/hb/2003
+A/chicken/Jilin/xw/2003
+A/chicken/Jilin//xv/2002
+A/duck/Hubei/wq/2003
+A/goose/Guangdong/xb/2001
+A/chicken/Taiwan/PF2/02
+A/chicken/Taiwan/PF3/02
+A/Sck/HK/Yu100/2002
+A/duck/Vietnam/8/05
+A/chicken/Hubei/wk/1997
+A/chicken/Hubei/wj/1997
+A/chicken/Hebei/108/02
+A/chicken/Henan/2/98
+A/chicken/Gansu/1/99
+A/chicken/Tianjing/1/96
+A/duck/Nanjing/2/97
+A/duck/Vietnam/1/2005
+A/swine/Indiana/P12439/00
+A/swine/Korea/CN22/2006
+A/swine/Ontario/53518/03
+A/swine/Ontario/57561/03
+A/swine/Ontario/11112/04
+A/swine/Ontario/48235/04
+A/swine/Ontario/55383/04
+A/swine/St-Hyacinthe/106/1991
+A/Swine/Wisconsin/458/98
+A/Swine/Wisconsin/464/98
+A/swine/British Columbia/28103/2005
+A/Swine/Iowa/930/01

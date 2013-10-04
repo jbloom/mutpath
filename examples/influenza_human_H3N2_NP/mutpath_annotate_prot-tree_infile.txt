@@ -1,0 +1,5 @@
+# input file for mutpath_annotate_tree.py
+intreefile prot_maxcladecredibility.trees
+outtreefile annotated_prot_maxcladecredibility.trees
+A/Aichi/2/1968_1968.50 Aichi/1968
+A/Brisbane/10/2007_2007.10 Brisbane/2007

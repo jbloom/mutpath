@@ -1,0 +1,11 @@
+build
+docs/_build
+docs/_static
+docs/_template
+*.pyc
+.DS_Store
+examples/influenza_human_H3N2_NP/prots_BEASTrun_*
+examples/influenza_human_H3N2_NP/prot_trees_merged.trees
+examples/influenza_NP_1918_Descended/RAxML_output/*
+examples/influenza_NP_1918_Descended/run*
+examples/influenza_NP_1918_Descended/merged_Combined_NP_proteins_compact.trees
