@@ -1,0 +1,2305 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>mutpath Python API &mdash; mutpath 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="mutpath 0.1 documentation" href="index.html" />
+    <link rel="next" title="Acknowledgements" href="acknowledgements.html" />
+    <link rel="prev" title="influenza NP 1918 descended" href="example_influenza_NP_1918_Descended.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="acknowledgements.html" title="Acknowledgements"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="example_influenza_NP_1918_Descended.html" title="influenza NP 1918 descended"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="mutpath-python-api">
+<h1><tt class="docutils literal"><span class="pre">mutpath</span></tt> Python API<a class="headerlink" href="#mutpath-python-api" title="Permalink to this headline">¶</a></h1>
+<p><tt class="docutils literal"><span class="pre">mutpath</span></tt> is designed so that you can use it simply by running the main scripts, and do not need to interface directly with the Python code. However, if you want to access the Python modules that constitute the package, here is the API.</p>
+<div class="section" id="module-__init__">
+<span id="mutpath-package"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">mutpath</span></tt> Package<a class="headerlink" href="#module-__init__" title="Permalink to this headline">¶</a></h2>
+<p>This package implements mutpath.</p>
+<p>This package is designed for building mutational paths through sequence
+space using mutation-mapped trees written by BEAST (using the MarkovJumps
+feature).</p>
+<p>Written by Jesse Bloom.</p>
+</div>
+<div class="section" id="module-align">
+<span id="align-module"></span><h2><a class="reference internal" href="#module-align" title="align"><tt class="xref py py-mod docutils literal"><span class="pre">align</span></tt></a> Module<a class="headerlink" href="#module-align" title="Permalink to this headline">¶</a></h2>
+<p>This module contains functions to run sequence alignment programs.</p>
+<p>It can be used to run PROBCONS or MUSCLE.</p>
+<p>Written by Jesse Bloom.</p>
+<dl class="function">
+<dt id="align.AddDots">
+<tt class="descclassname">align.</tt><tt class="descname">AddDots</tt><big>(</big><em>aligned_headers_seqs</em><big>)</big><a class="headerlink" href="#align.AddDots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds dots at identities in multiple sequence alignment.</p>
+<p>Takes as an argument a list of two or more aligned sequences, as would be
+returned by <cite>Align</cite>.</p>
+<p>Returns a copy of this list.  The first sequence in the list is unchanged.
+In all remaining sequences, dot characters (&#8221;.&#8221;) have been used to
+replace any amino acids that are identical to the amino acid at the 
+same position in the first sequence, except for gap characters.
+Characters are replaced even if they are not of the same case</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AddDots</span><span class="p">([(</span><span class="s">&#39;seq1&#39;</span><span class="p">,</span> <span class="s">&#39;-TGC&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;AGGC&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq3&#39;</span><span class="p">,</span> <span class="s">&#39;-tac&#39;</span><span class="p">)])</span>
+<span class="go">[(&#39;seq1&#39;, &#39;-TGC&#39;), (&#39;seq2&#39;, &#39;AG..&#39;), (&#39;seq3&#39;, &#39;-.a.&#39;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="align.Align">
+<tt class="descclassname">align.</tt><tt class="descname">Align</tt><big>(</big><em>headers_seqs</em>, <em>progpath</em>, <em>program='MUSCLE'</em><big>)</big><a class="headerlink" href="#align.Align" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a multiple sequence alignment of two or more sequences.</p>
+<p>By default, the protein sequences are aligned using MUSCLE. This
+program can be used to align either nucleotide or protein
+sequences. You can also use PROBCONS to align protein sequences.</p>
+<p><em>headers_seqs</em> is a list specifying the names of the sequences that we
+want to align.  Each entry is a 2-tuple <em>(head, seq)</em> where <em>head</em> is
+a header giving the sequence name and other information (might be empty)
+and <em>seq</em> is a string giving the protein sequence.  The list must have
+at least 2 entries.</p>
+<p><em>progpath</em> should specify a directory containing the alignment program executable,
+either PROBCONS or MUSCLE.  The PROBCONS executable is assumed to have
+the name &#8220;probcons&#8221; in this directory.  The MUSCLE executable is assumed to
+have the name &#8220;muscle&#8221; in this directory.</p>
+<p><em>program</em> specifies what program to use for the alignment.  By default, it is
+&#8220;MUSCLE&#8221;.  If you wish to use PROBCONS instead, set it to &#8220;PROBCONS&#8221;.</p>
+<p>This executable is used to perform a multiple sequence alignment of the proteins
+with the default settings of either PROBCONS or MUSCLE.  The returned variable is a
+new list <em>aligned_headers_seqs</em>.  Each entry is a 2-tuple <em>(head, aligned_seq)</em>.  
+<em>head</em> has the same meaning as on input (the sequence header) and 
+<em>aligned_seq</em> is the aligned sequence, with gaps inserted as &#8216;-&#8216;
+as appropriate.  Therefore, all of the <em>aligned_seq</em> entries in
+<em>aligned_headers_seqs</em> are of the same length.  The entries in <em>aligned_headers_seq</em>
+are in the same order as in the input list <em>headers_seqs</em>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="align.PairwiseStatistics">
+<tt class="descclassname">align.</tt><tt class="descname">PairwiseStatistics</tt><big>(</big><em>aligned_headers_seqs</em><big>)</big><a class="headerlink" href="#align.PairwiseStatistics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the number of gaps and identities in a pairwise alignment.</p>
+<dl class="docutils">
+<dt>This method is designed to compute statistics about an alignment of two</dt>
+<dd>sequences.</dd>
+</dl>
+<p><em>aligned_headers_seqs</em> is a pair of aligned sequences, as would be returned by
+calling <cite>Align</cite> with two sequences (which should be of the same 
+length since they have been aligned).  That is, it is a list of 2-tuples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[(</span><span class="n">head1</span><span class="p">,</span> <span class="n">alignedseq1</span><span class="p">),</span> <span class="p">(</span><span class="n">head2</span><span class="p">,</span> <span class="n">alignedseq2</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>The method returns the 2-tuple <em>(identities, gaps)</em>.  <em>identities</em> is a number
+between zero and one.  It is the fraction of residues in one
+sequence that are aligned with identical residues in the other sequence, gaps
+not being included in the tally.  This is computed by dividing the number of
+identities by the total length of the aligned sequence excluding gaps.
+<em>gaps</em> is the fraction of gaps in the 
+alignment.  It is the fraction of the positions in the alignment where
+either sequence has a gap.  So it is computed by dividing the total number
+of gaps by the length of the aligned sequences.  Upper and lower case 
+nucleotides are treated equivalently.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="nb">round</span><span class="p">(</span><span class="n">PairwiseStatistics</span><span class="p">([(</span><span class="s">&#39;seq1&#39;</span><span class="p">,</span> <span class="s">&#39;TGCAT&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;AG-AT&#39;</span><span class="p">)])[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">0.75</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="nb">round</span><span class="p">(</span><span class="n">PairwiseStatistics</span><span class="p">([(</span><span class="s">&#39;seq1&#39;</span><span class="p">,</span> <span class="s">&#39;tgcat&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;AG-AT&#39;</span><span class="p">)])[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">0.2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="align.RemoveDots">
+<tt class="descclassname">align.</tt><tt class="descname">RemoveDots</tt><big>(</big><em>aligned_headers_seqs</em><big>)</big><a class="headerlink" href="#align.RemoveDots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes dots at identities in a multiple sequence alignment.</p>
+<p>This function effectively undoes what can be done by &#8216;AddDots&#8217;.</p>
+<p>Takes as an argument a list of two or more aligned sequences
+in the form of (header, sequence) tuples, as would be returned
+by <strong>Align</strong>.</p>
+<p>Returns a copy of this list.  Any positions where one of the sequences
+after the first sequence has a &#8216;.&#8217; character, the amino acid
+is changed to that found at the same position in the first sequence.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">RemoveDots</span><span class="p">([(</span><span class="s">&#39;seq1&#39;</span><span class="p">,</span> <span class="s">&#39;-TGC&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;AG..&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq3&#39;</span><span class="p">,</span> <span class="s">&#39;-.a.&#39;</span><span class="p">)])</span>
+<span class="go">[(&#39;seq1&#39;, &#39;-TGC&#39;), (&#39;seq2&#39;, &#39;AGGC&#39;), (&#39;seq3&#39;, &#39;-TaC&#39;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="align.StripGapsToFirstSequence">
+<tt class="descclassname">align.</tt><tt class="descname">StripGapsToFirstSequence</tt><big>(</big><em>aligned_headers_seqs</em><big>)</big><a class="headerlink" href="#align.StripGapsToFirstSequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Strips gaps from a reference sequence, and all corresponding alignments.</p>
+<p>On input, <em>aligned_headers_seqs</em> should be a set of two or more aligned sequences,
+as would be returned by <cite>Align</cite>.</p>
+<p>The first sequence in this alignment is taken to correspond to the reference sequence.
+The returned variable is a list similar to aligned_headers_seqs, but with
+all positions corresponding to gaps in this reference sequence stripped away.
+All gaps (&#8216;-&#8216;) characters are removed from this reference sequence.  In addition,
+in all other aligned sequences in <em>aligned_headers_seqs</em>, every character at
+the same position as a gap in the reference sequence is removed.  Therefore,
+at the end of this procedure, all of the alignments have the same length
+as the reference sequence with its gaps stripped away.  The headers are 
+unchanged.  The order of sequences in this stripped alignment is also
+unchanged.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">StripGapsToFirstSequence</span><span class="p">([(</span><span class="s">&#39;s1&#39;</span><span class="p">,</span> <span class="s">&#39;-AT-A-GC&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;s2&#39;</span><span class="p">,</span> <span class="s">&#39;AAT-TAGC&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;s3&#39;</span><span class="p">,</span> <span class="s">&#39;--T-A-GC&#39;</span><span class="p">)])</span>
+<span class="go">[(&#39;s1&#39;, &#39;ATAGC&#39;), (&#39;s2&#39;, &#39;ATTGC&#39;), (&#39;s3&#39;, &#39;-TAGC&#39;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="align.StripLeadingTrailingGapsToFirstSequence">
+<tt class="descclassname">align.</tt><tt class="descname">StripLeadingTrailingGapsToFirstSequence</tt><big>(</big><em>aligned_headers_seqs</em><big>)</big><a class="headerlink" href="#align.StripLeadingTrailingGapsToFirstSequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Strips leading and trailing gaps from first sequence, and trims corresponding alignments.</p>
+<p>On input, <em>aligned_headers_seqs</em> should be a set of two or more aligned sequences,
+as would be returned by <cite>Align</cite>.</p>
+<p>The first sequence in the alignment is taken to correspond to the reference sequence.
+The returned variable is a list similar to <em>aligned_headers_seqs</em>, but all
+leading and trailing gaps have been stripped from the reference sequence.  A leading
+gap (&#8216;-&#8216;) is one that precedes the first non-gap character, and a trailing gap is
+one that follows the last non-gap character.  All other sequences have all
+positions corresponding the leading/trailing gaps of the reference sequence
+trimmed as well.  The headers and order of sequences are preserved.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">StripLeadingTrailingGapsToFirstSequence</span><span class="p">([(</span><span class="s">&#39;s1&#39;</span><span class="p">,</span> <span class="s">&#39;--ATA-GC-&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;s2&#39;</span><span class="p">,</span> <span class="s">&#39;TGATTA-CA&#39;</span><span class="p">)])</span>
+<span class="go">[(&#39;s1&#39;, &#39;ATA-GC&#39;), (&#39;s2&#39;, &#39;ATTA-C&#39;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-beast">
+<span id="beast-module"></span><h2><a class="reference internal" href="#module-beast" title="beast"><tt class="xref py py-mod docutils literal"><span class="pre">beast</span></tt></a> Module<a class="headerlink" href="#module-beast" title="Permalink to this headline">¶</a></h2>
+<p>Module for functions related to reading / writing BEAST files.</p>
+<p>This module is designed to interface with the BEAST phylogenetics
+package.</p>
+<p>Written by Jesse Bloom.</p>
+<dl class="function">
+<dt id="beast.WriteXML">
+<tt class="descclassname">beast.</tt><tt class="descname">WriteXML</tt><big>(</big><em>xmlfile</em>, <em>seqs</em>, <em>datatype</em>, <em>chainlength</em>, <em>screenloginterval</em>, <em>fileloginterval</em>, <em>usemarkovjumps</em>, <em>sitemodel</em><big>)</big><a class="headerlink" href="#beast.WriteXML" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes an XML file that can serve as input to BEAST.</p>
+<p>Dates are assigned to sequences based on the values specified
+in the names in seqs.</p>
+<p>The file logs are given the same base prefix as that for <em>xmlfile</em> itself,
+but the extensions are .log and .trees.</p>
+<p><em>xmlfile</em> a string giving the name of the XML file that
+we create. It is overwritten if it already exists.</p>
+<p><em>seqs</em> a list of sequences in the form (header, seq). 
+These sequences are assumed to have dates assigned,
+and are specified following a terminal underscore,
+such as:</p>
+<div class="highlight-python"><pre>A/Nanchang/933/1995_1995.00</pre>
+</div>
+<p><em>datatype</em> the data type for the sequences, might be
+&#8216;nucleotide&#8217; or &#8216;amino acid&#8217;.</p>
+<p><em>chainlength</em> integer giving the chain length for the MCMC.</p>
+<p><em>screenloginterval</em> integer specifying the frequency with which
+we log MCMC information to the screen.</p>
+<p><em>fileloginterval</em> integer specifying the frequency with which
+we log MCMC information to the file logs.</p>
+<p><em>usemarkovjumps</em> Boolean switch. If True, we use the Markov
+Jumps feature to write mutations / sequences for the .trees
+file. This allows reconstruction of mutational paths, but
+also increases the .trees file size dramatically.</p>
+<p><em>sitemodel</em> the site substitution model. Currently allows
+&#8216;JTT&#8217; for proteins and &#8216;HKY&#8217; for nucleic acids.</p>
+<p>Various other options are currently hardcoded in the method.
+Options could be set to allow them to be changed. Currently:</p>
+<ul class="simple">
+<li>uses a coalescent-based prior on the trees with constant
+population size with Jeffrey&#8217;s prior.</li>
+<li>uses a strict clock with uniform rates across branches, gamma 
+prior on rate.</li>
+</ul>
+</dd></dl>
+
+</div>
+<div class="section" id="module-io">
+<span id="io-module"></span><h2><a class="reference internal" href="#module-io" title="io"><tt class="xref py py-mod docutils literal"><span class="pre">io</span></tt></a> Module<a class="headerlink" href="#module-io" title="Permalink to this headline">¶</a></h2>
+<p>Module for performing input/output operations.</p>
+<p>Functions are:</p>
+<p><em>ParseInfile</em> : reads key / value pairs from an input file.</p>
+<p><em>ParseBoolValue</em> : reads Boolean values from input dictionary.</p>
+<p><em>ParseIntValue</em> : reads integer values from input dictionary.</p>
+<p><em>ParseFloatValue</em> : reads float values from input dictionary.</p>
+<p><em>ParseStringValue</em> : reads string values from input dictionary.</p>
+<p><em>ParseSeqValue</em> : reads sequence from file specified by input dictionary.</p>
+<p><em>ParseFileList</em> : reads file list specified by input dictionary.</p>
+<p>Written by Jesse Bloom.</p>
+<dl class="function">
+<dt id="io.ParseBoolValue">
+<tt class="descclassname">io.</tt><tt class="descname">ParseBoolValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseBoolValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets Boolean argument from input dictionary.</p>
+<p><em>d</em> is a dictionary of key/value string pairs as returned by
+<strong>ParseInfile</strong>.</p>
+<p><em>key</em> is a string in this dictionary that specifies a value that
+should be <em>True</em> or <em>False</em>.</p>
+<p>Returns the Boolean truth value specified by <em>key</em>. Raises a <em>ValueError</em>
+if <em>key</em> does not exist in <em>d</em>, and a <em>ValueError</em> if it specifies
+something other than <em>True</em> or <em>False</em>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;gzipped&#39;</span><span class="p">:</span><span class="s">&#39;True&#39;</span><span class="p">,</span> <span class="s">&#39;applyfilter&#39;</span><span class="p">:</span><span class="s">&#39;False&#39;</span><span class="p">,</span> <span class="s">&#39;a1&#39;</span><span class="p">:</span><span class="s">&#39;a1.txt&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParseBoolValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;gzipped&#39;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseBoolValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;applyfilter&#39;</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseBoolValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;a1&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">value a1.txt for a1 is not True/False</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseBoolValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;otherkey&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">did not find a key for otherkey</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="io.ParseFileList">
+<tt class="descclassname">io.</tt><tt class="descname">ParseFileList</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseFileList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets list of files from input dictionary.</p>
+<p><em>d</em> is a dictionary of key/value string pairs as returned by
+<strong>ParseInfile</strong>.</p>
+<p><em>key</em> is a string in this dictionary that specifies a value that
+should give a list of one or more file names.</p>
+<p>Returns a list of the file names specified by <em>key</em>. If one or more of
+these files does not exist, raises and IOError. If key does not
+exist in <em>d</em>, raises and KeyError.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="io.ParseFloatValue">
+<tt class="descclassname">io.</tt><tt class="descname">ParseFloatValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseFloatValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets float argument from input dictionary.</p>
+<p><em>d</em> a dictionary of key/value string pairs as returned by
+<strong>ParseInfile</strong>.</p>
+<p><em>key</em> is a string in this dictionary that specifies a value that
+should be convertible to a float.</p>
+<p>Returns the float specified by <em>key</em>. Raises a <em>ValueError</em>
+if <em>key</em> does not exist in <em>d</em>, and a <em>ValueError</em> if it specifies
+something other than an integer.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;maxn&#39;</span><span class="p">:</span><span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="s">&#39;minq&#39;</span><span class="p">:</span><span class="s">&#39;20.5&#39;</span><span class="p">,</span> <span class="s">&#39;string&#39;</span><span class="p">:</span><span class="s">&#39;hello&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;</span><span class="si">%.1f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">ParseFloatValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;maxn&#39;</span><span class="p">)</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;</span><span class="si">%.1f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">ParseFloatValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;minq&#39;</span><span class="p">)</span>
+<span class="go">20.5</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseFloatValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;string&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">value hello for string is not float</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseFloatValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;otherkey&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">did not find a key for otherkey</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="io.ParseInfile">
+<tt class="descclassname">io.</tt><tt class="descname">ParseInfile</tt><big>(</big><em>f</em><big>)</big><a class="headerlink" href="#io.ParseInfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads key / value pairs from an input file.</p>
+<p><em>f</em> should be a readable file-like object.</p>
+<p>Starting at the current position in <em>f</em>, reads all remaining lines
+until the end of the file-like object. Any blank line or line
+with a first character of # is disregarded (# indicates a comment
+line). All other lines should contain exactly two entries, the first
+being the key and the second being the value. The key is construed
+to be the first word, and cannot have any spaces. The value is all
+of the text that follows the key up to the newline. 
+The key / value pairs are returned in a
+dictionary, as illustrated in the example below. If there is a
+duplicate key, and exception is raised.</p>
+<p>Example of successfully reading two key/value pairs</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">cStringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;# comment line followed by blank line</span><span class="se">\n\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;key1 first_value</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;# now another key with two values</span><span class="se">\n</span><span class="s">key2 2 value2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParseInfile</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="p">{</span><span class="s">&#39;key1&#39;</span><span class="p">:</span><span class="s">&#39;first_value&#39;</span><span class="p">,</span> <span class="s">&#39;key2&#39;</span><span class="p">:</span><span class="s">&#39;2 value2&#39;</span><span class="p">}</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Example of duplicate key name</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">cStringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;# comment line followed by blank line</span><span class="se">\n\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;key1 first_value</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;# now another key</span><span class="se">\n</span><span class="s">key2 2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">key1 1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParseInfile</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="p">{</span><span class="s">&#39;key1&#39;</span><span class="p">:</span><span class="s">&#39;first_value&#39;</span><span class="p">,</span> <span class="s">&#39;key2&#39;</span><span class="p">:</span><span class="s">&#39;2&#39;</span><span class="p">}</span>
+<span class="gt">Traceback (most recent call last):</span>
+    <span class="o">...</span>
+<span class="gr">ValueError</span>: <span class="n">duplicate key: key1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="io.ParseIntValue">
+<tt class="descclassname">io.</tt><tt class="descname">ParseIntValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseIntValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets integer argument from input dictionary.</p>
+<p><em>d</em> is a dictionary of key/value string pairs as returned by
+<strong>ParseInfile</strong>.</p>
+<p><em>key</em> is a string in this dictionary that specifies a value that
+should be an integer.</p>
+<p>Returns the integer specified by <em>key</em>. Raises a <em>ValueError</em>
+if <em>key</em> does not exist in <em>d</em>, and a <em>ValueError</em> if it specifies
+something other than an integer.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;maxn&#39;</span><span class="p">:</span><span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="s">&#39;minq&#39;</span><span class="p">:</span><span class="s">&#39;20.5&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParseIntValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;maxn&#39;</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseIntValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;minq&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">value 20.5 for minq is not integer</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseIntValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;otherkey&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">did not find a key for otherkey</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="io.ParseSeqValue">
+<tt class="descclassname">io.</tt><tt class="descname">ParseSeqValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseSeqValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads sequence from FASTA file specified by input dictionary.</p>
+<p><em>d</em> is a dictionary of key/value string pairs as returned by
+<strong>ParseInfile</strong>.</p>
+<p><em>key</em> is a string in this dictionary that specifies a value that is a
+filename of a readable file that contains exactly one sequence
+in FASTA format.</p>
+<p>Returns a string corresponding to the sequence specified in the
+FASTA file. Raises a <em>ValueError</em> if the filename does not exist, or
+does not specify exactly one sequence.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="io.ParseStringValue">
+<tt class="descclassname">io.</tt><tt class="descname">ParseStringValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseStringValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads string argument specified by input dictionary.</p>
+<p><em>d</em> is a dictionary of the key/value string pairs as returned by
+<strong>ParseInfile</strong>.</p>
+<p><em>key</em> is a string in this dictionary that specifies a value that
+is a string.</p>
+<p>Returns string corresponding to <em>key</em>. Raises a <em>ValueError</em> if 
+the <em>key</em> does not exist in <em>d</em>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;outfileprefix&#39;</span><span class="p">:</span><span class="s">&#39;test_example&#39;</span><span class="p">,</span> <span class="s">&#39;samplename&#39;</span><span class="p">:</span><span class="s">&#39;test example&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParseStringValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;outfileprefix&#39;</span><span class="p">)</span>
+<span class="go">&#39;test_example&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseStringValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;samplename&#39;</span><span class="p">)</span>
+<span class="go">&#39;test example&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ParseStringValue</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&#39;otherkey&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">did not find a key for otherkey</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-plot">
+<span id="plot-module"></span><h2><a class="reference internal" href="#module-plot" title="plot"><tt class="xref py py-mod docutils literal"><span class="pre">plot</span></tt></a> Module<a class="headerlink" href="#module-plot" title="Permalink to this headline">¶</a></h2>
+<p>Module for performing plotting for <tt class="docutils literal"><span class="pre">mutpath</span></tt> package.</p>
+<p>This module uses <tt class="docutils literal"><span class="pre">pylab</span></tt> and <tt class="docutils literal"><span class="pre">matplotlib</span></tt> to make plots. These plots will
+fail if <tt class="docutils literal"><span class="pre">pylab</span></tt> and <tt class="docutils literal"><span class="pre">matplotlib</span></tt> are not available for importation. Before
+running any function in this module, you can run the <em>PylabAvailable</em>
+function to determine if <tt class="docutils literal"><span class="pre">pylab</span></tt> and <tt class="docutils literal"><span class="pre">matplotlib</span></tt> are available. Otherwise,
+calling any other function will raise an Exception if thise modules are
+not available. The <tt class="docutils literal"><span class="pre">pdf</span></tt> backend is used for <tt class="docutils literal"><span class="pre">matplotlib</span></tt> / <tt class="docutils literal"><span class="pre">pylab</span></tt>. This means
+that plots must be created as PDF files.</p>
+<p>Functions are:</p>
+<p><cite>PylabAvailable</cite></p>
+<p><cite>CumulativeFractionPlot</cite></p>
+<p>&#8216;DatesPlot`</p>
+<p><cite>Base10Formatter</cite></p>
+<p><cite>SplitLabel</cite></p>
+<p>Written by Jesse Bloom.</p>
+<dl class="function">
+<dt id="plot.Base10Formatter">
+<tt class="descclassname">plot.</tt><tt class="descname">Base10Formatter</tt><big>(</big><em>number</em>, <em>exp_cutoff</em>, <em>exp_decimal_digits</em>, <em>decimal_digits</em><big>)</big><a class="headerlink" href="#plot.Base10Formatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a number into Latex formatting with scientific notation.</p>
+<p>Takes a number and converts it to a string that can be shown
+in LaTex using math mode. It is converted to scientific notation
+if the criteria specified by exp_cutoff.</p>
+<p><em>number</em> the number to be formatted, should be a float or integer.
+Currently only works for numbers &gt;= 0</p>
+<p><em>exp_cutoff</em> convert to scientific notation if abs(math.log10(number)) &gt;= this.</p>
+<p><em>exp_decimal_digits</em> show this many digits after the decimal if number
+is converted to scientific notation.</p>
+<p><em>decimal_digits</em> show this many digits after the decimal if number
+is NOT converted to scientific notation.</p>
+<p>The returned value is the LaTex&#8217; string. If the number is zero, the
+returned string is simply &#8216;0&#8217;.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Base10Formatter</span><span class="p">(</span><span class="mi">103</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">&#39;103.0&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Base10Formatter</span><span class="p">(</span><span class="mf">103.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">&#39;1.0 \\times 10^{2}&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Base10Formatter</span><span class="p">(</span><span class="mf">103.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">&#39;1.03 \\times 10^{2}&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Base10Formatter</span><span class="p">(</span><span class="mf">2892.3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> 
+<span class="go">&#39;2.9 \\times 10^{3}&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Base10Formatter</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> 
+<span class="go">&#39;0&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Base10Formatter</span><span class="p">(</span><span class="mf">0.012</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">&#39;1.2 \\times 10^{-2}&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Base10Formatter</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+    <span class="o">...</span>
+<span class="gr">ValueError</span>: <span class="n">number must be &gt;= 0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="plot.CumulativeFractionPlot">
+<tt class="descclassname">plot.</tt><tt class="descname">CumulativeFractionPlot</tt><big>(</big><em>datalist</em>, <em>plotfile</em>, <em>title</em>, <em>xlabel</em><big>)</big><a class="headerlink" href="#plot.CumulativeFractionPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a cumulative fraction plot.</p>
+<p>Takes a list of numeric data. Plots a cumulative fraction
+plot giving the fraction of the data points that are &lt;=
+the indicated value.</p>
+<p><em>datalist</em> is a list of numbers giving the data for which we
+are computing the cumulative fraction plot. Raises an 
+exception if this is an empty list.</p>
+<p><em>plotfile</em> is the name of the output plot file created by this method
+(such as &#8216;plot.pdf&#8217;). The extension must be &#8216;.pdf&#8217;.</p>
+<p><em>title</em> is a string placed above the plot as a title. Uses LaTex
+formatting.</p>
+<p><em>xlabel</em> is the label given to the X-axis. Uses LaTex formatting.</p>
+<p>This function uses pylab / matplotlib. It will raise an Exception if
+these modules cannot be imported (if PylabAvailable() is False).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="plot.DatesPlot">
+<tt class="descclassname">plot.</tt><tt class="descname">DatesPlot</tt><big>(</big><em>mutdates</em>, <em>plotfile</em>, <em>interval</em><big>)</big><a class="headerlink" href="#plot.DatesPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots dates of mutations.</p>
+<p>Uses pylab / matplotlib to plot the dates and credible intervals
+for mutations. Will raise an error <em>PylabAvailable() == False</em>.
+The plot is a PDF.</p>
+<ul class="simple">
+<li><em>mutdates</em> is a list of the mutations, in the form of the tuples
+<em>(median, mininterval, maxinterval, mut, fractoca, weight)</em>. Mutations
+are plotted in the order they are listed. In these tuples:<ul>
+<li><em>median</em> : posterior median date</li>
+<li><em>minterval</em> : minimum of credible interval</li>
+<li><em>maxinterval</em> : maximum of credible interval</li>
+<li><em>mut</em> : string giving name of mutation</li>
+<li><em>fractoca</em> : probability mutation is on path from common ancestor
+to starting sequence</li>
+<li><em>weight</em> : fraction of paths containing mutation.</li>
+</ul>
+</li>
+<li><em>plotfile</em> is a string giving the name of the PDF file we create.</li>
+<li><em>interval</em> is the range of the credible interval. For example, 0.9
+means a 90% credible interval.</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="plot.PylabAvailable">
+<tt class="descclassname">plot.</tt><tt class="descname">PylabAvailable</tt><big>(</big><big>)</big><a class="headerlink" href="#plot.PylabAvailable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if pylab/matplotlib available, False otherwise.</p>
+<p>You should call this function to test for the availability of the
+pylab/matplotlib plotting modules before using other functions in
+this module.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="plot.SplitLabel">
+<tt class="descclassname">plot.</tt><tt class="descname">SplitLabel</tt><big>(</big><em>label</em>, <em>splitlen</em>, <em>splitchar</em><big>)</big><a class="headerlink" href="#plot.SplitLabel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits a string with a return if it exceeds a certain length.</p>
+<p><em>label</em> a string giving the label we might split.</p>
+<p><em>splitlen</em> the maximum length of a label before we attempt to 
+split it.</p>
+<p><em>splitchar</em> the character added when splitting a label.</p>
+<p>If len(<em>label</em>) &gt; <em>splitlen</em>, we attempt to split the label in the
+middle by adding <em>splitchar</em>. The label is split as close to the
+middle as possible while splitting at a space.</p>
+<p>No splitting as label length less than <em>splitlen</em></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">SplitLabel</span><span class="p">(</span><span class="s">&#39;WT virus 1&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="go">&#39;WT virus 1&#39;</span>
+</pre></div>
+</div>
+<p>Splitting of this label</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">SplitLabel</span><span class="p">(</span><span class="s">&#39;WT plasmid 1&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="go">&#39;WT\nplasmid 1&#39;</span>
+</pre></div>
+</div>
+<p>Splitting of this label</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">SplitLabel</span><span class="p">(</span><span class="s">&#39;mutated WT plasmid 1&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="go">&#39;mutated WT\nplasmid 1&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-sequtils">
+<span id="sequtils-module"></span><h2><a class="reference internal" href="#module-sequtils" title="sequtils"><tt class="xref py py-mod docutils literal"><span class="pre">sequtils</span></tt></a> Module<a class="headerlink" href="#module-sequtils" title="Permalink to this headline">¶</a></h2>
+<p>This file contains utilities for manipulating sequences.</p>
+<p>Performs functions such as reading / writing FASTA files, 
+translating sequences, etc.</p>
+<p>Written by Jesse Bloom.</p>
+<dl class="function">
+<dt id="sequtils.AAThreeToOne">
+<tt class="descclassname">sequtils.</tt><tt class="descname">AAThreeToOne</tt><big>(</big><em>aathree</em><big>)</big><a class="headerlink" href="#sequtils.AAThreeToOne" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a three letter amino acid code into a one letter code.</p>
+<p>The single input argument is the three letter amino acid code.  It
+can be of any case.</p>
+<p>This function returns, in upper case, the one letter amino acid code.
+It raises an exception if <em>aathree</em> is not a valid one letter code.
+&#8216;Xaa&#8217; is converted to &#8216;X&#8217;.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AAThreeToOne</span><span class="p">(</span><span class="s">&#39;Ala&#39;</span><span class="p">)</span>
+<span class="go">&#39;A&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AAThreeToOne</span><span class="p">(</span><span class="s">&#39;cys&#39;</span><span class="p">)</span>
+<span class="go">&#39;C&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AAThreeToOne</span><span class="p">(</span><span class="s">&#39;Xaa&#39;</span><span class="p">)</span>
+<span class="go">&#39;X&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AAThreeToOne</span><span class="p">(</span><span class="s">&#39;hi&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">Invalid amino acid code of hi.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.AmbiguousNTCodes">
+<tt class="descclassname">sequtils.</tt><tt class="descname">AmbiguousNTCodes</tt><big>(</big><em>nt</em><big>)</big><a class="headerlink" href="#sequtils.AmbiguousNTCodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all possible nucleotides corresponding to an ambiguous code.</p>
+<p>This method takes as input a single nucleotide character <em>nt</em>, which is
+assumed to represent a nucleotide as one of the accepted
+codes for an ambiguous character.  Returns a list giving
+all possible codes for which a nucleotide might stand.  Raises
+an exception if <em>nt</em> is not a valid nucleotide code.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AmbiguousNTCodes</span><span class="p">(</span><span class="s">&#39;N&#39;</span><span class="p">)</span>
+<span class="go">[&#39;A&#39;, &#39;T&#39;, &#39;G&#39;, &#39;C&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AmbiguousNTCodes</span><span class="p">(</span><span class="s">&#39;R&#39;</span><span class="p">)</span>
+<span class="go">[&#39;A&#39;, &#39;G&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AmbiguousNTCodes</span><span class="p">(</span><span class="s">&#39;A&#39;</span><span class="p">)</span>
+<span class="go">[&#39;A&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AmbiguousNTCodes</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span>
+<span class="go">[&#39;-&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AmbiguousNTCodes</span><span class="p">(</span><span class="s">&#39;F&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">Invalid nt code of &quot;F&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.CondenseSeqs">
+<tt class="descclassname">sequtils.</tt><tt class="descname">CondenseSeqs</tt><big>(</big><em>seqs</em>, <em>maxdiffs</em>, <em>exclude_positions</em><big>)</big><a class="headerlink" href="#sequtils.CondenseSeqs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes nearly identical protein sequences.</p>
+<p><em>seqs</em> is a list of sequences as (head, seq) 2-tuples.  The sequences
+are assumed to be aligned.</p>
+<p><em>maxdiffs</em> specifies the maximum number of differences that a sequence
+can have from another sequence in order to be removed.</p>
+<p><em>exclude_positions</em> is a list of integers specifying positions at which
+sequence can NOT differ and still be removed.  These integers
+are for numbering the sequences as 1, 2, ...</p>
+<p>The method proceeds as follows:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>For the first sequence iterates through the rest of the sequences,
+and removes any that differ at &lt;= ndiff sites, and do not differ
+at the sites specified by &#8216;exclude_position&#8217;.</li>
+<li>Repeats this process for each of the remaining sequences.</li>
+</ol>
+</div></blockquote>
+<p>The returned variable is <em>seqs</em> with the removed sequences gone.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">seqs</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&#39;s1&#39;</span><span class="p">,</span> <span class="s">&#39;ATGC&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;s2&#39;</span><span class="p">,</span> <span class="s">&#39;ATGA&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;s3&#39;</span><span class="p">,</span> <span class="s">&#39;ATC-&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;s4&#39;</span><span class="p">,</span> <span class="s">&#39;ATGC&#39;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CondenseSeqs</span><span class="p">(</span><span class="n">seqs</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[])</span>
+<span class="go">[(&#39;s1&#39;, &#39;ATGC&#39;), (&#39;s2&#39;, &#39;ATGA&#39;), (&#39;s3&#39;, &#39;ATC-&#39;)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CondenseSeqs</span><span class="p">(</span><span class="n">seqs</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[])</span>
+<span class="go">[(&#39;s1&#39;, &#39;ATGC&#39;), (&#39;s3&#39;, &#39;ATC-&#39;)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CondenseSeqs</span><span class="p">(</span><span class="n">seqs</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+<span class="go">[(&#39;s1&#39;, &#39;ATGC&#39;), (&#39;s2&#39;, &#39;ATGA&#39;), (&#39;s3&#39;, &#39;ATC-&#39;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.DateToOrdinal">
+<tt class="descclassname">sequtils.</tt><tt class="descname">DateToOrdinal</tt><big>(</big><em>datestring</em>, <em>refyear</em><big>)</big><a class="headerlink" href="#sequtils.DateToOrdinal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a date string to an ordinal date.</p>
+<p><em>datestring</em> is a date given by a string such as &#8216;2007/2/13&#8217; (for
+Feb-13-2007), or &#8216;2007/2//&#8217; if no day is specified, or
+&#8216;2007//&#8217; if no day or month is specified. The &#8216;/&#8217; characters can
+also be &#8216;-&#8216;.</p>
+<p><em>refdate</em> is an integer year from the approximate timeframe we are examining
+which is used to anchor the datestring date on the assumption
+that each year has 365.25 days.</p>
+<p>The returned value is a number (decimal) giving the date. If no
+day is specified, the 15th (halfway through the month) is chosen.
+If no month or day is specified, July 1 (halfway through the
+year) is chosen.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;</span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">DateToOrdinal</span><span class="p">(</span><span class="s">&#39;2007/4/27&#39;</span><span class="p">,</span> <span class="mi">1968</span><span class="p">)</span>
+<span class="go">2007.32</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;</span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">DateToOrdinal</span><span class="p">(</span><span class="s">&#39;2007/4/&#39;</span><span class="p">,</span> <span class="mi">1968</span><span class="p">)</span>
+<span class="go">2007.29</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;</span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">DateToOrdinal</span><span class="p">(</span><span class="s">&#39;2007//&#39;</span><span class="p">,</span> <span class="mi">1968</span><span class="p">)</span>
+<span class="go">2007.50</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&quot;</span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">DateToOrdinal</span><span class="p">(</span><span class="s">&#39;2007-4-27&#39;</span><span class="p">,</span> <span class="mi">1968</span><span class="p">)</span>
+<span class="go">2007.32</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.FindMotifs">
+<tt class="descclassname">sequtils.</tt><tt class="descname">FindMotifs</tt><big>(</big><em>seq</em>, <em>motif</em><big>)</big><a class="headerlink" href="#sequtils.FindMotifs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds occurrences of a specific motif in a nucleotide sequence.</p>
+<p><em>seq</em> is a string giving a nucleotide sequence.</p>
+<p><em>motif</em> is a string giving the motif that we are looking for.  It should
+be a string of valid nucleotide characters:
+* A   Adenine
+* G   Guanine
+* C   Cytosine
+* T   Thymine
+* U   Uracil
+* R   Purine (A or G)
+* Y   Pyrimidine (C or T)
+* N   Any nucleotide
+* W   Weak (A or T)
+* S   Strong (G or C)
+* M   Amino (A or C)
+* K   Keto (G or T)
+* B   Not A (G or C or T)
+* H   Not G (A or C or T)
+* D   Not C (A or G or T)
+* V   Not T (A or G or C)</p>
+<p>The returned variable is a list <em>motif_indices</em> of the indices that
+each occurrence of <em>motif</em> in <em>seq</em> begins with.  For example,
+if there is a motif beginning at <em>seq[7]</em>, then 7 will be
+present in <em>motif_indices</em>.  So the number of occurrences of
+the motif will be equal to len(<em>motif_indices</em>).</p>
+<p>This function is not case sensitive, so nucleotides can be either upper
+or lower case.  In addition, T (thymine) and U (uracil) nucleotides
+are treated identically, so the function can handle either DNA
+or RNA sequences.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">FindMotifs</span><span class="p">(</span><span class="s">&#39;ATCGAA&#39;</span><span class="p">,</span> <span class="s">&#39;WCGW&#39;</span><span class="p">)</span>
+<span class="go">[1]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.GetEntries">
+<tt class="descclassname">sequtils.</tt><tt class="descname">GetEntries</tt><big>(</big><em>namelist</em>, <em>fastafile</em>, <em>allow_substring=False</em><big>)</big><a class="headerlink" href="#sequtils.GetEntries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets selected entries from a (potentially very large) FASTA file.</p>
+<p>This method is designed to extract sequences from a FASTA file.  It will work
+even if the FASTA file is very large, since it avoids reading the entire
+file into memory at once.</p>
+<p><em>namelist</em> specifies the &#8220;names&#8221; of the sequences that we want to extract from
+the FASTA file.  The &#8220;name&#8221; of a sequence is the string immediately following
+the &#8220;&gt;&#8221; in the FASTA file header for a sequence, terminated by a space character
+(space, tab, or return).  So for example, the header:</p>
+<div class="highlight-python"><pre>&gt;E_coli_thioredoxin: the thioredoxin protein from E. coli</pre>
+</div>
+<p>would correspond to a name of &#8220;E_coli_thioredoxin&#8221;.  &#8216;namelist&#8217; specifies
+a list of these names.</p>
+<p><em>fastafile</em> is the name of a FASTA file that contains the sequences we are searching
+for.  For this method to be guaranteed to work properly, each sequence in the FASTA
+file must contain a unique name, where a &#8220;name&#8221; is as defined above.  Note that this
+uniqueness of names is not rigorously checked for, so if there are not unique names,
+the function may raise an exception, or it may continue along and give no hint of
+the problem.</p>
+<p><em>allow_substring</em> is an optional Boolean switch that specifies that the name given in
+<em>namelist</em> need only be a substring of the first entry in the <em>fastafile</em> header.</p>
+<p>The function expects to find exactly one entry in <em>fastafile</em> for each name listed in
+<em>namelist</em>.  If it does not, it will raise an exception.  The returned variable
+is a list composed of 2-tuples.  Element i of this list corresponds to the name
+given by <em>namelist[i]</em>.  Each 2-tuple has the form &#8216;(header, sequence)&#8217; where
+&#8216;header&#8217; is the full FASTA header, but with the leading &#8220;&gt;&#8221; character and any trailing
+linebreaks/spaces removed.  &#8216;sequence&#8217; is a string giving the sequence, again with the
+trailing linebreak removed.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.GetSequence">
+<tt class="descclassname">sequtils.</tt><tt class="descname">GetSequence</tt><big>(</big><em>header</em>, <em>headers_sequences</em><big>)</big><a class="headerlink" href="#sequtils.GetSequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a particular sequence based on its header name.</p>
+<p><em>header</em> specifies the name of a sequence&#8217;s FASTA header.</p>
+<p><em>headers_sequences</em> is a list of tuples &#8216;(head, seq)&#8217; as would
+be returned by <strong>Read</strong>.</p>
+<p>This function searches through <em>headers_sequences</em> and returns the
+sequence corresponding to the first header found that matches
+the calling argument <em>header</em>.  If no such header is found,
+raises an exception.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.PurgeAmbiguousDNA">
+<tt class="descclassname">sequtils.</tt><tt class="descname">PurgeAmbiguousDNA</tt><big>(</big><em>headers_sequences</em><big>)</big><a class="headerlink" href="#sequtils.PurgeAmbiguousDNA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes all sequences with ambiguous positions from nucleotide sequences.</p>
+<p>This function takes a single calling argument <em>headers_sequences</em>, which
+is a list of tuples <em>(header, seq)</em> as would be returned by <cite>Read</cite>.
+These sequences should specify nucleotide sequences.  It returns
+a new list which is a copy of <em>headers_sequences</em>, except that all
+sequences that contain ambiguous nucleotide entries (i.e. characters
+that are &#8216;A&#8217;, &#8216;T&#8217;, &#8216;C&#8217;, &#8216;G&#8217;, &#8216;a&#8217;, &#8216;t&#8217;, &#8216;c&#8217;, or &#8216;g&#8217;) have been
+removed.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.PurgeDuplicates">
+<tt class="descclassname">sequtils.</tt><tt class="descname">PurgeDuplicates</tt><big>(</big><em>headers_sequences</em><big>)</big><a class="headerlink" href="#sequtils.PurgeDuplicates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes all duplicate sequences and those that are substrings.</p>
+<p>This function takes a single calling argument <em>headers_sequences</em>, which
+is a list of tuples <em>(header, seq)</em> as would be returned by <cite>Read</cite>.
+It returns a new list in which each sequence appears exactly once.
+If a sequence appears more than once in the original calling
+list, the sequence that is kept is the first one encountered in
+the list. Sequences that are substrings of others
+are also removed.</p>
+<p>The ordering of sequences is preserved except for the removal
+of duplicates.  Sequences are returned as all upper case.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">PurgeDuplicates</span><span class="p">([(</span><span class="s">&#39;seq1&#39;</span><span class="p">,</span> <span class="s">&#39;atgc&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;GGCA&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq3&#39;</span><span class="p">,</span> <span class="s">&#39;ATGC&#39;</span><span class="p">)])</span>
+<span class="go">[(&#39;seq1&#39;, &#39;ATGC&#39;), (&#39;seq2&#39;, &#39;GGCA&#39;)]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">PurgeDuplicates</span><span class="p">([(</span><span class="s">&#39;seq1&#39;</span><span class="p">,</span> <span class="s">&#39;atgcca&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;TGCC&#39;</span><span class="p">)])</span>
+<span class="go">[(&#39;seq1&#39;, &#39;ATGCCA&#39;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.Read">
+<tt class="descclassname">sequtils.</tt><tt class="descname">Read</tt><big>(</big><em>fastafile</em><big>)</big><a class="headerlink" href="#sequtils.Read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads sequences from a FASTA file.</p>
+<p><em>fastafile</em> should specify the name of a FASTA file.</p>
+<p>This function reads all sequences from the FASTA file.  It returns the
+list <em>headers_seqs</em>.  This list is composed of a 2-tuple &#8216;(header, seq)&#8217;
+for every sequence entry in FASTA file.  &#8216;header&#8217; is the header for
+a sequence, with the leading &#8220;&gt;&#8221; and any trailing spaces removed. &#8216;seq&#8217;
+is the corresponding sequence.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.ReverseComplement">
+<tt class="descclassname">sequtils.</tt><tt class="descname">ReverseComplement</tt><big>(</big><em>heads_seqs</em><big>)</big><a class="headerlink" href="#sequtils.ReverseComplement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts nucleotide sequences to their reverse complements.</p>
+<p>The single input argument <em>heads_seqs</em> is a list of sequences
+in the format of tuples <em>(head, seq)</em> where <em>head</em> is the
+header and <em>seq</em> is the sequence.  The sequences should all
+be nucleotide sequences composed exclusively of A, T, C, or G
+(or their lowercase equivalents).  Ambiguous nucleotide codes
+are currently not accepted.</p>
+<p>The returned variable is a copy of <em>heads_seqs</em> in which the headers
+are unchanged but the sequences are converted to reverse complements.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ReverseComplement</span><span class="p">([(</span><span class="s">&#39;seq1&#39;</span><span class="p">,</span> <span class="s">&#39;ATGCAA&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;atgGCA&#39;</span><span class="p">)])</span>
+<span class="go">[(&#39;seq1&#39;, &#39;TTGCAT&#39;), (&#39;seq2&#39;, &#39;TGCcat&#39;)]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ReverseComplement</span><span class="p">([(</span><span class="s">&#39;seq1&#39;</span><span class="p">,</span> <span class="s">&#39;ATGNAA&#39;</span><span class="p">)])</span>
+<span class="gt">Traceback (most recent call last):</span>
+    <span class="o">...</span>
+<span class="gr">ValueError</span>: <span class="n">Invalid nucleotide code.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.Translate">
+<tt class="descclassname">sequtils.</tt><tt class="descname">Translate</tt><big>(</big><em>headers_sequences</em>, <em>readthrough_n=False</em>, <em>readthrough_stop=False</em>, <em>truncate_incomplete=False</em>, <em>translate_gaps=False</em><big>)</big><a class="headerlink" href="#sequtils.Translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates a set of nucleotide sequences to amino acid sequences.</p>
+<p>This function takes as input a single calling argument <em>header_sequences</em>,
+which is a list of tuples <em>(header, seq)</em> as would be returned by
+<cite>Read</cite>.  The sequences should all specify valid coding nucleotide
+sequences.  The returned variable is a new list in which
+all of the nucleotide sequences have been translated to their
+corresponding protein sequences, given by one letter codes. Stop codons
+are translated to &#8216;*&#8217;.
+If any of the nucleotide sequences do not translate to
+valid protein sequences, an exception is raised.</p>
+<p>The optional argument <em>readthrough_n</em> specifies that if any nucleotides
+in the sequence are equal to to an ambiguous nt code and cannot therefore
+be unambiguously translated into an amino acid, we simply translate through these 
+nucleotides by making the corresponding amino acid equal to &#8220;X&#8221;.  By
+default, this option is <em>False</em>.  Note that even when this option is <em>False</em>,
+certain ambiguous nucleotides may still be translatable if they all lead to 
+the same amino acid.</p>
+<p>The optional argument <em>readthrough_stop</em> specifies that if we encounter
+any stop codons, we simply translation them to &#8216;*&#8217;.  By default,
+this option is <em>False</em>, meaning that we instead raise an error
+of an incomplete stop codon.</p>
+<p>The optional argument <em>truncate_incomplete</em> specifies that if the sequence
+length is not a multiple of three, we simply truncate off the one or two
+final nucleotides to make the length a multiple of three prior to translation.
+By default, this option is <em>False</em>, meaning that no such truncation is done.</p>
+<p>The optional argument <em>translate_gaps</em> specifies that a codon containing &#8216;-&#8216; 
+is translated to &#8216;-&#8216;.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Translate</span><span class="p">([(</span><span class="s">&#39;seq1&#39;</span><span class="p">,</span> <span class="s">&#39;ATGTAA&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;gggtgc&#39;</span><span class="p">)])</span>
+<span class="go">[(&#39;seq1&#39;, &#39;M*&#39;), (&#39;seq2&#39;, &#39;GC&#39;)]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Translate</span><span class="p">([(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;GGNTGC&#39;</span><span class="p">)])</span>
+<span class="go">[(&#39;seq2&#39;, &#39;GC&#39;)]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Translate</span><span class="p">([(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;NGGTGC&#39;</span><span class="p">)])</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">Cannot translate codon NGG</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Translate</span><span class="p">([(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;NGGTGC&#39;</span><span class="p">)],</span> <span class="n">readthrough_n</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">[(&#39;seq2&#39;, &#39;XC&#39;)]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Translate</span><span class="p">([(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;TAATGC&#39;</span><span class="p">)])</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">Premature stop codon</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Translate</span><span class="p">([(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;TAATGC&#39;</span><span class="p">)],</span> <span class="n">readthrough_stop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">[(&#39;seq2&#39;, &#39;*C&#39;)]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Translate</span><span class="p">([(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;TGCA&#39;</span><span class="p">)])</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">Sequence length is not a multiple of three</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Translate</span><span class="p">([(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;TGCA&#39;</span><span class="p">)],</span> <span class="n">truncate_incomplete</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">[(&#39;seq2&#39;, &#39;C&#39;)]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Translate</span><span class="p">([(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;TGC---&#39;</span><span class="p">)])</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">Cannot translate gap.</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Translate</span><span class="p">([(</span><span class="s">&#39;seq2&#39;</span><span class="p">,</span> <span class="s">&#39;TGC---&#39;</span><span class="p">)],</span> <span class="n">translate_gaps</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">[(&#39;seq2&#39;, &#39;C-&#39;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.UnknownsToGaps">
+<tt class="descclassname">sequtils.</tt><tt class="descname">UnknownsToGaps</tt><big>(</big><em>headers_sequences</em><big>)</big><a class="headerlink" href="#sequtils.UnknownsToGaps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts all unknown ambiguous amino acids to gap characters.</p>
+<p>This function converts all of the common codes for unknown amino acids
+to gaps.  That is, &#8220;B&#8221; (Asp or Asn), &#8220;Z&#8221; (Glu or Gln), and &#8220;X&#8221; (any
+amino acid) are all converted to the character &#8220;-&#8221;, which is usually
+taken to denote a gap.  You would use this method if you are 
+subsequently processing the sequences with a program that recognizes
+the gap character but not these three other unknown characters.  Note,
+of course, that you are changing your sequence, so don&#8217;t do this unless
+you need to.</p>
+<p>This method takes as a single calling variable the list <em>header_sequences</em>
+as would be returned by <cite>Read</cite>.  It returns a copy of this list, but
+with all unknown amino acids replaced by &#8220;-&#8221;.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.Write">
+<tt class="descclassname">sequtils.</tt><tt class="descname">Write</tt><big>(</big><em>headers_seqs</em>, <em>filename</em>, <em>writable_file=False</em><big>)</big><a class="headerlink" href="#sequtils.Write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes sequences to a FASTA file.</p>
+<p><em>headers_seqs</em> is a list of 2-tuples specifying sequences and their
+corresponding headers.  Each entry is the 2-tuple <em>(header, seq)</em>
+where <em>header</em> is a string giving the header (without the leading &#8220;&gt;&#8221;),
+and <em>seq</em> is the corresponding sequence.</p>
+<p><em>filename</em> is a string that specifies the name of the file to which the
+headers and sequences should be written.  If this file already exists,
+it is overwritten.</p>
+<p><em>writable_file</em> is a Boolean switch specifying that rather than <em>filename</em>
+giving a string specifying the name of a file to which the sequences
+should be written, it instead specifies a writable file object to which
+the sequences should be written.</p>
+<p>The sequences are written to the file in the same order that they are specified
+in <em>headers_seqs</em>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequtils.WriteNEXUS">
+<tt class="descclassname">sequtils.</tt><tt class="descname">WriteNEXUS</tt><big>(</big><em>seqs</em>, <em>outfile</em>, <em>seqtype</em><big>)</big><a class="headerlink" href="#sequtils.WriteNEXUS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write sequences to a NEXUS file.</p>
+<p><em>seqs</em> is a list of 2-tuples specifying sequences as (name, sequence). 
+The sequences should all be aligned so that they are of the same
+length.</p>
+<p><em>outfile</em> is the name of the output file we are writing, such as &#8216;file.nex&#8217;</p>
+<p><em>seqtype</em> is the sequence type, such as &#8216;PROTEIN&#8217; or &#8216;DNA&#8217;</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tree">
+<span id="tree-module"></span><h2><a class="reference internal" href="#module-tree" title="tree"><tt class="xref py py-mod docutils literal"><span class="pre">tree</span></tt></a> Module<a class="headerlink" href="#module-tree" title="Permalink to this headline">¶</a></h2>
+<p>Module establishing classes and functions for representing phylogenetic trees.</p>
+<p>Written by Jesse Bloom.</p>
+<div class="section" id="functions-defined-in-this-module">
+<h3>Functions defined in this module<a class="headerlink" href="#functions-defined-in-this-module" title="Permalink to this headline">¶</a></h3>
+<p><cite>ApplyToNodes</cite> : Applies a function recursively to all descendents of a node.</p>
+<p><cite>GetBalancedIndex</cite> : Finds the index of balancing parentheses character.</p>
+<p><cite>GetPath</cite> : Returns the path along a tree between two nodes.</p>
+<p><cite>GetInfo</cite> : Gets information from a BEAST format information bracket.</p>
+<p><cite>TallySiteChangesAlongTree</cite> : Counts times a site has changed along a tree.</p>
+<p><cite>SplitNewick</cite> : Splits a bifurcating tree into its next two branches.</p>
+<p><cite>RecursivelyAssignDescendents</cite> : Assigns descendents to a node of a tree.</p>
+<p><cite>RecursivelySetNumbers</cite> : Sets the numbers for nodes of a tree.</p>
+<p><cite>RecursivelySetTipAndInternalNumbers</cite> : Sets numbers for tip and internal nodes.</p>
+<p><cite>GetNode</cite> : Gets a specific node from a tree.</p>
+<p><cite>ListsOfNodes</cite> : Returns lists of all internal and tip nodes in a tree.</p>
+<p><cite>QueryTree</cite> : Gets information about a particular node of a tree.</p>
+<p><cite>AssignTimes</cite> : Assigns times before the most recent tip to all nodes of a tree.</p>
+<p><cite>RecursivelyAssignTimes</cite> : Assigns times to all descendents of a node.</p>
+<p><cite>PrintAllTreeInformation</cite> : Prints information about nodes, names, sequences.</p>
+</div>
+<div class="section" id="classes-defined-in-this-module">
+<h3>Classes defined in this module<a class="headerlink" href="#classes-defined-in-this-module" title="Permalink to this headline">¶</a></h3>
+<p><cite>Tree</cite> : A class for representing a phylogenetic tree (composed of <em>Node</em> objects).</p>
+<p><cite>Node</cite> : A class for representing the node objects that compose a <em>Tree</em>.</p>
+</div>
+<div class="section" id="c-extensions-for-this-module">
+<h3>C-extensions for this module<a class="headerlink" href="#c-extensions-for-this-module" title="Permalink to this headline">¶</a></h3>
+<p>Some of the functions in this module are implemented in faster C code in the
+<tt class="docutils literal"><span class="pre">mutpath.ctree</span></tt> module. If this module is available, by default these faster implementations
+are used. The C implementations are automatically called when calling the Python 
+function, so there is no need to call functions in <tt class="docutils literal"><span class="pre">mutpath.ctree</span></tt> directly.</p>
+<p>The following functions can utilize fast C extensions:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>GetBalancedIndex</strong></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="details-of-functions-and-classes">
+<h3>Details of functions and classes<a class="headerlink" href="#details-of-functions-and-classes" title="Permalink to this headline">¶</a></h3>
+<p>Detailed descriptions of the functions and classes are given
+in their individual docstrings below.</p>
+<dl class="function">
+<dt id="tree.ApplyToNodes">
+<tt class="descclassname">tree.</tt><tt class="descname">ApplyToNodes</tt><big>(</big><em>node</em>, <em>F</em><big>)</big><a class="headerlink" href="#tree.ApplyToNodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies a function recursively to all descendents of a node.</p>
+<p><em>node</em> is a <cite>Node</cite> object.</p>
+<p><em>F</em> is a function that takes as input a node.  This function applies
+<em>F</em> to <em>node</em> and to all of its descendents.</p>
+<p>Typically, you will call this function with <em>node</em> as the root
+node of a tree, and then the function will be applied to the 
+whole tree.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tree.AssignTimes">
+<tt class="descclassname">tree.</tt><tt class="descname">AssignTimes</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#tree.AssignTimes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns times to all nodes of a tree.</p>
+<p><em>t</em> is a <em>tree.Tree</em> object for which we are assigning node times.</p>
+<p>At the conclusion of this function, all nodes of <em>t</em> have times
+assigned in their <em>node.info</em> attributes under the key &#8216;time&#8217;.
+The value for this key is a number that gives the time for that 
+node. Times are measured backwards from the most recent tip node.
+So the most recent tip node has a time of 0.0, and the root node
+has the largest value of time, which is the total height of the tree.</p>
+<p>In addition, all nodes will also have a key in their <em>node.info</em> attribute
+of &#8216;time_since_root&#8217; which gives the time of the node since the root.
+The value of this key is 0.0 for the root node, and is the total height
+of the tree for the most recent tip node.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tree.GetBalancedIndex">
+<tt class="descclassname">tree.</tt><tt class="descname">GetBalancedIndex</tt><big>(</big><em>s</em>, <em>i</em>, <em>use_ctree=True</em><big>)</big><a class="headerlink" href="#tree.GetBalancedIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the index of the balancing parentheses character.</p>
+<p><em>s</em> is a string.</p>
+<p><em>i</em> is an integer index (<em>0 &lt;= i &lt; len(s)</em>).  <em>s[i]</em> must be one of the characters
+&#8220;(&#8221;, &#8221;)&#8221;, &#8220;[&#8221;, &#8220;]&#8221;, &#8220;{&#8221;, or &#8220;}&#8221; &#8211; otherwise an exception is raised.</p>
+<p><em>use_ctree</em> specifies that we use the faster implementations in the <tt class="docutils literal"><span class="pre">ctree</span></tt>
+C extension if available. Is <em>True</em> by default; if you set to <em>False</em> will
+use the pure Python code.</p>
+<p>If <em>s[i]</em> is start bracket character such as &#8220;(&#8221;, then moves
+forward in the string to find and return the index of the
+balancing bracket character.  If <em>s[i]</em> is an end bracket character,
+then moves backward in the string to find and return the index
+of the balancing bracket character.  Raises an exception of the
+character cannot be balanced.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">GetBalancedIndex</span><span class="p">(</span><span class="s">&#39;hi (what did you say)!&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">20</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">GetBalancedIndex</span><span class="p">(</span><span class="s">&#39;hi (what did you say)!&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">GetBalancedIndex</span><span class="p">(</span><span class="s">&#39;(507:12.32[&amp;h=&quot;A,(B)&quot;]),(234)&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">22</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">GetBalancedIndex</span><span class="p">(</span><span class="s">&#39;(507:12.32[&amp;h=&quot;A,(B)&quot;]),(234)&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">21</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tree.GetInfo">
+<tt class="descclassname">tree.</tt><tt class="descname">GetInfo</tt><big>(</big><em>s</em><big>)</big><a class="headerlink" href="#tree.GetInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets information from a information bracket.</p>
+<p><em>s</em> is a string that defines a valid information bracket in the
+BEAST annotation format.  That is,
+it must start with &#8216;[&amp;&#8217; and end with &#8216;]&#8217;.  These two brackets
+must represent balanced parentheses.  There can then be an
+arbitrary number of pieces of information defined, in the form
+<em>key=value</em> where <em>value</em> is either a number or a string.</p>
+<p>Returns a dictionary keyed by the keys as strings, and with the values as
+strings.  If the value represents an integer, is converted into one. If the
+value represents a float, is converted into one. Otherwise, is kept as a
+string. If the string is enclosed in brackets, returns everything
+in the brackets.</p>
+<p>Currently will not handle keys or values that contain the &#8220;=&#8221; character,
+and will not handle values with unbalanced parentheses.
+Raises a <em>ValueError</em> if the string cannot be parsed in this fashion.
+Also will raise a <em>ValueError</em> if it finds duplicate keys.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s">&#39;[&amp;history_1={A:G:2.33},seq=&quot;ATGC&quot;,d=10.23,i=9]&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GetInfo</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="p">{</span><span class="s">&#39;history_1&#39;</span><span class="p">:</span><span class="s">&#39;{A:G:2.33}&#39;</span><span class="p">,</span> <span class="s">&#39;seq&#39;</span><span class="p">:</span><span class="s">&#39;ATGC&#39;</span><span class="p">,</span> <span class="s">&#39;d&#39;</span><span class="p">:</span><span class="mf">10.23</span><span class="p">,</span> <span class="s">&#39;i&#39;</span><span class="p">:</span><span class="mi">9</span><span class="p">}</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tree.GetNode">
+<tt class="descclassname">tree.</tt><tt class="descname">GetNode</tt><big>(</big><em>t</em>, <em>key</em>, <em>value</em><big>)</big><a class="headerlink" href="#tree.GetNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a specific node from a tree.</p>
+<p><em>t</em> is a <em>tree.Tree</em> object.</p>
+<p><em>key</em> and <em>value</em> are used to specify how we locate the node. For nodes
+in the tree <em>t</em>, we look through the <em>node.info</em> attribute for each node
+for a key that matches <em>key</em> and specifies a value equal to <em>value</em>.
+This function returns the first node it finds where <em>node.info[key]</em>
+exists and specifies <em>value</em>. If no such node is found, returns None.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tree.GetPath">
+<tt class="descclassname">tree.</tt><tt class="descname">GetPath</tt><big>(</big><em>startnode</em>, <em>endnode</em>, <em>markpath=None</em><big>)</big><a class="headerlink" href="#tree.GetPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the path along the tree between two nodes.</p>
+<p><em>startnode</em> and <em>endnode</em> are two nodes from the same <em>Tree</em>
+object. This function traces the path from <em>startnode</em> to <em>endnode</em>.</p>
+<p>The returned variable is 2-tuple of the form
+<em>(commonancestor, pathlist)</em>
+where <em>commonancestor&#8217; is the last common ancestor node, and
+*pathlist</em> is a list of the form
+<em>[startnode, node1, node2, ..., endnode]</em>
+where <em>node1</em>, <em>node2</em>, etc represent intermediate nodes
+between <em>startnode</em> and <em>node1</em>.  Initially, each
+node in the list will be the immediate ancestor of its predecessor
+in the list, until we have traced back to the last common ancstor.
+After that, each node in the list will be the descendent of its
+predecessor in the list.</p>
+<p><em>markpath</em> gives us the option to mark the nodes and branches
+by writing in their information dictionaries to indicate
+they are on the path.  If <em>markpath</em> is set to a non-null
+string, then for each node and branch on the path, an
+entry is created in the dictionary keyed by that
+string, and with the integer value of one.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tree.ListsOfNodes">
+<tt class="descclassname">tree.</tt><tt class="descname">ListsOfNodes</tt><big>(</big><em>node</em>, <em>tip_list</em>, <em>internal_list</em><big>)</big><a class="headerlink" href="#tree.ListsOfNodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that returns lists of all tip and internal nodes in a tree.</p>
+<p>Typically you will call this function with <em>node</em> as a <em>Node</em> object giving the 
+root node of a tree, and <em>tip_list</em> and <em>internal_list</em> as set to empty lists.</p>
+<p>On return, <em>tip_list</em> is a list of all tip nodes in the tree with <em>node</em> as its 
+root node.  <em>internal_list</em> is a list of all internal nodes in the tree with
+<em>node</em> as its root.</p>
+<p>If the method is called with <em>node</em> equal to something other than the root node,
+then the lists are of all nodes in the subtree with root <em>node</em>.</p>
+<p>If the method is called with <em>tip_list</em> and <em>internal_list</em> as non-empty lists,
+then the tip and internal nodes are merely appended to the existing entries
+of these lists.</p>
+<p>This function works by recursively calling itself.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tree.Node">
+<em class="property">class </em><tt class="descclassname">tree.</tt><tt class="descname">Node</tt><big>(</big><em>root=False</em>, <em>tip=False</em>, <em>name=None</em>, <em>ancestor=None</em>, <em>leftdescendent=None</em>, <em>rightdescendent=None</em>, <em>ancestorbranch=None</em>, <em>leftbranch=None</em>, <em>rightbranch=None</em>, <em>number=None</em>, <em>info={}</em>, <em>ancestorbranchinfo={}</em>, <em>rightbranchinfo={}</em>, <em>leftbranchinfo={}</em><big>)</big><a class="headerlink" href="#tree.Node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Class for representing nodes of a phylogenetic tree.</p>
+<p>Currently only competent for representing nodes on a bifurcating tree.</p>
+<p>The calling arguments for creation of a <em>Node</em> object are specified in
+the <em>__init__</em> method.</p>
+<p>A node object <em>n</em> has the following public attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>n.tip</em> : <em>True</em> if the node is a tip, <em>False</em> otherwise.</li>
+<li><em>n.root</em> : <em>True</em> if the node is a root node, <em>False</em> otherwise.</li>
+<li><em>n.number</em> : an integer that can be assigned to the node as an identifier.
+It is <em>None</em> of no integer has been set.  Typically, this value
+is used to uniquely identify nodes in a tree, and is set during
+construction of the tree.</li>
+<li><em>n.name</em> : a string giving the name of a node, or <em>None</em> if no name exists.</li>
+<li><em>n.info</em> : a dictionary keyed by arbitrary strings, with values giving
+the corresponding value for that node property.</li>
+<li><em>n.ancestor</em> : the node that is the ancestor of this node, or <em>None</em> if
+the node has no ancestor.  Typically there will be no ancestor
+if <em>n.root</em> is <em>True</em>.</li>
+<li><em>n.rightdescendent</em> : node that is the right descendent of this node,
+or <em>None</em> if there is no right descendent.  Typically there will be
+no right descendent if <em>n.tip</em> is <em>True</em>.</li>
+<li><em>n.leftdescendent</em> : like <em>n.rightdescendent</em>, but for the left descendent.</li>
+<li><em>n.ancestorbranch</em> : the length of the branch to the ancestor, or <em>None</em>
+if no such length is set.</li>
+<li><em>n.rightbranch</em> : the length to the branch to the right descendent, or 
+<em>None</em> if no such length is set.</li>
+<li><em>n.leftbranch</em> : like <em>n.rightbranch</em>, but for the left ancestor.</li>
+<li><em>n.ancestorbranchinfo</em> : a dictionary keyed by arbitrary strings, 
+with values giving the corresponding value for the ancestral branch.</li>
+<li><em>n.rightbranchinfo</em> : like <em>n.ancestorbranchinfo</em>, but for the right branch.</li>
+<li><em>n.leftbranchinfo</em> : like <em>n.ancestorbranchinfo</em>, but for the left branch.</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="tree.PrintAllTreeInformation">
+<tt class="descclassname">tree.</tt><tt class="descname">PrintAllTreeInformation</tt><big>(</big><em>tree</em>, <em>f=&lt;open file '&lt;stdout&gt;'</em>, <em>mode 'w' at 0x100261150&gt;</em><big>)</big><a class="headerlink" href="#tree.PrintAllTreeInformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints information about all nodes, names, and sequences in a tree.</p>
+<p><em>tree</em> is a <em>Tree</em> object specifying a phylogenetic tree.</p>
+<p><em>f</em> is a writeable filelike object.  By default, it is set to <em>sys.stdout</em>.
+You can also set it to some other writeable file.</p>
+<p>This function writes to <em>f</em> a FASTA file containing an entry for every node
+in <em>tree</em>.  The headers begin with the node&#8217;s location in the tree,
+then whether this is an interior or tip node, and finally the node&#8217;s
+assigned name.  The sequence is the value in <em>node.info[&#8216;sequence&#8217;]</em> for each
+node. Each node is assumed to have an entry with this key of &#8216;sequence&#8217;
+in its <em>node.info</em> dictionary. The nodes location is written
+as &#8220;ROOT&#8221; if the node is a root node, and otherwise as a string of
+comma delimited &#8220;LEFT&#8221; and &#8220;RIGHT&#8221; characters indicating how the node
+is reached from the root node.  If no name is assigned for the node,
+the name is printed as &#8220;None&#8221;. For example, the function might write:</p>
+<div class="highlight-python"><pre>&gt;ROOT INTERIOR None 
+None
+&gt;LEFT INTERIOR None
+None
+&gt;LEFT,LEFT TIP A/WSN/33 (H1N1)
+MTAGCKL
+&gt;LEFT,RIGHT TIP A/PR/8/34 (H1N1)
+MTAGNL
+&gt;RIGHT TIP A/Aichi/1968 (H3N2)
+MSGGNL</pre>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tree.QueryTree">
+<tt class="descclassname">tree.</tt><tt class="descname">QueryTree</tt><big>(</big><em>tree</em>, <em>nodelocation</em><big>)</big><a class="headerlink" href="#tree.QueryTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets information about a particular node of a tree.</p>
+<p><em>tree</em> is a <em>Tree</em> object specifying a phylogenetic tree.</p>
+<p><em>nodelocation</em> is a string giving the location of the node that
+we want to query from the tree.  It is specified in terms of
+tracing the tree forward from its root node.  A node location
+of &#8216;&#8217; (empty string) refers to the root node.  A node location
+of &#8216;right&#8217; refers to the right descendent of the root node.
+A node location of &#8216;right, left, left&#8217; refers to the node reached
+by beginning at the root node, taking the right descendent node,
+then this node&#8217;s left descendent, then that node&#8217;s left descendent.</p>
+<p>If <em>nodelocation</em> fails to specify an existing node of the tree, then
+an exception is raised.</p>
+<p>If <em>nodelocation</em> specifies an existing node, the function returns the 3-tuple:
+<em>(tip, name, sequence)</em> where:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>tip</em> is <em>True</em> if the node is a tip node, and <em>False</em> otherwise.</li>
+<li><em>name</em> is the string giving the name of the node, or <em>None</em> if
+no name is assigned to the node.</li>
+<li><em>sequence</em> is a string giving the sequence assigned to the node,
+or <em>None</em> if no sequence is assigned to this node.</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="tree.RecursivelyAssignDescendents">
+<tt class="descclassname">tree.</tt><tt class="descname">RecursivelyAssignDescendents</tt><big>(</big><em>node</em>, <em>newick_tree</em>, <em>scalebranchlength</em>, <em>tipnames_dict</em>, <em>make_lengths_non_negative=False</em><big>)</big><a class="headerlink" href="#tree.RecursivelyAssignDescendents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively assigns the descendents to a node in a phylogenetic tree.</p>
+<p>This method assigns the descendent nodes for <em>node</em>, and does the same
+for these descendent nodes, until the tips of the tree have
+been reached.  The tips of the trees have names assigned.  Branch
+lengths are assigned to all nodes.</p>
+<p>CALLING VARIABLES:</p>
+<p><em>node</em> is a <em>Node</em> that is not a tip and has no descendents assigned.</p>
+<p><em>newick_tree</em> is a string giving the Newick tree
+that has <em>node</em> as its root.  The same restrictions apply
+to <em>newick_tree</em> as those mentioned in the <em>__init__</em> method
+of <em>Tree</em>.</p>
+<p><em>scalebranchlength</em> is an optional argument that allows us to rescale
+all branch lengths.  If it has a value of <em>None</em>, then no
+rescaling is done.  If it has another value, then it should be a number
+greater than zero.  In this case, all branch lengths specified by 
+<em>newick_tree</em> are multiplied by <em>scalebranchlength</em>.</p>
+<p><em>tipnames_dict</em> has a similar meaning as described in the <em>__init__</em>
+method of <em>Tree</em>.  It is used to assign properties to the tip nodes.  It
+can still be <em>None</em>, meaning that no sequences are assigned.  Otherwise
+it is a dictionary, with the keys being the nodes names and the values
+themselves being dictionaries giving key / value pairs to add to the
+<em>node.info</em> dictionaries. There must be a key for every tip node.</p>
+<p><em>makes_lengths_non_negative</em> is a Boolean switch specifying that we set
+any branch lengths that are less than zero to instead be zero.
+This is done if it is <em>True</em>.</p>
+<p>RESULT OF CALLING THIS FUNCTION:</p>
+<p>At the conclusion of this function, <em>node</em> will have its descendents
+assigned as specified by <em>newick_tree</em>. <em>node</em> will therefore represent
+the root of a tree.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tree.RecursivelyAssignTimes">
+<tt class="descclassname">tree.</tt><tt class="descname">RecursivelyAssignTimes</tt><big>(</big><em>node</em>, <em>origin_time</em>, <em>time_label</em><big>)</big><a class="headerlink" href="#tree.RecursivelyAssignTimes" title="Permalink to this definition">¶</a></dt>
+<dd><p>For all descendents of a node, assigns the time since this node.</p>
+<p><em>node</em> is a <em>Node object</em>.  Assigns this node an entry in <em>node.info</em>
+of with the key <em>time_label</em> (a string) and the value <em>origin_time</em>   
+(a number). Then recursively assigns each descendent node a time equal
+to <em>origin_time</em> plus the length of the branch to that node.</p>
+<p>Typically, you might call this method with <em>node</em> equal to the
+root node of a tree, <em>origin_time</em> equal to 0.0, and <em>time_label</em>
+equal to &#8220;time_since_root&#8221;.  Then:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">node</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s">&quot;time_since_root&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+</pre></div>
+</div>
+<p>and all descendent nodes will have the time since the root specified.
+In addition, the function returns a single number representing
+the largest value of the time for any node in the subtree. This 
+number therefore represents the total height of the subtree rooted
+at node (if <em>origin_time</em> is zero on the call).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tree.RecursivelySetNumbers">
+<tt class="descclassname">tree.</tt><tt class="descname">RecursivelySetNumbers</tt><big>(</big><em>node</em>, <em>number</em><big>)</big><a class="headerlink" href="#tree.RecursivelySetNumbers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function for setting the numbers for nodes of a tree.</p>
+<p>Calling this function on the root node of a tree will set unique 
+numbers for all nodes of the tree.</p>
+<p>A node&#8217;s number is the value of <em>node.number</em>.</p>
+<p>Calling this function with <em>node</em> as the root node and <em>number</em> set to zero
+will return an integer giving the number of nodes in a tree (tip and
+internal nodes combined).  Typically, that is how you will use
+the function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">RecursivelySetNumbers</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">GetRoot</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On call, <em>node</em> should be a <em>Node</em> object.</p>
+<p><em>number</em> should be an integer that is the number that is set for <em>node</em>.</p>
+<p>Sets a number for <em>node</em>, and also recursively sets numbers for any of
+its descendents.  The returned value is the next number (number + 1)
+that is not set for any node.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tree.RecursivelySetTipAndInternalNumbers">
+<tt class="descclassname">tree.</tt><tt class="descname">RecursivelySetTipAndInternalNumbers</tt><big>(</big><em>node</em>, <em>tip_number</em>, <em>internal_number</em><big>)</big><a class="headerlink" href="#tree.RecursivelySetTipAndInternalNumbers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function for setting numbers for tip and internal nodes.</p>
+<p>The node numbers are the values accessed by <em>node.number</em>.  Any
+existing values for these numbers are cleared.</p>
+<p>Typically this function will initially be called with <em>node</em> as the
+root node of a tree, and <em>tip_number</em> and <em>internal_number</em> both
+equal to zero.  In this case, all of the tip nodes in the tree
+will be assigned integer numbers going from 0, 1, ...
+All of the inernal nodes in the tree will also be assigned integer
+numbers going from 0, 1, ...  Crucially, the numbers for the internal
+nodes are assigned so that if <em>nodej</em> is a descendent of <em>nodei</em>, then
+<em>nodej.number &lt; nodei.number</em>. This leads to the implication
+that the root node will have the smallest internal node number.  Any existing 
+numbers for the nodes are cleared.  Note that it is NOT the case that all nodes
+in the tree have unique numbers; all tip nodes have unique numbers,
+and all internal nodes have unique numbers.</p>
+<p>The returned value is
+the 2-tuple <em>(n_tips, n_internal)</em> where <em>n_tips</em> is the number of
+tip nodes and <em>n_internal</em> is the number of internal nodes.</p>
+<p>In its implementation, this function works by recursively calling itself.  In
+these recursive calls, the values of <em>tip_number</em> and <em>internal_number</em> are
+incremented as nodes are assigned numbers &#8211; the value of each of these
+corresponds to the next number that will be assigned to the next encountered
+tip or internal node.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tree.SplitNewick">
+<tt class="descclassname">tree.</tt><tt class="descname">SplitNewick</tt><big>(</big><em>newick_tree</em><big>)</big><a class="headerlink" href="#tree.SplitNewick" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits a bifurcating phylogenetic tree into its next two branches.</p>
+<p><em>newick_tree</em> is a string specifying a sub-tree of a Newick tree.
+If the string specifies the full tree, the trailing semicolon
+and the parentheses surrounding the root must already be
+removed.  In other words, the tree:</p>
+<div class="highlight-python"><pre>(((One:0.2,Two:0.3):0.3,(Three:0.5,Four:0.3):0.2):0.3,Five:0.7):0.0;</pre>
+</div>
+<p>is not acceptable, but the tree:</p>
+<div class="highlight-python"><pre>((One:0.2,Two:0.3):0.3,(Three:0.5,Four:0.3):0.2):0.3,Five:0.7</pre>
+</div>
+<p>is acceptable.  The same limitations to the Newick tree apply
+as are listed in the documentation string for the <em>__init__</em>
+method of <em>Tree</em>.</p>
+<p>Returns the 2-tuple <em>(left_branch, right_branch)</em>.  The elements of this
+tuple specify the left and right branches of the tree, respectively.
+Each branch is itself a 5-tuple of the form 
+<em>(branch, length, tip, node_info, branch_info)</em>, where:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>branch</em> is a string giving the subtree if this branch is a subtree,
+or the name of the node if it is a tip.</li>
+<li><em>length</em> is a number giving
+the length of the branch leading to this tip or subtree.</li>
+<li><em>tip</em> is <em>True</em> if the branch is a tip or <em>False</em> otherwise.</li>
+<li><em>node_info</em> gives any information specified for the node.</li>
+<li><em>branch_info</em> gives any information specified for the branch.</li>
+</ul>
+</div></blockquote>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">newick_tree</span> <span class="o">=</span> <span class="s">&#39;((One:0.2,Two:0.3):0.3,(Three:0.5,Four:0.3):0.2):0.3,Five:0.7&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">left_branch</span><span class="p">,</span> <span class="n">right_branch</span><span class="p">)</span> <span class="o">=</span> <span class="n">SplitNewick</span><span class="p">(</span><span class="n">newick_tree</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">right_branch</span> <span class="o">==</span> <span class="p">(</span><span class="s">&quot;Five&quot;</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{})</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left_branch</span> <span class="o">==</span> <span class="p">(</span><span class="s">&quot;(One:0.2,Two:0.3):0.3,(Three:0.5,Four:0.3):0.2&quot;</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{})</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tree.TallySiteChangesAlongTree">
+<tt class="descclassname">tree.</tt><tt class="descname">TallySiteChangesAlongTree</tt><big>(</big><em>t</em><big>)</big><a class="headerlink" href="#tree.TallySiteChangesAlongTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Counts the number of times a site has changed along a reconstructed tree.</p>
+<p>Takes as input a single argument <em>t</em> which shuld represent a <em>Tree</em>
+object.  This tree must be rooted, and must have sequence assigned to
+both all tip nodes and all interior nodes.  That is, the interior
+sequences must already be reconstructed by some method.  These sequences
+should all be the same length (i.e., they should be aligned).</p>
+<p>This method traverses along the tree starting at the root.  For each site,
+it counts the number of times that the identity of that site has
+changed, and what these changes have been.  It returns a dictionary <em>tally</em>
+keyed by sequence numbers (ranging from 1 to the length of the sequence).
+Entry <em>tally[i]</em> is the 2-tuple <em>(n, changes)</em>.  <em>n</em> is the total number
+of times site <em>i</em> is inferred to have changed identities.  <em>changes</em> is
+itself a dictinary.  For each transition from <em>x</em> to <em>y</em> at site <em>i</em>, 
+<em>changes[(x, y)]</em> counts the number of times that transition occurred.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tree.Tree">
+<em class="property">class </em><tt class="descclassname">tree.</tt><tt class="descname">Tree</tt><big>(</big><em>newick_tree</em>, <em>scalebranchlength=None</em>, <em>tipnames_dict=None</em>, <em>make_lengths_non_negative=False</em><big>)</big><a class="headerlink" href="#tree.Tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Class for representing a phylogenetic tree.</p>
+<p>Currently only works for representing a rooted bifurcating tree.</p>
+<p>The tree is composed of <em>Node</em> objects.</p>
+<p>Calling arguments are documented in detail in the <em>__init__</em> method.</p>
+<dl class="method">
+<dt id="tree.Tree.GetNewickTree">
+<tt class="descname">GetNewickTree</tt><big>(</big><big>)</big><a class="headerlink" href="#tree.Tree.GetNewickTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Newick string representing the original input tree.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tree.Tree.GetRoot">
+<tt class="descname">GetRoot</tt><big>(</big><big>)</big><a class="headerlink" href="#tree.Tree.GetRoot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>Node</em> object that is the root of the tree.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tree.Tree.WriteNewick">
+<tt class="descname">WriteNewick</tt><big>(</big><em>nodeinfo_keys={}</em>, <em>nodeinfo_res={}</em>, <em>branchinfo_keys={}</em>, <em>branchinfo_res={}</em><big>)</big><a class="headerlink" href="#tree.Tree.WriteNewick" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the Newick string corresponding a tree.</p>
+<p>This is NOT the original Newick string used to create the tree (for 
+for that use the <em>GetNewickTree</em> method).  Rather, nodes for this 
+tree are labeled according to the arguments <em>nodeinfo_keys</em> and 
+<em>nodeinfo_res</em> and branches for this tree are formatted according to 
+<em>branchinfo_keys</em> and <em>branchinfo_res</em>.</p>
+<p>These four arguments are 
+all dictionaries. For any node or branch that has comments
+(specified in the <em>node.info</em> dictionary) with a key that
+matches a key in <em>nodeinfo_keys</em> or <em>branchinfo_keys</em>,
+a comment is printed in the tree. In addition, any comment
+with a key that matches a regular expression that is a key
+in <em>nodinfo_res</em> or <em>branchinfo_res</em> is printed. The values
+corresponding to the keys can be <em>None</em>, in which case the
+method tries to print the correct form of the value (will 
+work for strings, integers, and floats). It can also be
+a function, in which case the method prints the string,
+integer, or float returned by that function which takes
+as input the node or branch information dictionary
+in question. If the function
+returns <em>None</em>, then nothing is printed for that value.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-parse_tree">
+<span id="parse-tree-module"></span><h2><a class="reference internal" href="#module-parse_tree" title="parse_tree"><tt class="xref py py-mod docutils literal"><span class="pre">parse_tree</span></tt></a> Module<a class="headerlink" href="#module-parse_tree" title="Permalink to this headline">¶</a></h2>
+<p>Module for various functions for parsing phylogenetic trees.</p>
+<p>This method is designed to take as input the text representations of
+phylogenetic trees produced by programs such as BEAST, and convert them
+to a form represented by the <em>Tree</em> and <em>Node</em> objects defined in the <tt class="docutils literal"><span class="pre">tree</span></tt>
+module.</p>
+<p>Written by Jesse Bloom.</p>
+<div class="section" id="list-of-functions-defined-in-this-module">
+<h3>List of functions defined in this module<a class="headerlink" href="#list-of-functions-defined-in-this-module" title="Permalink to this headline">¶</a></h3>
+<p><cite>TraceMutationPath</cite> : Finds the mutational path between two sequences on a tree.</p>
+<p><cite>AssignMutations</cite> : Assigns mutations to node branches.</p>
+<p><cite>BuildSeqsFromMutsAndTips</cite> : Builds node sequences from tip and mutation information.</p>
+<p><cite>RecursivelyAssignSeqsFromMuts</cite> : assigns sequences using parental sequence and mutations.
+<cite>GetTreeString</cite> : Gets the newick tree from a BEAST <tt class="docutils literal"><span class="pre">.tree</span></tt> file line.</p>
+<p><cite>ReadTreeTranslateBlock</cite> : Reads name translation block from <tt class="docutils literal"><span class="pre">.tree</span></tt> file.</p>
+</div>
+<div class="section" id="detailed-documentation-for-functions">
+<h3>Detailed documentation for functions<a class="headerlink" href="#detailed-documentation-for-functions" title="Permalink to this headline">¶</a></h3>
+<p>Detailed documentation for the functions is provided in their individual
+docstrings below.</p>
+<dl class="function">
+<dt id="parse_tree.AssignMutations">
+<tt class="descclassname">parse_tree.</tt><tt class="descname">AssignMutations</tt><big>(</big><em>node</em><big>)</big><a class="headerlink" href="#parse_tree.AssignMutations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns mutations to node branches.</p>
+<p>CALLING VARIABLES</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>nodes is a *tree.Node</em> object. Typically, you would call this function
+with <em>node</em> as the root node of a tree. The mutations should be specified
+in the <em>rightbranchinfo</em> and <em>leftbranchinfo</em> attributes of the nodes
+using the key &#8216;history_all&#8217; as detailed below.</li>
+</ul>
+</div></blockquote>
+<p>RESULT OF THIS FUNCTION</p>
+<p>This function recursively proceeds down the tree descended from <em>node</em>
+and assigns mutations to the branches.</p>
+<p>The <em>rightbranchinfo</em> and <em>leftbranchinfo</em> for each node are assumed
+to hold the information about the mutations. Specifically, if
+these dictionaries have an entry keyed by the string &#8216;history_all&#8217;,
+then this history should list all mutations (the absence of such
+a key indicates no mutations). These should be listed in forms
+such as the following:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">node</span><span class="o">.</span><span class="n">rightbranchinfo</span><span class="p">[</span><span class="s">&#39;history_all&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;{{286,42.2151,A,S},{353,40.2638,S,C}}&#39;</span>
+</pre></div>
+</div>
+<p>where the first number is the position (residue or nucleotide number) in
+1, 2, ... numbering; the second number is the time of the mutation given
+in units such that the most current tip node has a value of 0 and the
+tree root has a value equal to the tree height, and the next numbers
+are the wildtype and then the mutant amino acids or nucleotides. This
+function creates an entry in the <em>branchinfo</em> dictionary that gives the
+following list, with the entries sorted from largest to smallest, which
+means that the list gives the mutations in chronological order since
+the largest times correspond to those in the most distant past:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">node</span><span class="o">.</span><span class="n">rightbranchinfo</span><span class="p">[</span><span class="s">&#39;mutations&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">42.2151</span><span class="p">,</span> <span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="mi">286</span><span class="p">,</span> <span class="s">&#39;S&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mf">40.2638</span><span class="p">,</span> <span class="s">&#39;S&#39;</span><span class="p">,</span> <span class="mi">353</span><span class="p">,</span> <span class="s">&#39;C&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>where specifically each entry in the list is the time since the root node, the 
+wildtype identity, the position, and the mutant identity. If there are no
+mutations, an empty list is added for &#8216;mutations&#8217;.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="parse_tree.BuildSeqsFromMutsAndTips">
+<tt class="descclassname">parse_tree.</tt><tt class="descname">BuildSeqsFromMutsAndTips</tt><big>(</big><em>t</em>, <em>allowambiguousmismatches</em><big>)</big><a class="headerlink" href="#parse_tree.BuildSeqsFromMutsAndTips" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds node sequences from tip and mutation information.</p>
+<p>This function takes a single argument <em>t</em> specifying a <em>tree.Tree</em>
+object. In order for this method to work, all nodes must have
+mutations assigned to their <em>branchinfo</em> dictionaries under the 
+key &#8216;mutations&#8217; in the format given by <strong>AssignMutations</strong>. In other
+words, you should have already called:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">AssignMutations</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">GetRoot</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>In addition, all of the tip nodes of the tree should have their sequences
+(does not matter if these are protein or nucleic acid) specified in
+their <em>node.info</em> dictionaries under the key &#8216;sequences&#8217;.</p>
+<p>This method uses the tip sequences and the mutation information to
+determine the sequences for all nodes of the tree, and places
+these in the <em>node.info</em> dictionary under the key &#8216;sequence&#8217;. Furthermore,
+it makes sure that the tip sequences and mutations specified in the tree
+already are consistent, and raises an exception if they are not.</p>
+<p>First, it chooses a tip node and uses that to reconstruct the root node
+by tracing back up the tree to the root.
+Then it starts from this root node and recursively reconstruct all interior
+nodes and to check all tip nodes.</p>
+<p><em>allowambiguousmismatches</em> is a list or set specifying any ambiguous characters
+that we might allow in tip nodes. In general, if a tip node contains an 
+ambiguous character, then during the sequence building a mismatch
+gaps as ambiguous characters, then during the sequence building a mismatch
+can occur. Any character that is present in <em>allowambiguousmismatches</em> does not
+count as a mismatch. For protein sequences, you might want::</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">allowambiguousmismatches</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="s">&#39;X&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>to allow ambiguous amino acids and gaps. For nucleotide sequences, you might
+want:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">allowambiguousmismatches</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="s">&#39;N&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>to allow ambiguous nucleotides and gaps.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="parse_tree.GetTreeString">
+<tt class="descclassname">parse_tree.</tt><tt class="descname">GetTreeString</tt><big>(</big><em>line</em>, <em>replace_with_null=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#parse_tree.GetTreeString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the newick tree from a line from a BEAST <tt class="docutils literal"><span class="pre">.tree</span></tt> file.</p>
+<p><em>line</em> is a string giving a line representing a tree from a BEAST
+tree file.</p>
+<p><em>replace_with_null</em> is a list of regular expression patterns that we
+wish to remove from the tree string.  The replacements
+are done in the order that the items are specified. They are replaced
+with &#8216;&#8217; (nothing).</p>
+<p>Returns the newick tree portion of line only, with all patterns
+matching those listed in <em>replace_with_null</em> having been removed.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="parse_tree.ReadTreeTranslateBlock">
+<tt class="descclassname">parse_tree.</tt><tt class="descname">ReadTreeTranslateBlock</tt><big>(</big><em>treefile</em><big>)</big><a class="headerlink" href="#parse_tree.ReadTreeTranslateBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads name translation block from <tt class="docutils literal"><span class="pre">.tree</span></tt> file.</p>
+<p><em>treefile</em> is a string giving the name of a BEAST <tt class="docutils literal"><span class="pre">.trees</span></tt> file.</p>
+<p>A <tt class="docutils literal"><span class="pre">.trees</span></tt> file (such as that created by BEAST) contains a block
+called &#8216;Translate&#8217; under the &#8216;Begin trees&#8217; heading, such as:</p>
+<div class="highlight-python"><pre>Begin trees;
+    Translate
+        1 'A/Aichi/2/1968_1968.50',
+        2 'A/Akita/1/94_1994.50',
+        3 'A/nt/60/1968_1968.50'
+        ;</pre>
+</div>
+<p>This block is assigning the numbers used in the Newick strings to the
+full strain names.</p>
+<p>This function returns a dictionary keyed by the integer strain codes
+and with the values being the strings giving the full name. The integer
+strain codes are given as strings, not numbers. For example
+the above block would return:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;1&#39;</span><span class="p">:</span><span class="s">&#39;A/Aichi/2/1968_1968.50&#39;</span><span class="p">,</span> <span class="s">&#39;2&#39;</span><span class="p">:</span><span class="s">&#39;A/Akita/1/94_1994.50&#39;</span><span class="p">,</span> <span class="s">&#39;3&#39;</span><span class="p">:</span><span class="s">&#39;A/nt/60/1968_1968.50&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="parse_tree.RecursivelyAssignSeqsFromMuts">
+<tt class="descclassname">parse_tree.</tt><tt class="descname">RecursivelyAssignSeqsFromMuts</tt><big>(</big><em>node</em>, <em>allowambiguousmismatches</em><big>)</big><a class="headerlink" href="#parse_tree.RecursivelyAssignSeqsFromMuts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns sequences using parental sequence and specified mutations.</p>
+<p><em>node</em> is a <em>tree.Node</em> object.  <em>node</em> must have the following keys
+in its attribute dictionaries:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>node.info</em> must have the key &#8216;sequence&#8217; and a value specifying
+a nucleotide or protein sequence for the node.</li>
+<li>Unless <em>node</em> is a tip node (which is the case if <em>node.tip == True</em>),
+then <em>node.rightbranchinfo</em> and <em>node.leftbranchinfo</em> must both have the
+key &#8216;mutations&#8217; specifying mutations in the format written by 
+<strong>AssignMutations</strong>. These mutations should be numbered in 1, 2, ...
+numbering of the sequence specified under &#8216;sequence&#8217; in the <em>node.info</em>
+attribute.</li>
+</ul>
+</div></blockquote>
+<p>If <em>node</em> is a tip node (<em>node.tip == True</em>), this function does nothing.
+Otherwise, it uses the sequence specified in <em>node.info</em> and the mutations
+specified in <em>node.rightbranchinfo</em> and <em>node.leftbranchinfo</em> to build
+the sequences for the right and left descendents of <em>node</em>, and places
+these sequences under the key &#8216;sequences&#8217; in the <em>info</em> attributes
+of these descendents. If a &#8216;sequences&#8217; key already specifies a sequence
+for these descendents, then checks to make sure the sequences built from
+the ancestor and mutations matches this sequence &#8211; if they do not,
+raises an exception. This function then recursively calls itself on the
+descendent nodes.</p>
+<p>If you call this function with <em>node</em> as the root node of a tree, this
+method will build the sequences for all nodes of the tree.</p>
+<p><em>allowambiguousmismatches</em> has the same meaning as in <strong>BuildSeqsFromMutsAndTips</strong>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="parse_tree.TraceMutationPath">
+<tt class="descclassname">parse_tree.</tt><tt class="descname">TraceMutationPath</tt><big>(</big><em>t</em>, <em>startstrain</em>, <em>endstrain</em><big>)</big><a class="headerlink" href="#parse_tree.TraceMutationPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the mutational path between two sequences along a phylogenetic tree.</p>
+<p>Given a phylogenetic tree <em>t</em> with mutations assigned to branches and
+sequences assigned to nodes, this function traces the path along the
+tree from the tip node <em>startstrain</em> to the tip node <em>endstrain</em> and
+reconstructs the sequences along the way. This mutational path through
+sequence space is written to <em>pathfile</em>.</p>
+<p>CALLING VARIABLES:</p>
+<ul>
+<li><p class="first"><em>t</em> is a phylogenetic tree as a <em>tree.Tree</em> object. 
+All nodes should have mutations assigned to their branches in their
+<em>node.ancestorbranchinfo</em>, <em>node.rightdescendentinfo</em>, <em>node.leftdescendentinfo</em>
+attributes under the key &#8216;mutations&#8217;. In addition, all nodes should have
+sequences assigned in their <em>node.info</em> under the key &#8216;sequence&#8217;. In addition,
+all nodes should have their time preceding the most recent tip assigned
+in their <em>node.info</em> under the key &#8216;time&#8217;. In practice,
+you can ensure this is true by performing the following two function
+calls before calling this function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">parse_tree</span><span class="o">.</span><span class="n">AssignMutations</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">GetRoot</span><span class="p">())</span>
+<span class="n">parse_tree</span><span class="o">.</span><span class="n">BuildSeqsFroMutsAndTips</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">allowambiguousmismatches</span><span class="p">)</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">AssignTimes</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In addition, the tip nodes should have names assigned in their <em>node.info</em>
+dictionaries under the key &#8216;strain&#8217;. These names are used to locate
+the tip nodes corresponding to <em>startstrain</em> and <em>endstrain</em>.</p>
+</li>
+<li><p class="first"><em>startstrain</em> and <em>endstrain</em> are strings giving the names of the tip
+nodes that form the starting and ending sequences for the mutational path.
+There must be a unique tip node that has a <em>node.info</em> key &#8216;strain&#8217; giving
+<em>startstrain</em> as its value &#8211; this is the starting sequences. The same
+is true for <em>endstrain</em>.</p>
+</li>
+</ul>
+<p>RESULT OF CALLING THIS FUNCTION</p>
+<p>This function returns a string specifying the mutational path and the timing of
+mutations. All times are measured in units before the most recent tip node
+(so the root node would have the largest value of time). Here is an example
+of a path that might be produced:</p>
+<div class="highlight-python"><pre>startstrain_name A/Aichi/2/1968_1968.50
+startstrain_seq ATGGCAATGGGCTAA 
+startstrain_time 42.5
+endstrain_name A/Brisbane/10/2007_2007.10
+endstrain_seq ATGACGATTGGATAA
+endstrain_time 3.9
+commonancestor_seq ATGGCGATGGGCTAA
+commonancestor_time 43.12713
+startstrain_to_commonancestor_path
+A6G : 42.713     
+commonancestor_to_endstrain_path
+G9T : 31.732
+G4A : 25.1343
+C12A : 10.134</pre>
+</div>
+<p>In this output string, the first three entries give the name, sequence, and
+time for <em>startstrain</em>. The next three do the same for <em>endstrain</em>. The next
+two entries give the sequence and time of the most recent common ancestor
+of <em>startstrain</em> and <em>endstrain</em>. The mutational path is then specified,
+first tracing from <em>startstrain</em> to the common ancestor (so backwards along the
+tree), and then tracing from the common ancestor the <em>endstrain</em>. In each of
+these sections of the path, each line specifies a different mutation in 1, 2, ...
+numbering, followed by a colon and the time of the mutation (again measured
+backwards from the most recent tip).</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-trajectory">
+<span id="trajectory-module"></span><h2><a class="reference internal" href="#module-trajectory" title="trajectory"><tt class="xref py py-mod docutils literal"><span class="pre">trajectory</span></tt></a> Module<a class="headerlink" href="#module-trajectory" title="Permalink to this headline">¶</a></h2>
+<p>Module for representing mutational trajectories as directed graphs.</p>
+<p>Represents mutational trajectories through sequence space, which is the space in
+which each node is a unique sequence and edges are directional connections
+between nodes corresponding to mutations.</p>
+<p>These digraphs can be used to visualize mutational trajectories through sequence
+space. They are designed to be visualized using the GraphViz program.</p>
+<p>Written by Jesse Bloom.</p>
+<div class="section" id="id1">
+<h3>Functions defined in this module<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p><cite>WriteGraphVizTrajectory</cite> - Writes a GraphViz visualization of a <em>Trajectory</em> object.</p>
+<p><cite>WriteMutationDates</cite> - Writes files giving mutations dates and credible intervals.</p>
+<p><cite>WriteNodePersistence</cite> - Writes times that nodes persist (time before next mutation).</p>
+<p><cite>DistanceAlongPath</cite> - Distance along a mutational path.</p>
+<p><cite>HeuristicTraceback</cite> - Tries to find the last high weight predecessor of a node.</p>
+<p><cite>IteratePaths</cite> - Iterates of paths in a mutational path file.</p>
+</div>
+<div class="section" id="id2">
+<h3>Classes defined in this module<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p><cite>Trajectory</cite> - A class for representing a mutational trajectory through sequence space.</p>
+</div>
+<div class="section" id="id3">
+<h3>Detailed documentation for functions<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Provided in the individual function documentation strings below.</p>
+<dl class="function">
+<dt id="trajectory.DistanceAlongPath">
+<tt class="descclassname">trajectory.</tt><tt class="descname">DistanceAlongPath</tt><big>(</big><em>startseq</em>, <em>endseq</em>, <em>s</em><big>)</big><a class="headerlink" href="#trajectory.DistanceAlongPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the distance along the mutational path.</p>
+<p>This distance of a sequence <em>s</em> along the path is defined 
+as the Hamming Distance between <em>startseq</em> and <em>s</em> minus
+the Hamming Distance between <em>endseq</em> and <em>s</em> plus the
+Hamming distance between <em>startseq</em> and <em>endseq</em>.</p>
+<p>Sequences are not case sensitive.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="trajectory.HeuristicTraceback">
+<tt class="descclassname">trajectory.</tt><tt class="descname">HeuristicTraceback</tt><big>(</big><em>t</em>, <em>node</em>, <em>cutoff</em><big>)</big><a class="headerlink" href="#trajectory.HeuristicTraceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traces back to find last high weight precessor of a node.</p>
+<p><em>t</em> is a <em>Trajectory</em> object.</p>
+<p><em>node</em> is the string name of a node in <em>t</em>.</p>
+<p><em>cutoff</em> is a number &gt; 0 and &lt;= 1.</p>
+<p>This function starts at node, and traces back along the trajectory
+to return the first predecessor of <em>node</em> with a weight &gt;= <em>cutoff</em>.
+It does this by tracing back from <em>node</em> along its highest weight
+incoming edge to that predecessor, and then from that predecessor
+along its highest weight edge, etc until we find a predecessor
+with weight &gt;= <em>cutoff</em>. This approach
+is not absolutely guaranteed to find the first predecessor with weight
+&gt; <em>cutoff</em>, but it should work for reasonable trajectories. But beware,
+hence the word &#8216;Heuristic&#8217; in the name of this function.</p>
+<p>The return value is the string name of the first high weight predecessor.</p>
+<p>This function recursively calls itself.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="trajectory.IteratePaths">
+<tt class="descclassname">trajectory.</tt><tt class="descname">IteratePaths</tt><big>(</big><em>pathfile</em><big>)</big><a class="headerlink" href="#trajectory.IteratePaths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates over paths in a mutational path file.</p>
+<p><em>pathfile</em> should be a string giving a name of an input file specifying one or
+more mutational paths. These files are of the format created by 
+<tt class="docutils literal"><span class="pre">mutpath_get_paths.py</span></tt>. The required format is detailed below.</p>
+<p>This function will iterate over all paths in <em>pathfile</em>. For each path,
+it will return the tuple 
+<em>(startseq, starttime, endseq, endtime, caseq, catime, tocamuts, fromcamuts)</em>.
+The entries of these tuples are as follows. All sequences are converted
+to upper case, as are all letters in the mutation notations. The times
+are measured in units before the most recent tip of the tree. Tuple entries:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>startseq</em> is the starting sequence specified by <em>startstrain_seq</em></li>
+<li><em>starttime</em> is the time of <em>startseq</em> specified by <em>startstrain_time</em></li>
+<li><em>endseq</em> is the ending sequence specified by <em>endstrain_seq</em></li>
+<li><em>endtime</em> is the time of <em>endseq</em> specified by <em>endstrain_time</em></li>
+<li><em>caseq</em> is the common ancestor sequence specified by <em>commonancestor_seq</em></li>
+<li><em>catime</em> is the time of <em>caseq</em> specified by <em>commonancestor_time</em></li>
+<li><em>tocamuts</em> is a list of the mutations going from <em>startseq</em> to <em>caseq</em>,
+specified in the order they are listed in the file (should be along
+the path) as the 2-tuples of the form <em>(&#8216;A6G&#8217;, 42.713)</em> where the
+entries are the mutation and then the time.</li>
+<li><em>fromcamuts</em> is like <em>tocamuts</em>, but for mutations going from 
+<em>caseq</em> to <em>endseq</em>.</li>
+</ul>
+</div></blockquote>
+<p>The format of <em>pathfile</em> is as follows. This file should list
+mutational paths as:</p>
+<div class="highlight-python"><pre>MUTPATH 1
+startstrain_name A/Aichi/2/1968_1968.50
+startstrain_seq ATGGCAATGGGCTAA 
+startstrain_time 42.5
+endstrain_name A/Brisbane/10/2007_2007.10
+endstrain_seq ATGACGATTGGATAA
+endstrain_time 3.9
+commonancestor_seq ATGGCGATGGGCTAA
+commonancestor_time 43.12713
+startstrain_to_commonancestor_path
+A6G : 42.713     
+commonancestor_to_endstrain_path
+G9T : 31.732
+G4A : 25.1343
+C12A : 10.134
+
+MUTPATH 2
+startstrain_name A/Aichi/2/1968_1968.50
+startstrain_seq ATGGCAATGGGCTAA 
+startstrain_time 42.5
+endstrain_name A/Brisbane/10/2007_2007.10
+endstrain_seq ATGACGATTGGATAA
+endstrain_time 3.9
+commonancestor_seq ATGGCGATGGGCTAA
+commonancestor_time 44.12713
+startstrain_to_commonancestor_path
+A6G : 42.113     
+G9T : 43.124
+commonancestor_to_endstrain_path
+G4A : 21.1343
+C5A : 19.531
+A5C : 19.402
+C12A : 9.134</pre>
+</div>
+<p>The file lists each of the paths numbered starting at 1. 
+Within each path, the mutations are indicated with numbering starting 
+at 1 for the first position in the sequence. The times for the mutations, 
+the starting and ending strains, and the most recent common ancestor of these 
+two strains, are also indicated. These times are measured in units before 
+the most recent tip node (so the root node would have the largest value of time).
+The mutations must move from the starting to the ending sequence, and if
+multiple paths are specified, then they all must have the same starting and
+ending sequences.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="trajectory.Trajectory">
+<em class="property">class </em><tt class="descclassname">trajectory.</tt><tt class="descname">Trajectory</tt><big>(</big><em>pathfile</em>, <em>translateseqs=False</em>, <em>printprogress=False</em><big>)</big><a class="headerlink" href="#trajectory.Trajectory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Class for representing a mutational trajectory through sequence space.</p>
+<p>This class represents a mutational trajectory in sequence space. The trajectory
+is a directed graph consisting of nodes (sequences) and edges (mutations
+connecting nodes). The trajectory moves from one known sequence to another
+known sequence, passing through some number of uncertain intermediates (nodes).
+The trajectory is created by passing it a set of possible mutational paths
+from the starting to ending sequence. In the trajectory, the weight of each node
+corresponds to the fraction of paths that contain that sequence, while the
+weight of each edge corresponds to the fraction of paths that contain that edge.
+Note that if a path contains a node or edge more than once (which can happen
+if there are mutational cycles), the node or edge is still considered to have
+occurred once in that path for the purposes of assigning the weights.</p>
+<p>Each <em>Trajectory</em> object <em>t</em> has the following attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>t.npaths</em> : the number of individual paths used to construct the
+overall trajectory.</li>
+<li><em>t.startseq</em> : a string giving the starting sequence for the trajectory.</li>
+<li><em>t.endseq</em> : a string giving the ending sequence for the trajectory.</li>
+<li><em>t.nodes</em> : a dictionary keyed by strings representing the sequences for
+each node found at least once in the trajectory, and with values equal to
+the weight of that node (fraction of paths containing the node).</li>
+<li><em>t.edges</em> : a dictionary keyed by 2-tuples of strings <em>(s1, s2)</em> and
+values giving the weight of the directed edges from sequence <em>s1</em> to
+<em>s2</em>.</li>
+<li><em>t.mutations</em> : a dictionary keyed by mutation strings of the
+form &#8216;G5A&#8217; specifying mutations where the numbering is in
+1, 2, ... For each mutation that occurs in at least one of
+the paths passed to this trajectory, there will be a key.
+The values are lists giving the times of occurrence for all
+occurrences of that mutation in the paths used to create this
+trajectory. If a mutation occurs more than once in a path,
+only the time for its first occurrence is listed. So the
+fraction of paths that contain some mutation <em>m</em> is
+<em>t.mutations[m] / float(t.npaths)</em>. Note that if <em>translateseqs</em>
+is <em>True</em>, then the mutations specified here are only the
+protein mutations, not the nucleotide ones in the underlying
+nucleotide sequences.</li>
+<li><em>t.mutationstoca</em> : a dictionary keyed by mutation strings just
+as for <em>t.mutations</em>. Each mutation that is added to the lists
+in <em>t.mutations</em> can arise on the branch from the starting sequence
+to the common ancestor, or on the branch from the common ancestor
+to the ending sequence. The value of <em>t.mutationstoca[mut]</em> is
+the number of times that the first occurrence of <em>mut</em> is on
+the route from starting sequence to the common ancestor. So if
+<em>mut</em> is always on the path from the starting sequence to the
+common ancestor, then <em>t.mutationstoca[mut] == len(t.mutations[mut])</em>.
+If it is always on the path from the starting sequence to the 
+ending sequence, then <em>t.mutations[mut] == 0</em>.</li>
+<li><em>t.persistence</em> : a dictionary keyed by the node sequences and
+with the values being a list of numbers. If a node occurs on a path,
+then the time for which the node sequence persisted before another
+mutation is listed (for the first occurrence of the node if it
+occurs multiple times on the same path). Note that it <em>translateseqs</em>
+is True, then these are the persistence times to the first
+non-synonymous mutation, as only those mutations change the node
+sequences. The total length of the list for each node will be equal
+to the number of paths that contained that node.</li>
+<li><em>t.timetofirstmut</em> : if <em>translateseqs</em> is False, then this 
+is just equal to <em>t.persistence</em>. But if <em>translateseqs</em> is True,
+then the entries give the time after the occurrence of a node to 
+the first mutation of any time &#8211; synonymous or nonsynonymous. In
+this case, entries in <em>t.timetofirstmut</em> will often be less than
+those in <em>t.persistence</em>, since the first mutation to a node will
+often by synonymous, which will change the nucleotide sequence
+but not the actual protein sequence node identity.</li>
+</ul>
+</div></blockquote>
+<p>To create a <em>Trajectory</em> object <em>t</em>, use the command:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">t</span> <span class="o">=</span> <span class="n">Trajectory</span><span class="p">(</span><span class="n">pathfile</span><span class="p">,</span> <span class="n">translateseqs</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">printprogress</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>pathfile</em> should be a string giving a name of an input file specifying one or
+more mutational paths. These files are of the format created by 
+<tt class="docutils literal"><span class="pre">mutpath_get_paths.py</span></tt>. They must be readable by the <em>IteratePaths</em>
+function.</p>
+<p><em>translateseqs</em> is an optional argument that is <em>False</em> by default. If it
+is set to <em>True</em>, then the sequences contained within <em>mutpathfile</em> are
+taken to represent coding nucleotide sequences, but the trajectory is
+built through protein sequence space. In other words, the nucleotide sequences
+in the paths are translated, and the trajectory is built from these
+translated sequences. All of the nodes and edges will therefore connect
+protein sequences. Note that no checking is made to ensure that the
+sequences translate properly: any stop codons are simply translated to &#8216;*&#8217;,
+codons containing gaps are translated to &#8216;-&#8216;, and sequences that do not have
+lengths that are multiples of three have the extra one or two nucleotides
+truncated.</p>
+<p><em>printprogress</em> is a switch specifying that we print progress as we
+process paths. You may want to use this if you are processing a large
+number of paths and want to output the progress. By default it is <em>False</em>,
+meaning that nothing is printed. If you set it to an integer, it will then
+print to <em>sys.stdout</em> after processing every <em>printprogress</em> paths.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="trajectory.WriteGraphVizTrajectory">
+<tt class="descclassname">trajectory.</tt><tt class="descname">WriteGraphVizTrajectory</tt><big>(</big><em>t</em>, <em>graphvizfile</em>, <em>minweight</em>, <em>labelcutoff</em>, <em>nodenames=None</em>, <em>nodesize=0.90000000000000002</em>, <em>ranksep=0.10000000000000001</em>, <em>nodesep=0.20000000000000001</em>, <em>penwidth=10</em>, <em>fontsize=40</em>, <em>arrowsize=1.3999999999999999</em>, <em>fontname='Helvetica-Bold'</em>, <em>rankdir='TB'</em>, <em>startendasdiamonds=True</em><big>)</big><a class="headerlink" href="#trajectory.WriteGraphVizTrajectory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes a GraphViz visualization of a <em>Trajectory</em> object.</p>
+<p>This function creates a file <em>graphvizfile</em> that can be used to visualize the
+directed graph represented by a <em>Trajectory</em> object <em>t</em>. Graphviz is a freely
+available software package (<a class="reference external" href="http://www.graphviz.org/">http://www.graphviz.org/</a>) for visualizing graphs.
+The trajectory is written in the DOT language 
+(<a class="reference external" href="http://www.graphviz.org/doc/info/lang.html">http://www.graphviz.org/doc/info/lang.html</a>).</p>
+<p>The areas of nodes and the widths of edges are proportional to their weights.</p>
+<p>The color saturations of nodes and edges are linearly proportional to their 
+weights.</p>
+<p>The rank of nodes (for example, their vertical position when <em>rankdir</em> 
+is &#8216;LR&#8217;) is ordered according to their distance along the path from the
+starting to ending sequence. This distance is defined as the Hamming
+Distance from the starting node minus the Hamming Distance from the ending node
+plus the Hamming distance between the starting and ending nodes.</p>
+<p>CALLING VARIABLES:</p>
+<ul class="simple">
+<li><em>t</em> is the <em>Trajectory</em> object that contains the trajectory that we want
+to visualize.</li>
+<li><em>graphvizfile</em> is a string giving the name of the GraphViz input file that
+we want to create. It will typically end with the extension <tt class="docutils literal"><span class="pre">.dot</span></tt>. If this
+file already exists, it is overwritten. You should be able to open this file
+directly with Graphviz. The file is written in the DOT language
+(<a class="reference external" href="http://www.graphviz.org/doc/info/lang.html">http://www.graphviz.org/doc/info/lang.html</a>).</li>
+<li><em>minweight</em> is a number specifying the minimum weight that a node or edge
+must possess in order to be shown on the graph. Nodes or edges with 
+weights &lt; <em>minweight</em> are not included. Note that this creates a possibility
+for orphan nodes if a node has a weight &gt;= <em>minweight</em> but all of its
+incoming and outgoing nodes have weights &lt; <em>minweight</em>. To show all nodes
+and edges regardless of weight, set <em>minweight</em> to zero. However, this can
+sometimes lead to a very large <em>graphvizfile</em> since there can be a huge
+number of very low weight nodes / edges.</li>
+<li><em>labelcutoff</em> is the minimum weight that an edge must possess in order
+to be labeled on the graph. In addition, all nodes with weight &gt;=
+<em>labelcutoff</em> have an incoming edge that is labeled. If there is not
+such an edge, then traces back to find the first predecessor node with
+weight <em>labelcutoff</em> and then draws a different colored edge spanning
+multiple mutations to connect these nodes. Generally, you would want
+<em>labelcutoff &gt; 0.5</em>.</li>
+<li><em>nodenames</em> is an optional argument that allows you to specify names
+for nodes. It is <em>None</em> by default. If you set it to another value,
+it should be a dictionary. It is keyed by node sequences (which
+are the identifiers for the nodes in t.nodes) and the values are
+strings giving names that are used to label the nodes in the 
+trajectory. These names are written on the nodes only if
+the weight for that node is &gt;= <em>labelcutoff</em>.</li>
+</ul>
+<p>OPTIONAL CALLING VARIABLES SPECIFYING FORMATTING DETAILS:</p>
+<ul class="simple">
+<li><em>nodesize</em> is the height of a node with weight.</li>
+<li><em>ranksep</em> is the separation between ranks, as fraction of <em>nodesize</em>.</li>
+<li><em>nodesep</em> is the minimum separation between nodes of the same rank,
+as fraction of <em>nodesize</em>.</li>
+<li><em>penwidth</em> is the pen width of an edge.</li>
+<li><em>fontsize</em> is the font size.</li>
+<li><em>arrowsize</em> is the size of the arrows.</li>
+<li><em>fontname</em> is the font style.</li>
+<li><em>rankdir</em> specifies the direction the ranks move. If set to &#8216;TB&#8217; then 
+the graph moves from top to bottom. If set to &#8216;LR&#8217; then the graph moves
+from left to right.</li>
+<li><em>startendasdiamonds</em> is a Boolean switch. If True, we show the starting
+and ending nodes as diamonds rather than circles. We also make these
+starting and ending nodes larger in size to fit their full labels. If 
+False, we make them circles with size proportional to weights like
+all other nodes.</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="trajectory.WriteMutationDates">
+<tt class="descclassname">trajectory.</tt><tt class="descname">WriteMutationDates</tt><big>(</big><em>t</em>, <em>labelcutoff</em>, <em>interval</em>, <em>datesfile</em>, <em>datesplot</em>, <em>lasttipdate</em><big>)</big><a class="headerlink" href="#trajectory.WriteMutationDates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates text file and plot showing dates of mutations.</p>
+<blockquote>
+<div><p>For each mutation that occurs in at least <em>labelcutoff</em> fraction of 
+the paths that form the trajectory <em>t</em>, this function writes the
+posterior median and a Bayesian credible interval for the date of
+first occurrence of that mutation. The posterior is taken over all
+paths that contain that mutation.</p>
+<p>The output also provides information about whether the mutations
+are on the branch from the starting sequence to the common ancestor,
+or from the common ancestor to the starting sequence.</p>
+<p>CALLING VARIABLES:</p>
+<ul class="simple">
+<li><em>t</em> is a <em>Trajectory</em> object that contains the mutations data.</li>
+<li><em>labelcutoff</em> is a number &gt; 0 and &lt;= 1. We write the dates of all
+mutations in <em>t</em> that have weights &gt;= <em>labelcutoff</em> (occur in
+at least this fraction of the paths).</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><em>interval</em> specifies the range of the Bayesian credible interval,
+for example a value of 0.9 means that we print the 90% credible
+interval.</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><em>datesfile</em> is the name of the text file that we create which
+contains the dates and intervals. It is overwritten if it does
+not already exist.</li>
+<li><em>datesplot</em> is the name of the plot file that we create using
+matplotlib. This plot can only be created if matplotlib is 
+available. So first check on this (for example using 
+<em>Plot.PylabAvailable()</em>. If matplotlib is not available, or if
+you don&#8217;t want to make the plot, make this argument <em>None</em>. Otherwise
+make it the name of the PDF plot file that you want to create.</li>
+<li><em>lasttipdate</em> specifies the absolute units for the dates. Dates
+in <em>t</em> will be specified in units of time before the most recent
+tip. Here provide a number giving the date of the most recent tip,
+and the dates shown are then this number minus the time for
+each mutation.</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="trajectory.WriteNodePersistence">
+<tt class="descclassname">trajectory.</tt><tt class="descname">WriteNodePersistence</tt><big>(</big><em>t</em>, <em>nodestowrite</em>, <em>interval</em>, <em>persistencefile</em>, <em>cutoff</em><big>)</big><a class="headerlink" href="#trajectory.WriteNodePersistence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes times for which nodes persist before the next mutation.</p>
+<p>The trajectory <em>t</em> specifies a set of nodes. For each node specified
+by <em>nodestowrite</em> and with weight &gt;= <em>cutoff</em>, reports the time until that 
+node experiences the next mutation that moves it to a new node.
+If <em>t</em> is a trajectory through protein sequence space that was
+created from nucleotide sequences (this will be the case if <em>t</em>
+was created with <em>translateseqs = True</em>), the next mutation that
+moves it to a new node is a nonsynonymous mutation. This method
+then also records the time until the first mutation of any type
+(synonymous or nonsynonymous) after the trajectory moves to nodes.
+The persistence is written as the posterior median from all 
+paths containing plus the Bayesian credible interval specified 
+by <em>interval</em>. The persistence
+times are written to the text file <em>persistencefile</em>.</p>
+<p>CALLING VARIABLES:</p>
+<ul class="simple">
+<li><em>t</em> is a <em>Trajectory</em> object that contains the persistence data.</li>
+<li><em>nodestowrite</em> is a dictionary specifying for which nodes we
+write persistence times, and the names used when writing these
+nodes. It is keyed by node sequences (which
+are the identifiers for the nodes in t.nodes) and the values are
+strings giving names that are used to label the nodes in the 
+output. However, there does not actually have to be a
+node with persistence data for each key in <em>nodestowrite</em> &#8211; if there
+is not persistence data for a node key, nothing is written for it.</li>
+<li><em>interval</em> specifies the range of the Bayesian credible interval,
+for example a value of 0.9 means that we print the 90% credible
+interval.</li>
+<li><em>persistencefile</em> is a string giving the name of the text file
+that we create which contains the persistence times. It has
+headers explaning its format. If this file already exists, it
+is overwritten. The order in which nodes is written is arbitrary.</li>
+<li><em>cutoff</em> is a weight cutoff (fraction of paths containing this node).
+We only write persistence times for nodes that are both in 
+<em>nodestowrite</em> and have weights &gt;= <em>cutoff</em>. This keeps us from
+writing persistence times for nodes that only occur rarely.</li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-stats">
+<span id="stats-module"></span><h2><a class="reference internal" href="#module-stats" title="stats"><tt class="xref py py-mod docutils literal"><span class="pre">stats</span></tt></a> Module<a class="headerlink" href="#module-stats" title="Permalink to this headline">¶</a></h2>
+<p>Module for performing statistics operations operations.</p>
+<div class="section" id="list-of-functions">
+<h3>List of functions<a class="headerlink" href="#list-of-functions" title="Permalink to this headline">¶</a></h3>
+<p><em>MedianCredibleInterval</em> : Returns posterior median and centered credible interval.</p>
+</div>
+<div class="section" id="details-of-functions">
+<h3>Details of functions<a class="headerlink" href="#details-of-functions" title="Permalink to this headline">¶</a></h3>
+<p>Details of functions are listed below in their individual docstrings.</p>
+<dl class="function">
+<dt id="stats.MedianCredibleInterval">
+<tt class="descclassname">stats.</tt><tt class="descname">MedianCredibleInterval</tt><big>(</big><em>data</em>, <em>interval</em><big>)</big><a class="headerlink" href="#stats.MedianCredibleInterval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns posterior median and centered Bayesian credible interval.</p>
+<p><em>data</em> is a list of numbers (must contain at least one number). These
+are assumed to represent numbers sampled from a posterior distribution.</p>
+<p><em>interval</em> is a number with <em>0 &lt; interval &lt;= 1</em>.</p>
+<p>This function returns the following tuple <em>(median, mininterval, maxinterval)</em>.
+In this tuple:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>median</em> is the median value in <em>data</em>. This represents the posterior
+median.</li>
+<li><em>mininterval</em> and <em>maxinterval</em> are numbers with 
+<em>maxinterval &gt;= mininterval</em> such that a fraction <em>interval</em> of
+that data in <em>data</em> are &gt;= <em>minterval</em> and &lt;= <em>maxinterval</em>.
+Furthermore, this interval is centered such that the fraction of
+the entries in <em>data</em> that are &lt; <em>minterval</em> is the same as
+the fraction of entries that are &gt; <em>maxinterval</em>. In other words,
+<em>minterval</em> and <em>maxinterval</em> specify the centered Bayesian credible
+interval.</li>
+</ul>
+</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.1</span><span class="p">,</span> <span class="mf">7.9</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">8.1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">median</span><span class="p">,</span> <span class="n">mininterval</span><span class="p">,</span> <span class="n">maxinterval</span><span class="p">)</span> <span class="o">=</span> <span class="n">MedianCredibleInterval</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">median</span> <span class="o">==</span> <span class="mi">2</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mininterval</span> <span class="o">==</span> <span class="mf">0.1</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxinterval</span> <span class="o">==</span> <span class="mf">7.9</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><tt class="docutils literal"><span class="pre">mutpath</span></tt> Python API</a><ul>
+<li><a class="reference internal" href="#module-__init__"><tt class="docutils literal"><span class="pre">mutpath</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-align"><tt class="docutils literal"><span class="pre">align</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-beast"><tt class="docutils literal"><span class="pre">beast</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-io"><tt class="docutils literal"><span class="pre">io</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-plot"><tt class="docutils literal"><span class="pre">plot</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-sequtils"><tt class="docutils literal"><span class="pre">sequtils</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-tree"><tt class="docutils literal"><span class="pre">tree</span></tt> Module</a><ul>
+<li><a class="reference internal" href="#functions-defined-in-this-module">Functions defined in this module</a></li>
+<li><a class="reference internal" href="#classes-defined-in-this-module">Classes defined in this module</a></li>
+<li><a class="reference internal" href="#c-extensions-for-this-module">C-extensions for this module</a></li>
+<li><a class="reference internal" href="#details-of-functions-and-classes">Details of functions and classes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-parse_tree"><tt class="docutils literal"><span class="pre">parse_tree</span></tt> Module</a><ul>
+<li><a class="reference internal" href="#list-of-functions-defined-in-this-module">List of functions defined in this module</a></li>
+<li><a class="reference internal" href="#detailed-documentation-for-functions">Detailed documentation for functions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-trajectory"><tt class="docutils literal"><span class="pre">trajectory</span></tt> Module</a><ul>
+<li><a class="reference internal" href="#id1">Functions defined in this module</a></li>
+<li><a class="reference internal" href="#id2">Classes defined in this module</a></li>
+<li><a class="reference internal" href="#id3">Detailed documentation for functions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-stats"><tt class="docutils literal"><span class="pre">stats</span></tt> Module</a><ul>
+<li><a class="reference internal" href="#list-of-functions">List of functions</a></li>
+<li><a class="reference internal" href="#details-of-functions">Details of functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="example_influenza_NP_1918_Descended.html"
+                        title="previous chapter">influenza NP 1918 descended</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="acknowledgements.html"
+                        title="next chapter">Acknowledgements</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/pythonapi.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="acknowledgements.html" title="Acknowledgements"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="example_influenza_NP_1918_Descended.html" title="influenza NP 1918 descended"
+             >previous</a> |</li>
+        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Jesse Bloom.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

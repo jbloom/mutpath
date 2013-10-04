@@ -1,0 +1,150 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>mutpath_annotate_tree.py script &mdash; mutpath 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="mutpath 0.1 documentation" href="index.html" />
+    <link rel="next" title="mutpath_make_digraph.py script" href="mutpath_make_digraph.html" />
+    <link rel="prev" title="mutpath_get_paths.py script" href="mutpath_get_paths.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="mutpath_make_digraph.html" title="mutpath_make_digraph.py script"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mutpath_get_paths.html" title="mutpath_get_paths.py script"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="mutpath-annotate-tree-py-script">
+<h1><tt class="docutils literal"><span class="pre">mutpath_annotate_tree.py</span></tt> script<a class="headerlink" href="#mutpath-annotate-tree-py-script" title="Permalink to this headline">¶</a></h1>
+<p>Script for annotating a <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> <tt class="docutils literal"><span class="pre">.trees</span></tt> file (such as a maximum clade credibility tree from <a class="reference external" href="http://beast.bio.ed.ac.uk/TreeAnnotator">TreeAnnotator</a>) so that it is better formatted for visualization by <a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a>.</p>
+<p>To run this script, create an input file with the format described below. Then run this script by typing the script name followed by the name of the input file:</p>
+<div class="highlight-python"><pre>mutpath_annotate_tree.py infile.txt</pre>
+</div>
+<p>Or if the script is not executable on your platform:</p>
+<div class="highlight-python"><pre>python mutpath_annotate_tree.py infile.txt</pre>
+</div>
+<div class="section" id="motivation-and-details">
+<h2>Motivation and details<a class="headerlink" href="#motivation-and-details" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://beast.bio.ed.ac.uk/TreeAnnotator">TreeAnnotator</a> can be used to create a <tt class="docutils literal"><span class="pre">.trees</span></tt> file that can be visualized with <a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a>. However, the visualization will typically not look very good. Although it can be manually edited within <a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a>, this script automates some of the annotations. Specfically, it allows you to show a set of user-specified names for just a subset of the branch tips. It also orders the tree nodes in ascending order.</p>
+<p>Below is an example input file. After running the script on this input file, the new <em>outtreefile</em> file will be better formatted for opening by <a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a>. Specifically, tip node names will only be shown for tips listed in the input file.</p>
+</div>
+<div class="section" id="example-input-file">
+<h2>Example input file<a class="headerlink" href="#example-input-file" title="Permalink to this headline">¶</a></h2>
+<p>The input file is a text file. Empty lines or lines beginning with # are ignored. Otherwise, the first line should have the key <em>intreefile</em> and then give the <tt class="docutils literal"><span class="pre">.trees</span></tt> file that we are annotated. The next line should have the key <em>outtreefile</em> and then give the name of the new output <tt class="docutils literal"><span class="pre">.trees</span></tt> file with the annotations. If <em>outtreefile</em> already exists, it is overwritten. Remaining lines should then give tip names as they are specified in <em>intreefile</em> followed by a space and the name that is given to that tip in the annotated tree. If a tip name is not listed, it is not annotated in the tree. Typically, if you are working with a large tree then you may want to annotate only a small subset of the tips. Here is an example input file:</p>
+<div class="highlight-python"><pre># input file for mutpath_annotate_tree.py
+intreefile prot_maxcladecredibility.trees
+outtreefile annotated_maxcladecredibility.trees
+A/Aichi/2/1968_1968.50 Aichi/1968
+A/Brisbane/10/2007_2007.10 Brisbane/2007</pre>
+</div>
+<p>After running the script on this input file, two tips will be annotated as Aichi/1968 and Brisbane/2007, and the others will not be annotated.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><tt class="docutils literal"><span class="pre">mutpath_annotate_tree.py</span></tt> script</a><ul>
+<li><a class="reference internal" href="#motivation-and-details">Motivation and details</a></li>
+<li><a class="reference internal" href="#example-input-file">Example input file</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mutpath_get_paths.html"
+                        title="previous chapter"><tt class="docutils literal"><span class="pre">mutpath_get_paths.py</span></tt> script</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mutpath_make_digraph.html"
+                        title="next chapter"><tt class="docutils literal docutils literal"><span class="pre">mutpath_make_digraph.py</span></tt> script</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/mutpath_annotate_tree.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="mutpath_make_digraph.html" title="mutpath_make_digraph.py script"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mutpath_get_paths.html" title="mutpath_get_paths.py script"
+             >previous</a> |</li>
+        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Jesse Bloom.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

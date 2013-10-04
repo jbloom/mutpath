@@ -1,7 +1,0 @@
-# Name : name of the node
-# MedianPersistence : posterior median time to next node
-# MinPersistenceInterval : minimum of 90.00 percent credible interval
-# MaxPersistenceInterval : maximum of 90.00 percent credible interval
-#
-#Name	MedianPersistence	MinPersistenceInterval	MaxPersistenceInterval
-swine/Wisconsin/1957	1.538900	0.319700	4.023900

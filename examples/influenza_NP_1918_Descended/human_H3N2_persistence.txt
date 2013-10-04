@@ -1,7 +1,0 @@
-# Name : name of the node
-# MedianPersistence : posterior median time to next node
-# MinPersistenceInterval : minimum of 90.00 percent credible interval
-# MaxPersistenceInterval : maximum of 90.00 percent credible interval
-#
-#Name	MedianPersistence	MinPersistenceInterval	MaxPersistenceInterval
-Aichi/1968	0.138350	0.011200	0.593300

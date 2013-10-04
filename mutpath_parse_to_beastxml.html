@@ -1,0 +1,290 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>mutpath_parse_to_beast_xml.py script &mdash; mutpath 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="mutpath 0.1 documentation" href="index.html" />
+    <link rel="next" title="mutpath_compact_trees.py script" href="mutpath_compact_trees.html" />
+    <link rel="prev" title="Typical workflow" href="workflow.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="mutpath_compact_trees.html" title="mutpath_compact_trees.py script"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="workflow.html" title="Typical workflow"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="mutpath-parse-to-beast-xml-py-script">
+<h1><tt class="docutils literal"><span class="pre">mutpath_parse_to_beast_xml.py</span></tt> script<a class="headerlink" href="#mutpath-parse-to-beast-xml-py-script" title="Permalink to this headline">¶</a></h1>
+<p>Script for parsing sequences and building BEAST input XML file.</p>
+<p>To run this script, first create a text infile of the format described
+below in this documentation. If you name this input file <tt class="docutils literal"><span class="pre">infile.txt</span></tt>, then you would
+run the script with the single
+input file as an argument:</p>
+<div class="highlight-python"><pre>mutpath_parse_to_beastxml.py infile.txt</pre>
+</div>
+<p>If the script is not executable on your platform, you can use:</p>
+<div class="highlight-python"><pre>python mutpath_parse_to_beastxml.py infile.txt</pre>
+</div>
+<p>Various variables must be specified in the script input file as described below.</p>
+<p>This script goes through a FASTA file and parses out the
+desired sequences, and then uses them to create a BEAST input XML file
+for running BEAST. You can use it to run BEAST with or without the MarkovJumps
+feature (which allows mutational path mapping but increases the output file
+sizes). There are options for running BEAST using protein sequences (with the JTT matrix)
+or nucleotide sequences (with the HKY model).
+Various other options include coalescent trees with
+a constant population size using Jeffrey&#8217;s prior, and a strict clock with
+a gamma prior on the substitution rate.</p>
+<p>This script also helps you to identify possible outlier sequences (see the
+<em>divergenceranking</em> option), and you can then manually specify these
+outliers for exclusion use the <em>excludeseqs</em> option. This requires
+running the script once to identify the outliers, and then running
+it again with <em>excludeseqs</em> set to those sequences.</p>
+<p>The sequences are provided in the FASTA input files specified by <em>seqfile</em>, <em>startseq</em>, and <em>endseq</em> and should have headers of the following format:</p>
+<div class="highlight-python"><pre>&gt;cds:AEB71984 A/Boston/99/2009 2009/04/27 NP</pre>
+</div>
+<p>or:</p>
+<div class="highlight-python"><pre>&gt;cds:AEB71984 A/Boston/99/2009 2009-04-27 NP</pre>
+</div>
+<p>or:</p>
+<div class="highlight-python"><pre>&gt;cds:BAA00478 A/Texas/1/1977 1977-- NP</pre>
+</div>
+<p>or:</p>
+<div class="highlight-python"><pre>&gt;cds:BAA00478 A/Texas/1/1977 1977// NP</pre>
+</div>
+<p>The strain names are extracted and the dates appended after an underscore:</p>
+<div class="highlight-python"><pre>A/Boston/99/2009_2009.32</pre>
+</div>
+<p>or:</p>
+<div class="highlight-python"><pre>A/Texas/1/1977_1977.0.50</pre>
+</div>
+<p>In the creation of the output file specified by <em>outfileprefix</em>, any square brackets <em>[</em> or <em>]</em> are converted to regular parentheses <em>(</em> or <em>)</em> because square brackets cause problems for <a class="reference external" href="http://beast.bio.ed.ac.uk/TreeAnnotator">TreeAnnotator</a> in later analyses. Any spaces in the sequence names are converted to underscores.</p>
+<p>You are asked to specify a starting sequence <em>startseq</em> which serves as
+the reference sequence for alignment and also provides an initial sequence
+for the mutational path. You are also asked to provide an end sequence <em>endseq</em>
+for the end of the mutational path &#8211; if you do not actually plan to build
+such a path, just make the <em>endseq</em> the same as the <em>startseq</em> and it will be
+removed if <em>purgeredundant</em> is True.</p>
+<p>The overall workflow of the script is as follows:</p>
+<ol class="arabic simple">
+<li>Combine all the sequences in <em>startseq</em>, <em>endseq</em>, and <em>seqfile</em>; convert to upper case.</li>
+<li>Translate into protein sequences (if <em>translateseqs</em> is True).</li>
+<li>Purge redundant sequences or substrings of others (if <em>purgeredundant</em> is True).</li>
+<li>Align all sequences individually to <em>startseq</em>, stripping any gaps relative to
+this sequence.</li>
+<li>Output .fasta, .nex, and .xml files using <em>outfileprefix</em> for naming. The
+strain names are written in the format of the strain name followed by an underscore and the date. If two sequences would
+have identical names in this format, then they are named as strain_2_date, etc.</li>
+</ol>
+<p>The output of this script is the parsed sequences in the following formats:</p>
+<ul class="simple">
+<li>FASTA</li>
+<li>Nexus</li>
+<li>BEAST XML file</li>
+</ul>
+<div class="section" id="input-file-description">
+<h2>Input file description<a class="headerlink" href="#input-file-description" title="Permalink to this headline">¶</a></h2>
+<p>The input file format is a .txt file that specifies the following entries:</p>
+<p><em>seqfile</em>  is the name of a FASTA file containing the large set of sequences to be analyzed.
+These sequences should have headers in the following format:</p>
+<div class="highlight-python"><pre>&gt;cds:AEB71984 A/Boston/99/2009 2009/04/27 NP</pre>
+</div>
+<p>or:</p>
+<div class="highlight-python"><pre>&gt;cds:BAA00478 A/Texas/1/1977 1977// NP</pre>
+</div>
+<p>or:</p>
+<div class="highlight-python"><pre>&gt;cds:AEB71984 A/Boston/99/2009 2009-04-27 NP</pre>
+</div>
+<p>In particular, the second entry is presumed to give the strain name,
+and the third entry must give the date of isolation, including at least
+a year and a month and day if available. The dates are important,
+as date stamped sequences are used in BEAST. If a date only includes the
+year, the numerical date assigned is halfway through that year (July 1).</p>
+<p><em>startseq</em> should give the name of a FASTA file containing a single sequence
+entry which is the starting sequence for the mutational trajectory. The
+header should have the same format as for <em>seqfile</em>. This is also the reference
+sequence to which all other sequences are aligned.</p>
+<p><em>endseq</em> should give the name of a FASTA file containing a single sequence
+entry which is the ending sequence for the mutational trajectory. The header
+should have the same format as for <em>seqfile</em>. If you do not have an end sequence
+(are not making a mutational path) then just set this to the same as <em>startseq</em>,
+and the <em>endseq</em> will be purged if <em>purgeredundant</em> is True.</p>
+<p><em>musclepath</em> should give the path to a directory that contains the MUSCLE
+alignment program in the form of an executable of the name <tt class="docutils literal"><span class="pre">muscle</span></tt>.</p>
+<p><em>translateseqs</em> is a Boolean switch specifying whether or not we translate
+the sequences. If we do translate them, then all of the subsequent operations
+(alignment, etc) are done on the translated sequences. An exception is raised
+if any sequence cannot be translated. Can be set to either True or False.</p>
+<p><em>purgeredundant</em> is a Boolean switch specifying that we remove any sequences
+that are identical or substrings of others. The order they are removed is
+arbitrary, except that the sequences specified by <em>startseq</em> and <em>endseq</em>
+are always retained. Can be set to either True or False.</p>
+<p><em>divergenceranking</em> specifies where we output information about the sequence
+divergence of each sequence relative to <em>startseq</em>. After aligning each
+sequence to <em>startseq</em> (first translating it if <em>translateseqs</em> is True), the
+pairwise identity of each sequence relative to <em>startseq</em> is computed among
+non-gap positions, and the fraction of gaps is computed. These identities
+are written to the text files <em>divergenceranking</em>_identities.txt and <em>divergenceranking</em>_gaps.txt. Note that the listing
+here is generated after the <em>purgeredundant</em> and <em>excludeseqs</em> have been done.
+Plots of cumulative distributions for the identities and gaps are also
+written to files <em>divergenceranking</em>_identities.pdf and <em>divergenceranking</em>_gaps.pdf if <a class="reference external" href="http://matplotlib.org/">matplotlib</a> is available. You can also set <em>divergenceranking</em> to None, in which case no divergence ranking is done.</p>
+<p><em>excludeseqs</em> specifies the name of a text file listing the names of
+sequences that we are manually specifying for exclusion from the analysis.
+For example, you might have identified these as outliers or otherwise suspicious
+sequences. These outliers are removed after purging of redundant sequences, but
+before generating the listing given by <em>divergenceranking</em>. This file
+should list the full header for each sequence to be excluded on a separate line,
+with the headers in the same format they appear in <em>seqfile</em>, <em>endseq</em>, or <em>startseq</em>. It is OK if there is more text after the header, meaning that you can copy directly from the <em>divergenceranking</em> text files.
+You can assign <em>excludeseqs</em> to either an empty but existing
+file or to None if you don&#8217;t want to exclude anything. For example, here is a valid file:</p>
+<div class="highlight-python"><pre>cds:ADX87378 A/Beijing/080302/2009 2009/08/03 NP    0.93574
+cds:ADX21092 A/Cambodia/NHRCC00010/2009 2009/10/15 NP   0.93712
+cds:AAK18005 A/Hong Kong/497/97 1997// NP   0.93775
+cds:ACX46212 A/Darwin/4/2005 2005/06/01 NP  0.93775</pre>
+</div>
+<p><em>outfileprefix</em> is the prefix that is assigned to the .fasta, .nex, and .xml
+files created by this script.</p>
+<p><em>chainlength</em> specifies the length of the MCMC chain in the BEAST xml file.</p>
+<p><em>screenloginterval</em> specifies the frequency (number of steps) for which output
+is specified to be written to the screen in the BEAST xml file</p>
+<p><em>fileloginterval</em> specifies the frequency (number of steps) for which output
+is specified to be written to the .log and .trees file in the BEAST xml file.</p>
+<p><em>usemarkovjumps</em> specifies whether we use the Markov Jumps feature to map mutations
+onto branches. Doing this allows reconstruction of the mutational path, but
+also increases the output file size. Can be True or False.</p>
+<p><em>sitemodel</em> specifies the site model of evolution that is used. Currently accepted
+values are JTT (for protein sequences) or HKY (for nucleotide sequences). Make
+sure the value that you set here is consistent with your choice for <em>translateseqs</em>.</p>
+</div>
+<div class="section" id="example-input-file">
+<h2>Example input file<a class="headerlink" href="#example-input-file" title="Permalink to this headline">¶</a></h2>
+<p>Here is an example input file. In the input files, any lines beginning with a # character or that are empty are ignored. Otherwise entries should be specified by the name of the variable being specified followed by the specified value:</p>
+<div class="highlight-python"><pre># input file for mutpath_parse_to_beastxml.py
+# Builds a BEAST XML file from translated nucleotide sequences.
+seqfile NPhumanH3N2.fasta
+startseq Aichi1968_NP.fasta
+endseq Brisbane2007_NP.fasta
+# path to MUSCLE on my computer
+musclepath /Users/jbloom/muscle3.8/
+translateseqs True
+purgeredundant True
+divergenceranking divergence
+excludeseqs excluded_sequences.txt
+outfileprefix NPhumanH3N2_aligned
+chainlength 20000000
+screenloginterval 1000
+fileloginterval 10000
+usemarkovjumps True
+sitemodel JTT</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><tt class="docutils literal"><span class="pre">mutpath_parse_to_beast_xml.py</span></tt> script</a><ul>
+<li><a class="reference internal" href="#input-file-description">Input file description</a></li>
+<li><a class="reference internal" href="#example-input-file">Example input file</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="workflow.html"
+                        title="previous chapter">Typical workflow</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mutpath_compact_trees.html"
+                        title="next chapter"><tt class="docutils literal docutils literal docutils literal"><span class="pre">mutpath_compact_trees.py</span></tt> script</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/mutpath_parse_to_beastxml.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="mutpath_compact_trees.html" title="mutpath_compact_trees.py script"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="workflow.html" title="Typical workflow"
+             >previous</a> |</li>
+        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Jesse Bloom.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

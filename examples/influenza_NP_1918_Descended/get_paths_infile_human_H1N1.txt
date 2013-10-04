@@ -1,9 +1,0 @@
-# input file to mutpath_get_paths.py
-intreefiles run1/Combined_NP_proteins_compact.trees run2/Combined_NP_proteins_compact.trees run3/Combined_NP_proteins_compact.trees run4/Combined_NP_proteins_compact.trees 
-burnin 250
-mergedtreesfile merged_Combined_NP_proteins_compact.trees
-fastafile Combined_NP_proteins.fasta
-seqtype protein
-startseq 1954.50_COUNT281_STRAIN_A/Memphis/13/1978_HOST_Human_SUBTYPE_H1N1_DATE_1954.50
-endseq 1984.92_COUNT133_STRAIN_A/Taiwan/11526/2008_HOST_Human_SUBTYPE_H1N1_DATE_1984.92
-mutpathsfile human_H1N1_mutpaths.txt

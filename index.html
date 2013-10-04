@@ -1,0 +1,130 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>mutpath overview &mdash; mutpath 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="mutpath 0.1 documentation" href="#" />
+    <link rel="next" title="Installation of mutpath" href="installation.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation of mutpath"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">mutpath 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="mutpath-overview">
+<h1><tt class="docutils literal"><span class="pre">mutpath</span></tt> overview<a class="headerlink" href="#mutpath-overview" title="Permalink to this headline">¶</a></h1>
+<p><tt class="docutils literal"><span class="pre">mutpath</span></tt> is a Python package for identifying mutational paths through sequence space generated using the MarkovJumps feature of <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a>. The package also contains scripts that might be useful for generating <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> XML files for other purposes.</p>
+<p><tt class="docutils literal"><span class="pre">mutpath</span></tt> source code is available <a class="reference external" href="https://github.com/jbloom/mutpath">on GitHub</a>. You can download a ZIP file of the repository from this site by clicking on the <tt class="docutils literal"><span class="pre">Download</span> <span class="pre">ZIP</span></tt> button on the right side.</p>
+<p><tt class="docutils literal"><span class="pre">mutpath</span></tt> documentation is available <a class="reference external" href="http://jbloom.github.com/mutpath/">on GitHub Pages</a>.</p>
+<p>This package contains a number of scripts that interface with <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a>. These scripts generate mutational trajectories through sequence space and other associated data from <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> output. Briefly, <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> is used to sample phylogenetic trees with mutations mapped to branches from the posterior distribution. These trees make it possible to calculate the posterior probability for different trajectories through sequence space between two known sequences.</p>
+<p>Some example analyses are included in the <tt class="docutils literal"><span class="pre">./examples/</span></tt> subdirectory of the main package repository.</p>
+<p>This package was created by <a class="reference external" href="http://labs.fhcrc.org/bloom/">Jesse Bloom</a>. It is based on the approach used to generate the mutation trajectories in <a class="reference external" href="http://elife.elifesciences.org/content/2/e00631">Gong et al, 2013</a>. The mutation-mapping <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> itself was implemented by <a class="reference external" href="http://faculty.biomath.ucla.edu/msuchard/">Marc Suchard</a>.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation of <tt class="docutils literal"><span class="pre">mutpath</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="beastbeagle.html">BEAST and BEAGLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Typical workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mutpath_parse_to_beastxml.html"><tt class="docutils literal"><span class="pre">mutpath_parse_to_beast_xml.py</span></tt> script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mutpath_compact_trees.html"><tt class="docutils literal"><span class="pre">mutpath_compact_trees.py</span></tt> script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mutpath_get_paths.html"><tt class="docutils literal"><span class="pre">mutpath_get_paths.py</span></tt> script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mutpath_annotate_tree.html"><tt class="docutils literal"><span class="pre">mutpath_annotate_tree.py</span></tt> script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mutpath_make_digraph.html"><tt class="docutils literal"><span class="pre">mutpath_make_digraph.py</span></tt> script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_influenza_human_H3N2_NP.html">influenza human H3N2 NP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_influenza_NP_1918_Descended.html">influenza NP 1918 descended</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonapi.html"><tt class="docutils literal"><span class="pre">mutpath</span></tt> Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acknowledgements.html">Acknowledgements</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Next topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="next chapter">Installation of <tt class="docutils literal docutils literal"><span class="pre">mutpath</span></tt></a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation of mutpath"
+             >next</a> |</li>
+        <li><a href="#">mutpath 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Jesse Bloom.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

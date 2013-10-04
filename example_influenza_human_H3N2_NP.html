@@ -1,0 +1,236 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>influenza human H3N2 NP &mdash; mutpath 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="mutpath 0.1 documentation" href="index.html" />
+    <link rel="next" title="influenza NP 1918 descended" href="example_influenza_NP_1918_Descended.html" />
+    <link rel="prev" title="mutpath_make_digraph.py script" href="mutpath_make_digraph.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="example_influenza_NP_1918_Descended.html" title="influenza NP 1918 descended"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mutpath_make_digraph.html" title="mutpath_make_digraph.py script"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="influenza-human-h3n2-np">
+<h1>influenza human H3N2 NP<a class="headerlink" href="#influenza-human-h3n2-np" title="Permalink to this headline">¶</a></h1>
+<p>This analysis is found in the <tt class="docutils literal"><span class="pre">./examples/influenza_human_H3N2_NP/</span></tt> subdirectory in the <tt class="docutils literal"><span class="pre">mutpath</span></tt> package which can be obtained <a class="reference external" href="https://github.com/jbloom/mutpath">on GitHub</a>. This is an example analysis using <tt class="docutils literal"><span class="pre">mutpath</span></tt> on the nucleoprotein (NP) from human H3N2 influenza to build a mutational trajectory at the protein level.</p>
+<p>This example essentially recapitulates the analysis in <a class="reference external" href="http://elife.elifesciences.org/content/2/e00631">Gong et al, 2013</a>, although it is not the exact code used for that paper and so may not be a completely precise match.</p>
+<div class="section" id="input-sequence-data">
+<h2>Input sequence data<a class="headerlink" href="#input-sequence-data" title="Permalink to this headline">¶</a></h2>
+<p>The beginning data files in this directory are as follows:</p>
+<p><tt class="docutils literal"><span class="pre">NPhumanH3N2.fasta</span></tt> is a FASTA file of all full-length coding nucleotide sequences from human H3N2 influenza, excluding lab strains, as downloaded from the Influenza Virus Resource on May-19-2011.</p>
+<p><tt class="docutils literal"><span class="pre">Aichi1968_NP.fasta</span></tt> and <tt class="docutils literal"><span class="pre">Brisbane2007_NP.fasta</span></tt> are FASTA files containing the coding sequences from the NP genes from the A/Aichi/2/1968 and A/Brisbane/10/2007 H3N2 strains, as encoded in the Bloom lab reverse genetics plasmids pHWAichi68-NP (#593) and pHWBR10-NP (#589).</p>
+</div>
+<div class="section" id="generation-of-beast-input-xml-file">
+<h2>Generation of <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> input XML file<a class="headerlink" href="#generation-of-beast-input-xml-file" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> XML files were generated as follows using the <tt class="docutils literal"><span class="pre">mutpath_parse_to_beastxml.py</span></tt> script on my personal computer.</p>
+<p>Input file <tt class="docutils literal"><span class="pre">mutpath_parse_to_beastxml-prot-infile.txt</span></tt> was created manually.</p>
+<p>A files to specify excluded outlier sequences was created and named <tt class="docutils literal"><span class="pre">excluded_prots.txt</span></tt>.</p>
+<p>The script was then run:</p>
+<div class="highlight-python"><pre>mutpath_parse_to_beastxml.py mutpath_parse_to_beastxml-prot-infile.txt</pre>
+</div>
+<p>This created the <tt class="docutils literal"><span class="pre">.txt</span></tt> and <tt class="docutils literal"><span class="pre">.pdf</span></tt> files with prefixes <tt class="docutils literal"><span class="pre">prot-divergence_gaps</span></tt> / <tt class="docutils literal"><span class="pre">prot-divergence_identities</span></tt>. These files were used to identify likely outlier sequences, which were added to the <tt class="docutils literal"><span class="pre">excluded_prots.txt</span></tt> file, and the script was run again.</p>
+<p>The final output files were:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">prots</span><span class="o">.</span><span class="n">fasta</span>
+<span class="n">prots</span><span class="o">.</span><span class="n">nex</span>
+<span class="n">prots</span><span class="o">.</span><span class="n">xml</span>
+</pre></div>
+</div>
+<p>The XML files is the <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> input file for the next step.</p>
+</div>
+<div class="section" id="running-beast">
+<h2>Running <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a><a class="headerlink" href="#running-beast" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> was used to run the <tt class="docutils literal"><span class="pre">prots.xml</span></tt> file. The version of <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> used was v1.8.0pre Prerelease r5356, using the <a class="reference external" href="http://beast.bio.ed.ac.uk/BEAGLE">BEAGLE</a> library. This was done on the FHCRC&#8217;s <tt class="docutils literal"><span class="pre">rhino</span></tt> computing cluster.</p>
+<p>Six separate directories were created called <tt class="docutils literal"><span class="pre">prots_BEASTrun_1</span></tt>, <tt class="docutils literal"><span class="pre">prots_BEASTrun_2</span></tt>, ... The <tt class="docutils literal"><span class="pre">prots.xml</span></tt> file was copied into <tt class="docutils literal"><span class="pre">prots_BEASTrun_*</span></tt>.
+BEAST was then run in each of these directories. The runs were initiated by <tt class="docutils literal"><span class="pre">sbatch</span></tt> as described below. Note that it specifies the <a class="reference external" href="http://beast.bio.ed.ac.uk/BEAGLE">BEAGLE</a> library location based on the fact that these have been installed locally in <tt class="docutils literal"><span class="pre">/home/jbloom/BEAGLE_libs</span></tt>.</p>
+<p>Specifically, to run <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a>, the following file was created with the name <tt class="docutils literal"><span class="pre">runcommand.sbatch</span></tt>:</p>
+<div class="highlight-python"><pre>#!/bin/sh
+#SBATCH
+#PBS -l walltime=480:00:00
+echo "Starting..."
+java -Xmx4048m -Xms4048m -Djava.library.path=/home/jbloom/BEAGLE_libs/lib -cp ~/BEAST/build/dist/beast.jar dr.app.beast.BeastMain -beagle prots.xml &gt; screenlog.txt
+echo "Finished."</pre>
+</div>
+<p>The file was run using:</p>
+<div class="highlight-python"><pre>sbatch runcommand.sbatch</pre>
+</div>
+<p>This created the <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> <tt class="docutils literal"><span class="pre">.trees</span></tt> and <tt class="docutils literal"><span class="pre">.log</span></tt> files.</p>
+<p>The output directories were then copied back to my local computer for analysis. However, these directories are not included in the repository <a class="reference external" href="https://github.com/jbloom/mutpath">on GitHub</a> due to the large file size.</p>
+<p>The <tt class="docutils literal"><span class="pre">.log</span></tt> files were examined using <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">Tracer</a> to check for MCMC convergence.</p>
+<p>Using a burn-in of the first 2 million steps (first 10% of steps), the effective sample size (ESS) for both the posterior and the root height exceed 200, suggesting good MCMC convergence.</p>
+</div>
+<div class="section" id="compacting-the-trees-files">
+<h2>Compacting the <tt class="docutils literal"><span class="pre">.trees</span></tt> files<a class="headerlink" href="#compacting-the-trees-files" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">prot.trees</span></tt> files created by running <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> were then compacted to new files called <tt class="docutils literal"><span class="pre">prots_compact.trees</span></tt> using the <tt class="docutils literal"><span class="pre">mutpath_compact_trees.py</span></tt> script.</p>
+<p>The commands (run inside each individual run directory were as follows):</p>
+<div class="highlight-python"><pre>% du -h prots.trees
+939M    prots.trees
+% mutpath_compact_trees.py prots.trees
+% du -h prots_compact.trees
+40M prots_compact.trees
+% rm prots.trees</pre>
+</div>
+</div>
+<div class="section" id="extracting-the-mutational-paths">
+<h2>Extracting the mutational paths<a class="headerlink" href="#extracting-the-mutational-paths" title="Permalink to this headline">¶</a></h2>
+<p>To extract the mutational paths and merged trees from the compacted <tt class="docutils literal"><span class="pre">.trees</span></tt> file, the script <tt class="docutils literal"><span class="pre">mutpath_get_paths.py</span></tt> was used. The first 10% of each <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> run was specified as burnin. The file <tt class="docutils literal"><span class="pre">mutpath_get_prot-paths_infile.txt</span></tt> was created manually.
+The script was then run using the following command:</p>
+<div class="highlight-python"><pre>mutpath_get_paths mutpath_get_prot-paths_infile.txt</pre>
+</div>
+<p>to extract the protein mutational paths. This created an output file listing the mutational paths (<tt class="docutils literal"><span class="pre">prot_mutpaths.txt</span></tt>) as well as the merged trees without branch annotations (<tt class="docutils literal"><span class="pre">prot_trees_merged.trees</span></tt>). The merged <tt class="docutils literal"><span class="pre">.trees</span></tt> file is designed for building maximum-clade credibility trees with <a class="reference external" href="http://beast.bio.ed.ac.uk/TreeAnnotator">TreeAnnotator</a>.</p>
+</div>
+<div class="section" id="making-and-annotating-the-maximum-clade-credibility-tree">
+<h2>Making and annotating the maximum clade credibility tree<a class="headerlink" href="#making-and-annotating-the-maximum-clade-credibility-tree" title="Permalink to this headline">¶</a></h2>
+<p>The maximum clade credibility tree was constructed from the <tt class="docutils literal"><span class="pre">prot_trees_merged.trees</span></tt> files built by <tt class="docutils literal"><span class="pre">mutpath_get_trees.py</span></tt> using <a class="reference external" href="http://beast.bio.ed.ac.uk/TreeAnnotator">TreeAnnotator</a>. The commands was:</p>
+<div class="highlight-python"><pre>~/BEASTv1.6.1/bin/treeannotator prot_trees_merged.trees prot_maxcladecredibility.trees</pre>
+</div>
+<p>to created the maximum clade credibility tree <tt class="docutils literal"><span class="pre">prot_maxcladecredibility.trees</span></tt>.</p>
+<p>This files was then further annotated with <tt class="docutils literal"><span class="pre">mutpath_annotate_tree.py</span></tt>. An input file for this script was created and named <tt class="docutils literal"><span class="pre">mutpath_annotate_prot-tree.txt</span></tt>, and then the script was run with:</p>
+<div class="highlight-python"><pre>mutpath_annotate_tree.py mutpath_annotate_prot-tree.txt</pre>
+</div>
+<p>This created the file <tt class="docutils literal"><span class="pre">annotated_prot_maxcladecredibility.trees</span></tt>. <a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a> was used to visualize this file, manually recolor the branches red, and save the image <tt class="docutils literal"><span class="pre">annotated_prot_maxcladecredibility.pdf</span></tt>. This PDF image was used to create <tt class="docutils literal"><span class="pre">annotated_prot_maxcladecredibility.jpg</span></tt> using the shell <tt class="docutils literal"><span class="pre">convert</span></tt> utility.</p>
+<div class="figure align-center">
+<img alt="maximum clade credibility tree" src="_images/annotated_prot_maxcladecredibility.jpg" style="width: 65%;" />
+<p class="caption">The maximum clade credibility tree (<tt class="docutils literal"><span class="pre">annotated_prot_maxcladecredibility.jpg</span></tt>).</p>
+</div>
+</div>
+<div class="section" id="making-the-mutational-trajectory-and-dating-the-mutations">
+<h2>Making the mutational trajectory and dating the mutations<a class="headerlink" href="#making-the-mutational-trajectory-and-dating-the-mutations" title="Permalink to this headline">¶</a></h2>
+<p>The mutational trajectory was created with <tt class="docutils literal"><span class="pre">mutpath_make_digraph.py</span></tt> from the <tt class="docutils literal"><span class="pre">prot_mutpaths.txt</span></tt> mutational paths file created by <tt class="docutils literal"><span class="pre">mutpath_get_paths.py</span></tt>. The input file <tt class="docutils literal"><span class="pre">mutpath_make_digraph-prot_infile.txt</span></tt> was created manually, as was the file <tt class="docutils literal"><span class="pre">nodenames.fasta</span></tt>, which defines the names of high-confidence nodes as used in &#8220;Stability-mediated epistasis constrains the evolution of an influenza protein.&#8221; The <tt class="docutils literal"><span class="pre">mutpath_make_digraph.py</span></tt> script was then run on these input files with:</p>
+<div class="highlight-python"><pre>mutpath_make_digraph.py mutpath_make_digraph-prot_infile.txt</pre>
+</div>
+<p>This created a mutational trajectory in protein sequence space.
+The trajectory was written in the <a class="reference external" href="http://www.graphviz.org/doc/info/lang.html">DOT</a> language in the file <tt class="docutils literal"><span class="pre">prot_trajectory.dot</span></tt>.
+It was then visualized using <tt class="docutils literal"><span class="pre">GraphViz</span></tt> (version 2.30), which was also used to save the image files <tt class="docutils literal"><span class="pre">prot_trajectory.pdf</span></tt> and <tt class="docutils literal"><span class="pre">prot_trajectory.jpg</span></tt>. The script also created the following additional output files which contain information about the mutation dates and node persistence times:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">prot_mutationdates</span><span class="o">.</span><span class="n">pdf</span>
+<span class="n">prot_mutationdates</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">prot_nodepersistence</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">prot_mutationdates.pdf</span></tt> file was used to create <tt class="docutils literal"><span class="pre">prot_mutationdates.jpg</span></tt> using the shell <tt class="docutils literal"><span class="pre">convert</span></tt> utility.</p>
+<div class="figure align-center">
+<img alt="the mutational trajectory" src="_images/prot_trajectory.jpg" style="width: 50%;" />
+<p class="caption">The mutational trajectory (file <tt class="docutils literal"><span class="pre">prot_trajectory.jpg</span></tt>).</p>
+</div>
+<div class="figure align-center">
+<img alt="the mutation dates" src="_images/prot_mutationdates.jpg" style="width: 40%;" />
+<p class="caption">The mutation dates (file <tt class="docutils literal"><span class="pre">prot_mutationdates.jpg</span></tt>).</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">influenza human H3N2 NP</a><ul>
+<li><a class="reference internal" href="#input-sequence-data">Input sequence data</a></li>
+<li><a class="reference internal" href="#generation-of-beast-input-xml-file">Generation of BEAST input XML file</a></li>
+<li><a class="reference internal" href="#running-beast">Running BEAST</a></li>
+<li><a class="reference internal" href="#compacting-the-trees-files">Compacting the <tt class="docutils literal"><span class="pre">.trees</span></tt> files</a></li>
+<li><a class="reference internal" href="#extracting-the-mutational-paths">Extracting the mutational paths</a></li>
+<li><a class="reference internal" href="#making-and-annotating-the-maximum-clade-credibility-tree">Making and annotating the maximum clade credibility tree</a></li>
+<li><a class="reference internal" href="#making-the-mutational-trajectory-and-dating-the-mutations">Making the mutational trajectory and dating the mutations</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mutpath_make_digraph.html"
+                        title="previous chapter"><tt class="docutils literal"><span class="pre">mutpath_make_digraph.py</span></tt> script</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="example_influenza_NP_1918_Descended.html"
+                        title="next chapter">influenza NP 1918 descended</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/example_influenza_human_H3N2_NP.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="example_influenza_NP_1918_Descended.html" title="influenza NP 1918 descended"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mutpath_make_digraph.html" title="mutpath_make_digraph.py script"
+             >previous</a> |</li>
+        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Jesse Bloom.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

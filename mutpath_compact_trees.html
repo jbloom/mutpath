@@ -1,0 +1,159 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>mutpath_compact_trees.py script &mdash; mutpath 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="mutpath 0.1 documentation" href="index.html" />
+    <link rel="next" title="mutpath_get_paths.py script" href="mutpath_get_paths.html" />
+    <link rel="prev" title="mutpath_parse_to_beast_xml.py script" href="mutpath_parse_to_beastxml.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="mutpath_get_paths.html" title="mutpath_get_paths.py script"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mutpath_parse_to_beastxml.html" title="mutpath_parse_to_beast_xml.py script"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="mutpath-compact-trees-py-script">
+<h1><tt class="docutils literal"><span class="pre">mutpath_compact_trees.py</span></tt> script<a class="headerlink" href="#mutpath-compact-trees-py-script" title="Permalink to this headline">¶</a></h1>
+<p>Script compacting <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> <tt class="docutils literal"><span class="pre">.trees</span></tt> files produced using the Markov Jumps mutation mapping feature.</p>
+<p>Run this script by typing the script name followed by the name of the <tt class="docutils literal"><span class="pre">.trees</span></tt> file that you want to compact, for example:</p>
+<div class="highlight-python"><pre>mutpath_compact_trees.py largefile.trees</pre>
+</div>
+<p>Or if the script is not executable on your platform:</p>
+<div class="highlight-python"><pre>python mutpath_compact_trees.py largefile.trees</pre>
+</div>
+<p>These commands will create a more compact version of the file called <tt class="docutils literal"><span class="pre">largefile_compact.trees</span></tt>.</p>
+<div class="section" id="motivation-and-details">
+<h2>Motivation and details<a class="headerlink" href="#motivation-and-details" title="Permalink to this headline">¶</a></h2>
+<p>Running <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> while mapping mutations to the branches tends to create very large output <tt class="docutils literal"><span class="pre">.trees</span></tt> files due to the large amount of information written. Most of the information is not actually necessary for reconstructing the mutational path. This script makes compact versions by removing information that is not needed to build mutational paths using the <tt class="docutils literal"><span class="pre">mutpath</span></tt> package. You can then store these compact <tt class="docutils literal"><span class="pre">.trees</span></tt> files more easily.</p>
+<p>This script takes as input a <tt class="docutils literal"><span class="pre">.trees</span></tt> file created by running <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> with Markov Jumps mutation mapping. You provide it with a single argument giving the name of the non-compacted <tt class="docutils literal"><span class="pre">.trees</span></tt> file. It creates a new compact version of the file in which the suffix <tt class="docutils literal"><span class="pre">.trees</span></tt> has been replaced by <tt class="docutils literal"><span class="pre">_compact.trees</span></tt>. If a file with the name of this compacted file already exists, the script exits printing an error message. If the specified input file does not exist, the script exists with an error.</p>
+<p>Once you have created the <tt class="docutils literal"><span class="pre">_compact.trees</span></tt> file, you should be able to delete the original <tt class="docutils literal"><span class="pre">.trees</span></tt> file and still do all of the mutational mapping using the more compact version. However, the script does not delete the non-compacted file itself &#8211; you must do this manually.</p>
+<p>The <tt class="docutils literal"><span class="pre">.trees</span></tt> file is compacted by doing the following to all of the lines containing trees:</p>
+<ol class="arabic simple">
+<li>All of the entries of the form <em>c_allTransitions=4.5</em> are removed.</li>
+<li>All of the entries of the form <em>&amp;states=&#8221;MATGA&#8221;</em> (giving sequence states) are removed.</li>
+<li>All of the <em>history_all</em> notations are replaced with the more compact <em>h</em> in the lines giving the mutations, sites, and times.</li>
+<li>All of the decimal numbers specifying the branch lengths are rounded to just four decimal places (so <em>3.872141428850743</em> becomes <em>3.8721</em>, for example). Although this slightly decreases the numerical accuracy, for reasonable branch lengths the difference should be unimportant.</li>
+</ol>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>Here is example usage of this script to shrink a file called <tt class="docutils literal"><span class="pre">prots.trees</span></tt> into the more compact <tt class="docutils literal"><span class="pre">prots_compact.trees</span></tt>, and then delete the larger <tt class="docutils literal"><span class="pre">prots.trees</span></tt> file:</p>
+<div class="highlight-python"><pre>% du -h prots.trees
+939M    prots.trees
+% mutpath_compact_trees.py prots.trees
+% du -h prots_compact.trees
+40M prots_compact.trees
+% rm prots.trees</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><tt class="docutils literal"><span class="pre">mutpath_compact_trees.py</span></tt> script</a><ul>
+<li><a class="reference internal" href="#motivation-and-details">Motivation and details</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mutpath_parse_to_beastxml.html"
+                        title="previous chapter"><tt class="docutils literal"><span class="pre">mutpath_parse_to_beast_xml.py</span></tt> script</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mutpath_get_paths.html"
+                        title="next chapter"><tt class="docutils literal docutils literal"><span class="pre">mutpath_get_paths.py</span></tt> script</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/mutpath_compact_trees.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="mutpath_get_paths.html" title="mutpath_get_paths.py script"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mutpath_parse_to_beastxml.html" title="mutpath_parse_to_beast_xml.py script"
+             >previous</a> |</li>
+        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Jesse Bloom.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
