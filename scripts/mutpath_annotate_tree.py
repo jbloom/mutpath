@@ -69,7 +69,7 @@ def main():
                         del name_d[line[1 : -1]]
                     else:
                         newline = '%s[&!name=""]\n' % (newline[ : -1])
-            elif (line == 'Taxlabels'):
+            elif (line.lower() == 'taxlabels'):
                 if startedtaxa or finishedtaxa:
                     raise IOError("Found Taxlabels line but already started or finished taxa block")
                 startedtaxa = True
