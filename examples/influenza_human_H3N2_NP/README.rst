@@ -6,6 +6,7 @@ This analysis is found in the ``./examples/influenza_human_H3N2_NP/`` subdirecto
 
 This example essentially recapitulates the analysis in `Gong et al, 2013`_, although it is not the exact code used for that paper and so may not be a completely precise match.
 
+In repository `on GitHub`_, the large `BEAST`_ output ``*.trees`` files are not included due to their very large file size.
 
 Input sequence data
 ---------------------
@@ -41,7 +42,7 @@ The XML files is the `BEAST`_ input file for the next step.
 
 Running `BEAST`_
 ------------------
-`BEAST`_ was used to run the ``prots.xml`` file. The version of `BEAST`_ used was v1.8.0pre Prerelease r5356, using the `BEAGLE`_ library. This was done on the FHCRC's ``rhino`` computing cluster.
+`BEAST`_ was used to run the ``prots.xml`` file. The version of `BEAST`_ used was v1.8.0pre Prerelease r5356, using the `BEAGLE`_ (revision 1093) library. This was done on the FHCRC's ``rhino`` computing cluster.
 
 Six separate directories were created called ``prots_BEASTrun_1``, ``prots_BEASTrun_2``, ... The ``prots.xml`` file was copied into ``prots_BEASTrun_*``.
 BEAST was then run in each of these directories. The runs were initiated by ``sbatch`` as described below. Note that it specifies the `BEAGLE`_ library location based on the fact that these have been installed locally in ``/home/jbloom/BEAGLE_libs``.

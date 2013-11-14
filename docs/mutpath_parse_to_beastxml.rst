@@ -2,7 +2,7 @@
 ``mutpath_parse_to_beast_xml.py`` script
 ==========================================
 
-Script for parsing sequences and building BEAST input XML file.
+Script for parsing sequences and building BEAST input XML file. You do not have to use this script if you have another preferred method of creating the XML file.
 
 To run this script, first create a text infile of the format described
 below in this documentation. If you name this input file ``infile.txt``, then you would 

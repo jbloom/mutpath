@@ -2,7 +2,7 @@
 influenza NP 1918 descended
 ===========================================
 
-This analysis is found in the ``./examples/influenza_NP_1918_Descendend/`` subdirectory of the main `mutpath`_ repository.
+This analysis is found in the ``./examples/influenza_NP_1918_Descendend/`` subdirectory of the main `mutpath`_ repository `on GitHub`_.  In repository `on GitHub`_, the large `BEAST`_ output ``*.trees`` files are not included due to their very large file size.
 
 This analysis involves influenza NPs descended directly from the 1918 virus.
 These are
@@ -97,7 +97,7 @@ Running `BEAST`_
 
 The file *Combined_NP_proteins.xml* was constructed from the sequences in *Combined_NP_proteins.fasta* as a `BEAST`_ input file using a combination of `BEAUTI`_ and hand-annotation. This XML file specifies date-stamped sequences, a strict molecular clock, and a JTT model of substitution.
 
-This file was then used as the input for four different runs of `BEAST`_ (version 1.7) using the `BEAGLE`_ library, which were performed in the subdirectories ``run1/``, ``run2/``, etc. These runs were performed on the FHCRC's rhino cluster using ``sbatch`` with the command::
+This file was then used as the input for four different runs of `BEAST`_ (version 1.8pre Prelease r5356) using the `BEAGLE`_ (revision 1093) library, which were performed in the subdirectories ``run1/``, ``run2/``, etc. These runs were performed on the FHCRC's rhino cluster using ``sbatch`` with the command::
 
     sbatch run.sbatch
     
@@ -275,3 +275,4 @@ This tree is shown below:
 .. _`GraphViz`: http://www.graphviz.org/
 .. _`DOT` : http://www.graphviz.org/doc/info/lang.html
 .. _`Gong et al, 2013`: http://elife.elifesciences.org/content/2/e00631
+.. _`on GitHub`: https://github.com/jbloom/mutpath

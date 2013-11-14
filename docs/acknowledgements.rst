@@ -4,7 +4,7 @@ Acknowledgements
 
 The mutation mapping feature in `BEAST`_ was implemented by `Marc Suchard`_.
 
-There is currently no specific reference for this software package. However, the reference for the general approach of creating mutational trajectories is `Gong et al, 2013`_.
+If you use this software package, please cite `Gong et al, 2013`_ as the reference for the approach, and include a weblink to this software program `on GitHub`_.
 
 .. _`BEAGLE`: http://beast.bio.ed.ac.uk/BEAGLE
 .. _`BEAST`: http://beast.bio.ed.ac.uk/Main_Page
