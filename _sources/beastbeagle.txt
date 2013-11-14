@@ -1,6 +1,6 @@
 BEAST and BEAGLE
 =====================
-``mutpath`` is designed to interface with the `BEAST`_ phylogenetics package, so you will obviously want to install `BEAST`_. The actual mutational path mapping requires the Markov Jumps feature of `BEAST`_. This feature is not available in the current stable release of `BEAST`_ (this may change when version 1.8 is released), so you need to obtain the developer's version of `BEAST`_. Use of the Markov Jumps feature also requires using the `BEAGLE`_ library, so you need to install that as well.
+``mutpath`` is designed to interface with the `BEAST`_ phylogenetics package, so you will obviously want to install `BEAST`_. The actual mutational path mapping requires the Markov Jumps feature of `BEAST`_. This feature is not available in the current stable release of `BEAST`_ (this may change when version 1.8 is released), so you need to obtain the developer's version of `BEAST`_ (or perhaps version 1.8, I have not tested that). Use of the Markov Jumps feature also requires using the `BEAGLE`_ library, so you need to install that as well.
 
 Here are the commands that I used to obtain `BEAST`_ (v1.8.0pre Prelease r5356) and `BEAGLE`_ (revision 1093) on my computer. For `BEAST`_::
 

@@ -6,7 +6,9 @@ The scripts themselves are documented individually in the following sections. Th
 
 Create the `BEAST`_ XML file
 -------------------------------
-First, use ``mutpath_parse_to_beastxml.py`` to create an input `BEAST`_ XML file from the FASTA sequence files. You can do this by manually creating the text input file and then running::
+You may have your own strategy to create the `BEAST`_ input XML file. If not, ``mutpath`` has a script to do this.
+
+Specifically, you can use ``mutpath_parse_to_beastxml.py`` to create an input `BEAST`_ XML file from the FASTA sequence files. You can do this by manually creating the text input file and then running::
 
     mutpath_parse_to_beastxml.py infile.txt
 
@@ -14,7 +16,7 @@ where ``infile.txt`` is a text file that you have created that specifies the inp
 
 Run `BEAST`_
 -----------------
-Next, you will want to run `BEAST`_ on the XML file that you have created. Note that you will need to use `BEAGLE`_. Below is an example command if you have installed both `BEAST`_ and `BEAGLE`_ locally, and have an XML file named ``infile.xml``::
+You will want to run `BEAST`_ on the XML file that you have created. Note that you will need to use `BEAGLE`_. Below is an example command if you have installed both `BEAST`_ and `BEAGLE`_ locally, and have an XML file named ``infile.xml``::
 
     java -Xmx2024m -Xms2024m -Djava.library.path=/home/jbloom/BEAGLE_libs/lib -cp ~/BEAST/build/dist/beast.jar dr.app.beast.BeastMain -beagle infile.xml
 

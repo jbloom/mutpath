@@ -56,7 +56,7 @@
             
   <div class="section" id="influenza-np-1918-descended">
 <h1>influenza NP 1918 descended<a class="headerlink" href="#influenza-np-1918-descended" title="Permalink to this headline">¶</a></h1>
-<p>This analysis is found in the <tt class="docutils literal"><span class="pre">./examples/influenza_NP_1918_Descendend/</span></tt> subdirectory of the main <a class="reference external" href="https://github.com/jbloom/mutpath">mutpath</a> repository.</p>
+<p>This analysis is found in the <tt class="docutils literal"><span class="pre">./examples/influenza_NP_1918_Descendend/</span></tt> subdirectory of the main <a class="reference external" href="https://github.com/jbloom/mutpath">mutpath</a> repository <a class="reference external" href="https://github.com/jbloom/mutpath">on GitHub</a>.  In repository <a class="reference external" href="https://github.com/jbloom/mutpath">on GitHub</a>, the large <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> output <tt class="docutils literal"><span class="pre">*.trees</span></tt> files are not included due to their very large file size.</p>
 <p>This analysis involves influenza NPs descended directly from the 1918 virus.
 These are
 human seasonal H1N1 (1918-1957, 1977-2008),
@@ -145,7 +145,7 @@ cat Human_NP_proteins.fasta Swine_NP_proteins.fasta &gt; Combined_NP_proteins.fa
 <div class="section" id="running-beast">
 <h3>Running <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a><a class="headerlink" href="#running-beast" title="Permalink to this headline">¶</a></h3>
 <p>The file <em>Combined_NP_proteins.xml</em> was constructed from the sequences in <em>Combined_NP_proteins.fasta</em> as a <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> input file using a combination of <a class="reference external" href="http://beast.bio.ed.ac.uk/BEAUti">BEAUTI</a> and hand-annotation. This XML file specifies date-stamped sequences, a strict molecular clock, and a JTT model of substitution.</p>
-<p>This file was then used as the input for four different runs of <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> (version 1.7) using the <a class="reference external" href="http://beast.bio.ed.ac.uk/BEAGLE">BEAGLE</a> library, which were performed in the subdirectories <tt class="docutils literal"><span class="pre">run1/</span></tt>, <tt class="docutils literal"><span class="pre">run2/</span></tt>, etc. These runs were performed on the FHCRC&#8217;s rhino cluster using <tt class="docutils literal"><span class="pre">sbatch</span></tt> with the command:</p>
+<p>This file was then used as the input for four different runs of <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> (version 1.8pre Prelease r5356) using the <a class="reference external" href="http://beast.bio.ed.ac.uk/BEAGLE">BEAGLE</a> (revision 1093) library, which were performed in the subdirectories <tt class="docutils literal"><span class="pre">run1/</span></tt>, <tt class="docutils literal"><span class="pre">run2/</span></tt>, etc. These runs were performed on the FHCRC&#8217;s rhino cluster using <tt class="docutils literal"><span class="pre">sbatch</span></tt> with the command:</p>
 <div class="highlight-python"><pre>sbatch run.sbatch</pre>
 </div>
 <p>where the contents of the <tt class="docutils literal"><span class="pre">run.sbatch</span></tt> file was as follows:</p>

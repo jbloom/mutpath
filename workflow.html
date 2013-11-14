@@ -60,14 +60,15 @@
 <p>The scripts themselves are documented individually in the following sections. This section gives an overall workflow of how these scripts can be used in conjunction with <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a>.</p>
 <div class="section" id="create-the-beast-xml-file">
 <h2>Create the <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> XML file<a class="headerlink" href="#create-the-beast-xml-file" title="Permalink to this headline">¶</a></h2>
-<p>First, use <tt class="docutils literal"><span class="pre">mutpath_parse_to_beastxml.py</span></tt> to create an input <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> XML file from the FASTA sequence files. You can do this by manually creating the text input file and then running:</p>
+<p>You may have your own strategy to create the <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> input XML file. If not, <tt class="docutils literal"><span class="pre">mutpath</span></tt> has a script to do this.</p>
+<p>Specifically, you can use <tt class="docutils literal"><span class="pre">mutpath_parse_to_beastxml.py</span></tt> to create an input <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> XML file from the FASTA sequence files. You can do this by manually creating the text input file and then running:</p>
 <div class="highlight-python"><pre>mutpath_parse_to_beastxml.py infile.txt</pre>
 </div>
 <p>where <tt class="docutils literal"><span class="pre">infile.txt</span></tt> is a text file that you have created that specifies the input variables. Note that this script will create files that provide information about sequences that are outliers in terms of their divergence. If you think that these might be mis-annotated sequences that should not be part of the tree, specify them for exclusion using the options provided in <tt class="docutils literal"><span class="pre">infile.txt</span></tt> and then run the script again. The final output of interest will be a <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> XML file.</p>
 </div>
 <div class="section" id="run-beast">
 <h2>Run <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a><a class="headerlink" href="#run-beast" title="Permalink to this headline">¶</a></h2>
-<p>Next, you will want to run <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> on the XML file that you have created. Note that you will need to use <a class="reference external" href="http://beast.bio.ed.ac.uk/BEAGLE">BEAGLE</a>. Below is an example command if you have installed both <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> and <a class="reference external" href="http://beast.bio.ed.ac.uk/BEAGLE">BEAGLE</a> locally, and have an XML file named <tt class="docutils literal"><span class="pre">infile.xml</span></tt>:</p>
+<p>You will want to run <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> on the XML file that you have created. Note that you will need to use <a class="reference external" href="http://beast.bio.ed.ac.uk/BEAGLE">BEAGLE</a>. Below is an example command if you have installed both <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> and <a class="reference external" href="http://beast.bio.ed.ac.uk/BEAGLE">BEAGLE</a> locally, and have an XML file named <tt class="docutils literal"><span class="pre">infile.xml</span></tt>:</p>
 <div class="highlight-python"><pre>java -Xmx2024m -Xms2024m -Djava.library.path=/home/jbloom/BEAGLE_libs/lib -cp ~/BEAST/build/dist/beast.jar dr.app.beast.BeastMain -beagle infile.xml</pre>
 </div>
 <p>This will create a .trees and .log file with the prefix specified in <tt class="docutils literal"><span class="pre">infile.xml</span></tt>. You may want to run several replicates of <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> in different directories to create more MCMC data to analyze. Use <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">Tracer</a> to examine the <tt class="docutils literal"><span class="pre">.log</span></tt> files to see if you run enough steps of MCMC to give good effective sample sizes.</p>
@@ -132,7 +133,7 @@
                         title="previous chapter">BEAST and BEAGLE</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="mutpath_parse_to_beastxml.html"
-                        title="next chapter"><tt class="docutils literal docutils literal docutils literal"><span class="pre">mutpath_parse_to_beast_xml.py</span></tt> script</a></p>
+                        title="next chapter"><tt class="docutils literal docutils literal"><span class="pre">mutpath_parse_to_beast_xml.py</span></tt> script</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/workflow.txt"
