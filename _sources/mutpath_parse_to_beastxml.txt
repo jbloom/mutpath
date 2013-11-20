@@ -112,6 +112,7 @@ and the third entry must give the date of isolation, including at least
 a year and a month and day if available. The dates are important,
 as date stamped sequences are used in BEAST. If a date only includes the
 year, the numerical date assigned is halfway through that year (July 1).
+Note that **stop codons must be removed** from the sequences in *seqfile* prior to running this script.
 
 *startseq* should give the name of a FASTA file containing a single sequence
 entry which is the starting sequence for the mutational trajectory. The

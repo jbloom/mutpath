@@ -53,6 +53,8 @@ The input file should contain a series of keys (strings without spaces) that are
     MATTVW
     >2 
     MATWVG
+  
+  When naming the nodes, you must know the protein sequence that they have. The node name is assigned to the node in the mutational path that has that sequence.
 
 * *mutationdates* specifies the prefix for the files we use to display dates for all mutations that occur in at least *labelcutoff* of the paths. For each such mutation, the time that it first occurs along each path is recorded. The script then outputs the posterior median and the 90% Bayesian credible interval (median centered) of the time of occurrence for each of these mutations taken over the set of paths in which that mutation occurs. In addition, it indicates the posterior probability that the mutation occurs on the forward path from the common ancestor to the ending sequence (the posterior probability that the mutation is on the reverse path from the starting sequence to the common ancestor is one minus this number). In *mutpathfile* itself, times are measured in units before the most recent tip node on the trees. The times here are measured as *lasttipdate* minus those times, so if *lasttipdate* is set to the date of the last tip node, then the times listed here are actually dates. A text file with the prefix *mutationdates* and the suffix ``.txt`` lists this information. If `matplotlib`_ is available, a PDF file with the prefix *mutationdates* and the suffix ``.pdf`` is also created to plot this information. These files are overwritten if they already exist. If *translateseqs* is *True*, then these are the dates for the amino-acid mutations, not the nucleotide mutations.
 
@@ -86,7 +88,7 @@ This script creates the following output files:
 
 * *mutationdates*.pdf is created if `matplotlib`_ is available. It is a PDF file plotting the first dates of occurrences of mutations that occur in at least *labelcutoff* of the paths. 
 
-* *persistencefile* is a text file giving the persistence (time to next node) for nodes specified in *nodenamesfile* and that occur in at least *labelcutoff* of the paths.
+* *persistencefile* is a text file giving the persistence (time to next node) for nodes specified in *nodenamefile* and that occur in at least *labelcutoff* of the paths.
 
 
 

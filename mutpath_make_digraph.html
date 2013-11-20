@@ -101,6 +101,7 @@ MATTVW
 &gt;2
 MATWVG</pre>
 </div>
+<p>When naming the nodes, you must know the protein sequence that they have. The node name is assigned to the node in the mutational path that has that sequence.</p>
 </li>
 <li><p class="first"><em>mutationdates</em> specifies the prefix for the files we use to display dates for all mutations that occur in at least <em>labelcutoff</em> of the paths. For each such mutation, the time that it first occurs along each path is recorded. The script then outputs the posterior median and the 90% Bayesian credible interval (median centered) of the time of occurrence for each of these mutations taken over the set of paths in which that mutation occurs. In addition, it indicates the posterior probability that the mutation occurs on the forward path from the common ancestor to the ending sequence (the posterior probability that the mutation is on the reverse path from the starting sequence to the common ancestor is one minus this number). In <em>mutpathfile</em> itself, times are measured in units before the most recent tip node on the trees. The times here are measured as <em>lasttipdate</em> minus those times, so if <em>lasttipdate</em> is set to the date of the last tip node, then the times listed here are actually dates. A text file with the prefix <em>mutationdates</em> and the suffix <tt class="docutils literal"><span class="pre">.txt</span></tt> lists this information. If <a class="reference external" href="http://matplotlib.org/">matplotlib</a> is available, a PDF file with the prefix <em>mutationdates</em> and the suffix <tt class="docutils literal"><span class="pre">.pdf</span></tt> is also created to plot this information. These files are overwritten if they already exist. If <em>translateseqs</em> is <em>True</em>, then these are the dates for the amino-acid mutations, not the nucleotide mutations.</p>
 </li>
@@ -132,7 +133,7 @@ persistencefile persistence.txt</pre>
 <li><em>dotfile</em> is a <a class="reference external" href="http://www.graphviz.org/doc/info/lang.html">DOT</a> formatted graph that can be visualized by <a class="reference external" href="http://www.graphviz.org/">GraphViz</a>. In the visualization, the areas of nodes are proportional to their weight, and the width of edges is proportional to their weight. The trajectory moves from the starting to ending sequence, with the position of nodes along the direction of movement (vertical) defined as the Hamming distance between that node and the starting sequence minus the Hamming distance between that node and the ending sequence plus the Hamming Distance between the starting and ending sequences.</li>
 <li><em>mutationdates</em>.txt is a text file giving the first dates of occurrences of mutations that occur in at least <em>labelcutoff</em> of the paths.</li>
 <li><em>mutationdates</em>.pdf is created if <a class="reference external" href="http://matplotlib.org/">matplotlib</a> is available. It is a PDF file plotting the first dates of occurrences of mutations that occur in at least <em>labelcutoff</em> of the paths.</li>
-<li><em>persistencefile</em> is a text file giving the persistence (time to next node) for nodes specified in <em>nodenamesfile</em> and that occur in at least <em>labelcutoff</em> of the paths.</li>
+<li><em>persistencefile</em> is a text file giving the persistence (time to next node) for nodes specified in <em>nodenamefile</em> and that occur in at least <em>labelcutoff</em> of the paths.</li>
 </ul>
 </div>
 </div>
@@ -155,7 +156,7 @@ persistencefile persistence.txt</pre>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="mutpath_annotate_tree.html"
-                        title="previous chapter"><tt class="docutils literal docutils literal docutils literal"><span class="pre">mutpath_annotate_tree.py</span></tt> script</a></p>
+                        title="previous chapter"><tt class="docutils literal"><span class="pre">mutpath_annotate_tree.py</span></tt> script</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="example_influenza_human_H3N2_NP.html"
                         title="next chapter">influenza human H3N2 NP</a></p>
