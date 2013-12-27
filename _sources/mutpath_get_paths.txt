@@ -1,5 +1,5 @@
 ==========================================
-``mutpath_get_paths.py`` script
+mutpath_get_paths.py 
 ==========================================
 
 Script for parsing mutational paths from ``.trees`` files created using `BEAST`_ with the Markov Jumps mutation-mapping feature. 
@@ -115,11 +115,4 @@ Running ``mutpath_get_paths.py`` creates two output files, *mergedtreesfile* and
 
 
 
-.. _`BEAGLE`: http://beast.bio.ed.ac.uk/BEAGLE
-.. _`BEAST`: http://beast.bio.ed.ac.uk/Main_Page
-.. _`TreeAnnotator`: http://beast.bio.ed.ac.uk/TreeAnnotator
-.. _`on GitHub`: https://github.com/jbloom/mutpath
-.. _`Jesse Bloom`: http://labs.fhcrc.org/bloom/
-.. _`matplotlib`: http://matplotlib.org/
-.. _`MUSCLE`: http://www.drive5.com/muscle/
-.. _`on GitHub Pages`: http://jbloom.github.com/mutpath/
+.. include:: weblinks.txt

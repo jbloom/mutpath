@@ -1,5 +1,5 @@
 =========================================
-``mutpath_compact_trees.py`` script
+mutpath_compact_trees.py
 =========================================
 
 Script compacting `BEAST`_ ``.trees`` files produced using the Markov Jumps mutation mapping feature.
@@ -46,11 +46,5 @@ Here is example usage of this script to shrink a file called ``prots.trees`` int
     40M prots_compact.trees
     % rm prots.trees
 
-
-.. _`BEAGLE`: http://beast.bio.ed.ac.uk/BEAGLE
-.. _`BEAST`: http://beast.bio.ed.ac.uk/Main_Page
-.. _`on GitHub`: https://github.com/jbloom/mutpath
-.. _`Jesse Bloom`: http://labs.fhcrc.org/bloom/
-.. _`matplotlib`: http://matplotlib.org/
-.. _`MUSCLE`: http://www.drive5.com/muscle/
+.. include:: weblinks.txt
 

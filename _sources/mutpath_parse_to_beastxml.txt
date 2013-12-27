@@ -1,5 +1,5 @@
 ==========================================
-``mutpath_parse_to_beast_xml.py`` script
+mutpath_parse_to_beast_xml.py
 ==========================================
 
 Script for parsing sequences and building BEAST input XML file. You do not have to use this script if you have another preferred method of creating the XML file.
@@ -206,5 +206,4 @@ Here is an example input file. In the input files, any lines beginning with a # 
     usemarkovjumps True
     sitemodel JTT
 
-.. _`matplotlib`: http://matplotlib.org/
-.. _`TreeAnnotator` : http://beast.bio.ed.ac.uk/TreeAnnotator
+.. include:: weblinks.txt

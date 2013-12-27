@@ -26,8 +26,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="mutpath 0.1 documentation" href="index.html" />
+    <link rel="up" title="Examples" href="examples.html" />
     <link rel="next" title="influenza NP 1918 descended" href="example_influenza_NP_1918_Descended.html" />
-    <link rel="prev" title="mutpath_make_digraph.py script" href="mutpath_make_digraph.html" /> 
+    <link rel="prev" title="Examples" href="examples.html" /> 
   </head>
   <body>
     <div class="related">
@@ -43,9 +44,10 @@
           <a href="example_influenza_NP_1918_Descended.html" title="influenza NP 1918 descended"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="mutpath_make_digraph.html" title="mutpath_make_digraph.py script"
+          <a href="examples.html" title="Examples"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li>
+          <li><a href="examples.html" accesskey="U">Examples</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -56,7 +58,7 @@
             
   <div class="section" id="influenza-human-h3n2-np">
 <h1>influenza human H3N2 NP<a class="headerlink" href="#influenza-human-h3n2-np" title="Permalink to this headline">¶</a></h1>
-<p>This analysis is found in the <tt class="docutils literal"><span class="pre">./examples/influenza_human_H3N2_NP/</span></tt> subdirectory in the <tt class="docutils literal"><span class="pre">mutpath</span></tt> package which can be obtained <a class="reference external" href="https://github.com/jbloom/mutpath">on GitHub</a>. This is an example analysis using <tt class="docutils literal"><span class="pre">mutpath</span></tt> on the nucleoprotein (NP) from human H3N2 influenza to build a mutational trajectory at the protein level.</p>
+<p>This analysis is found in the <tt class="docutils literal"><span class="pre">./examples/influenza_human_H3N2_NP/</span></tt> subdirectory in the <a class="reference external" href="https://github.com/jbloom/mutpath/">mutpath</a> package which can be obtained <a class="reference external" href="https://github.com/jbloom/mutpath">on GitHub</a>. This is an example analysis using <a class="reference external" href="https://github.com/jbloom/mutpath/">mutpath</a> on the nucleoprotein (NP) from human H3N2 influenza to build a mutational trajectory at the protein level.</p>
 <p>This example essentially recapitulates the analysis in <a class="reference external" href="http://elife.elifesciences.org/content/2/e00631">Gong et al, 2013</a>, although it is not the exact code used for that paper and so may not be a completely precise match.</p>
 <p>In repository <a class="reference external" href="https://github.com/jbloom/mutpath">on GitHub</a>, the large <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> output <tt class="docutils literal"><span class="pre">*.trees</span></tt> files are not included due to their very large file size.</p>
 <div class="section" id="input-sequence-data">
@@ -125,7 +127,7 @@ The script was then run using the following command:</p>
 </div>
 <div class="section" id="making-and-annotating-the-maximum-clade-credibility-tree">
 <h2>Making and annotating the maximum clade credibility tree<a class="headerlink" href="#making-and-annotating-the-maximum-clade-credibility-tree" title="Permalink to this headline">¶</a></h2>
-<p>The maximum clade credibility tree was constructed from the <tt class="docutils literal"><span class="pre">prot_trees_merged.trees</span></tt> files built by <tt class="docutils literal"><span class="pre">mutpath_get_trees.py</span></tt> using <a class="reference external" href="http://beast.bio.ed.ac.uk/TreeAnnotator">TreeAnnotator</a>. The commands was:</p>
+<p>The maximum clade credibility tree was constructed from the <tt class="docutils literal"><span class="pre">prot_trees_merged.trees</span></tt> files built by <tt class="docutils literal"><span class="pre">mutpath_get_trees.py</span></tt> using <a class="reference external" href="http://beast.bio.ed.ac.uk/TreeAnnotator">TreeAnnotator</a> (version 1.6.1). The commands was:</p>
 <div class="highlight-python"><pre>~/BEASTv1.6.1/bin/treeannotator prot_trees_merged.trees prot_maxcladecredibility.trees</pre>
 </div>
 <p>to created the maximum clade credibility tree <tt class="docutils literal"><span class="pre">prot_maxcladecredibility.trees</span></tt>.</p>
@@ -145,7 +147,7 @@ The script was then run using the following command:</p>
 </div>
 <p>This created a mutational trajectory in protein sequence space.
 The trajectory was written in the <a class="reference external" href="http://www.graphviz.org/doc/info/lang.html">DOT</a> language in the file <tt class="docutils literal"><span class="pre">prot_trajectory.dot</span></tt>.
-It was then visualized using <tt class="docutils literal"><span class="pre">GraphViz</span></tt> (version 2.30), which was also used to save the image files <tt class="docutils literal"><span class="pre">prot_trajectory.pdf</span></tt> and <tt class="docutils literal"><span class="pre">prot_trajectory.jpg</span></tt>. The script also created the following additional output files which contain information about the mutation dates and node persistence times:</p>
+It was then visualized using <a class="reference external" href="http://www.graphviz.org/">GraphViz</a> (version 2.30), which was also used to save the image files <tt class="docutils literal"><span class="pre">prot_trajectory.pdf</span></tt> and <tt class="docutils literal"><span class="pre">prot_trajectory.jpg</span></tt>. The script also created the following additional output files which contain information about the mutation dates and node persistence times:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">prot_mutationdates</span><span class="o">.</span><span class="n">pdf</span>
 <span class="n">prot_mutationdates</span><span class="o">.</span><span class="n">txt</span>
 <span class="n">prot_nodepersistence</span><span class="o">.</span><span class="n">txt</span>
@@ -184,8 +186,8 @@ It was then visualized using <tt class="docutils literal"><span class="pre">Grap
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="mutpath_make_digraph.html"
-                        title="previous chapter"><tt class="docutils literal"><span class="pre">mutpath_make_digraph.py</span></tt> script</a></p>
+  <p class="topless"><a href="examples.html"
+                        title="previous chapter">Examples</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="example_influenza_NP_1918_Descended.html"
                         title="next chapter">influenza NP 1918 descended</a></p>
@@ -224,9 +226,10 @@ It was then visualized using <tt class="docutils literal"><span class="pre">Grap
           <a href="example_influenza_NP_1918_Descended.html" title="influenza NP 1918 descended"
              >next</a> |</li>
         <li class="right" >
-          <a href="mutpath_make_digraph.html" title="mutpath_make_digraph.py script"
+          <a href="examples.html" title="Examples"
              >previous</a> |</li>
-        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Examples</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

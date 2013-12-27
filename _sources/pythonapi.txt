@@ -1,7 +1,7 @@
-``mutpath`` Python API
+`mutpath`_ Python API
 =========================
 
-``mutpath`` is designed so that you can use it simply by running the main scripts, and do not need to interface directly with the Python code. However, if you want to access the Python modules that constitute the package, here is the API.
+`mutpath`_ is designed so that you can use it simply by running the main scripts, and do not need to interface directly with the Python code. However, if you want to access the Python modules that constitute the package, here is the API.
 
 :mod:`mutpath` Package
 -----------------------
@@ -82,3 +82,5 @@
     :members:
     :undoc-members:
     :show-inheritance:
+
+.. include:: weblinks.txt

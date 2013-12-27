@@ -4,18 +4,18 @@
    contain the root `toctree` directive.
 
 ===================================
-``mutpath`` overview
+`mutpath`_ overview
 ===================================
 
-``mutpath`` is a Python package for identifying mutational paths through sequence space generated using the MarkovJumps feature of `BEAST`_. 
+`mutpath`_ is a Python package for identifying mutational paths through sequence space generated using the MarkovJumps feature of `BEAST`_. 
 
 This package was created by `Jesse Bloom`_. It is based on the approach used to generate the mutation trajectories in `Gong et al, 2013`_. The mutation-mapping `BEAST`_ itself was implemented by `Marc Suchard`_. It can be used to create mutational paths similar to that in `Figure 2A`_ of `Gong et al, 2013`_.
 
-``mutpath`` source code is available `on GitHub`_. You can download a ZIP file of the repository from this site by clicking on the ``Download ZIP`` button on the right side.
+`mutpath`_ source code is available `on GitHub`_. You can download a ZIP file of the repository from this site by clicking on the ``Download ZIP`` button on the right side.
 
-``mutpath`` documentation is available `on GitHub Pages`_.
+`mutpath`_ documentation is available `on GitHub Pages`_.
 
-If you use ``mutpath``, please cite `Gong et al, 2013`_ as the reference describing the approach.
+If you use `mutpath`_, please cite `Gong et al, 2013`_ as the reference describing the approach.
 
 This package contains a number of scripts that interface with `BEAST`_. These scripts generate mutational trajectories through sequence space and other associated data from `BEAST`_ output. Briefly, `BEAST`_ is used to sample phylogenetic trees with mutations mapped to branches from the posterior distribution. These trees make it possible to calculate the posterior probability for different trajectories through sequence space between two known sequences.
 
@@ -24,29 +24,14 @@ Some example analyses are included in the ``./examples/`` subdirectory of the ma
 
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    installation
    beastbeagle
    workflow
-   mutpath_parse_to_beastxml
-   mutpath_compact_trees
-   mutpath_get_paths
-   mutpath_annotate_tree
-   mutpath_make_digraph
-   example_influenza_human_H3N2_NP
-   example_influenza_NP_1918_Descended
+   scripts
+   examples
    pythonapi
    acknowledgements
 
-
-.. _`BEAGLE`: http://beast.bio.ed.ac.uk/BEAGLE
-.. _`BEAST`: http://beast.bio.ed.ac.uk/Main_Page
-.. _`on GitHub`: https://github.com/jbloom/mutpath
-.. _`Jesse Bloom`: http://labs.fhcrc.org/bloom/
-.. _`matplotlib`: http://matplotlib.org/
-.. _`MUSCLE`: http://www.drive5.com/muscle/
-.. _`on GitHub Pages`: http://jbloom.github.com/mutpath/
-.. _`Marc Suchard`: http://faculty.biomath.ucla.edu/msuchard/
-.. _`Gong et al, 2013`: http://elife.elifesciences.org/content/2/e00631
-.. _`Figure 2A`: http://elife.elifesciences.org/content/2/e00631/F2
+.. include:: weblinks.txt

@@ -1,6 +1,6 @@
 BEAST and BEAGLE
 =====================
-``mutpath`` is designed to interface with the `BEAST`_ phylogenetics package, so you will obviously want to install `BEAST`_. The actual mutational path mapping requires the Markov Jumps feature of `BEAST`_. This feature is not available in the current stable release of `BEAST`_ (this may change when version 1.8 is released), so you need to obtain the developer's version of `BEAST`_ (or perhaps version 1.8, I have not tested that). Use of the Markov Jumps feature also requires using the `BEAGLE`_ library, so you need to install that as well.
+`mutpath`_ is designed to interface with the `BEAST`_ phylogenetics package, so you will obviously want to install `BEAST`_. The actual mutational path mapping requires the Markov Jumps feature of `BEAST`_. This feature is not available in the current stable release of `BEAST`_ (this may change when version 1.8 is released), so you need to obtain the developer's version of `BEAST`_ (or perhaps version 1.8, I have not tested that). Use of the Markov Jumps feature also requires using the `BEAGLE`_ library, so you need to install that as well.
 
 Here are the commands that I used to obtain `BEAST`_ (v1.8.0pre Prelease r5356) and `BEAGLE`_ (revision 1093) on my computer. For `BEAST`_::
 
@@ -25,9 +25,4 @@ If you just want to install BEAGLE locally in some directory such as ``BEAGLE_li
 
 and then you can install without the ``sudo`` command.
 
-.. _`BEAGLE`: http://beast.bio.ed.ac.uk/BEAGLE
-.. _`BEAST`: http://beast.bio.ed.ac.uk/Main_Page
-.. _`on GitHub`: https://github.com/jbloom/mutpath
-.. _`Jesse Bloom`: http://labs.fhcrc.org/bloom/
-.. _`matplotlib`: http://matplotlib.org/
-.. _`MUSCLE`: http://www.drive5.com/muscle/
+.. include:: weblinks.txt

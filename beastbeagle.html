@@ -56,7 +56,7 @@
             
   <div class="section" id="beast-and-beagle">
 <h1>BEAST and BEAGLE<a class="headerlink" href="#beast-and-beagle" title="Permalink to this headline">¶</a></h1>
-<p><tt class="docutils literal"><span class="pre">mutpath</span></tt> is designed to interface with the <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> phylogenetics package, so you will obviously want to install <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a>. The actual mutational path mapping requires the Markov Jumps feature of <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a>. This feature is not available in the current stable release of <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> (this may change when version 1.8 is released), so you need to obtain the developer&#8217;s version of <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> (or perhaps version 1.8, I have not tested that). Use of the Markov Jumps feature also requires using the <a class="reference external" href="http://beast.bio.ed.ac.uk/BEAGLE">BEAGLE</a> library, so you need to install that as well.</p>
+<p><a class="reference external" href="https://github.com/jbloom/mutpath/">mutpath</a> is designed to interface with the <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> phylogenetics package, so you will obviously want to install <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a>. The actual mutational path mapping requires the Markov Jumps feature of <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a>. This feature is not available in the current stable release of <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> (this may change when version 1.8 is released), so you need to obtain the developer&#8217;s version of <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> (or perhaps version 1.8, I have not tested that). Use of the Markov Jumps feature also requires using the <a class="reference external" href="http://beast.bio.ed.ac.uk/BEAGLE">BEAGLE</a> library, so you need to install that as well.</p>
 <p>Here are the commands that I used to obtain <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> (v1.8.0pre Prelease r5356) and <a class="reference external" href="http://beast.bio.ed.ac.uk/BEAGLE">BEAGLE</a> (revision 1093) on my computer. For <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a>:</p>
 <div class="highlight-python"><pre>svn co http://beast-mcmc.googlecode.com/svn/trunk BEAST
 cd BEAST
@@ -86,7 +86,7 @@ make check</pre>
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
   <p class="topless"><a href="installation.html"
-                        title="previous chapter">Installation of <tt class="docutils literal"><span class="pre">mutpath</span></tt></a></p>
+                        title="previous chapter">Installation of mutpath</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="workflow.html"
                         title="next chapter">Typical workflow</a></p>
