@@ -263,7 +263,7 @@ def main():
     nperyearhostsubtype = 5 # keep this many per year / host / subtype
     nperyearhost = 50 # keep this many per host per year regardless of subtype
     purgeambiguous = True # remove sequences with ambiguous nucleotides
-    needlecmd = '/Users/jbloom/EMBOSS-6.5.7/emboss/needle' # path to EMBOSS needle
+    needlecmd = 'needle' # path to EMBOSS needle
     refseqfile = 'Aichi68-NP.fasta' # sequence to which we align
     infile = 'NPseqs.fasta' # input file with all sequences
     outfile = 'Swine_NP_nts.fasta' # output file
@@ -282,8 +282,6 @@ def main():
 
 
     # get and align the sequences
-    if not os.path.isfile(needlecmd):
-        raise IOError("Could not find EMBOSS needle of %s" % needlecmd)
     if not os.path.isfile(refseqfile):
         raise IOError("Could not find refseqfile of %s" % refseqfile)
     refseq = mapmuts.sequtils.ReadFASTA(refseqfile)

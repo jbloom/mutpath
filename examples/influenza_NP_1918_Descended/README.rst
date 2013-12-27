@@ -2,27 +2,36 @@
 influenza NP 1918 descended
 ===========================================
 
-This analysis is found in the ``./examples/influenza_NP_1918_Descendend/`` subdirectory of the main `mutpath`_ repository `on GitHub`_.  In repository `on GitHub`_, the large `BEAST`_ output ``*.trees`` files are not included due to their very large file size.
+This analysis is found in the ``./examples/influenza_NP_1918_Descended/`` subdirectory of the main `mutpath`_ repository `on GitHub`_.  In the repository `on GitHub`_, the `BEAST`_ output ``*.trees`` files are not included due to their very large file size -- but the files can be regenerated from the input data files provided here.
 
-This analysis involves influenza NPs descended directly from the 1918 virus.
-These are
-human seasonal H1N1 (1918-1957, 1977-2008),
-human H2N2 (1957-1968), humanH3N2 (1968-2013), and North American swine lineages.
+This analysis examines the evolution of nucleoprotein (NP) from influenza viruses descended from the 1918 virus.
 
-This analysis utilizes the `mapmuts`_ and `mutpath`_ packages. 
+Software used
+-----------------
+* `mutpath`_ (version 0.1): the main software package for building the trajectory from the `BEAST`_ output.
 
-The analysis proceeded as follows:
+* `Python`_ (version 2.6.8)
 
-    1) Construction of sequence sets from these lineages where outlier / mis-annotated sequences have been removed. These aligned sequences are found in *Combined_NP_proteins.fasta*.
+* `BEAST`_ (version 1.8pre Prelease r5356)
 
-    2) Construction of phylogenetic trees with mutations mapped to branches for the sequences in *Combined_NP_proteins.fasta* using `BEAST`_ starting with the input file *Combined_NP_proteins.xml*. The construction of trees and mutational paths using the `mutpath`_ package. Note that the actual `BEAST`_ output files are not included in the repository due to the very large file size.
+* `BEAGLE`_ (revision 1093)
+
+* `RAxML`_ (version 7.6.3)
+
+* `TreeAnnotator`_ (version 1.7.5)
+
+* `FigTree`_ (version 1.4.0): to visualize phylogenetic trees
+
+* `GraphViz`_ (version 2.30.1): to visualize mutational trajectories
+
+* `mapmuts`_ (version 1.0): used by the `Python`_ scripts to parse the sequence sets.
 
 
 Construction of sequence sets
 ------------------------------------
-The first step was the construction of aligned coding sequence sets for the human and swine lineages. The ultimate set of aligned sequences are in *Combined_NP_nts.fasta* and *Combined_NP_proteins.fasta*. 
+The first step is construction of aligned coding sequence sets for the human and swine lineages. The ultimate set of aligned sequences are in *Combined_NP_nts.fasta* and *Combined_NP_proteins.fasta*. 
 
-Separate analyses were done for the human and swine lineages. The sets are constructed by the scripts *get_human_seqs.py* and *get_swine_seqs.py* which construct the files *Human_NP_nts.fasta*, *Human_NP_proteins.fasta*, *Swine_NP_nts.fasta*, and *Swine_NP_proteins.fasta*. These two files were then concatenated to create *Combined_NP_nts.fasta* and *Combined_NP_proteins.fasta*. These scripts use the following input files:
+Separate analyses were done for the human and swine lineages. The sets are constructed by the scripts *get_human_seqs.py* and *get_swine_seqs.py* which construct the files *Human_NP_nts.fasta*, *Human_NP_proteins.fasta*, *Swine_NP_nts.fasta*, and *Swine_NP_proteins.fasta*. The swine and human files were then concatenated to create *Combined_NP_nts.fasta* and *Combined_NP_proteins.fasta*. These scripts use the following input files:
 
     * *NPseqs.fasta* is the set of all unique full-length influenza A coding DNA sequences as downloaded from the `Influenza Virus Resource`_ on June-25-2013.
 
@@ -35,12 +44,15 @@ Separate analyses were done for the human and swine lineages. The sets are const
 Human lineages
 ~~~~~~~~~~~~~~~~~~~
 The retained sequences are all human NPs that are descended directly from the 1918
-viruses in the human lineage. This is H1N1 from 1918 to 1957, then
-H2N2 from 1957 to 1968, and then H3N2 from 1968 to 2013. It also includes
-human H1N1 sequences isolated between 1977 and 2008 (human seasonal H1N1), with
-24 years are subtracted from the year based on the idea that these viruses 
-appear to have been frozen since 1953 before reappearing as described 
-in `dos Reis et al, 2009`_. 
+viruses in the human lineage. These are:
+
+    * H1N1 from 1918 to 1957: these include the 1918 virus and its direct descendents.
+
+    * H2N2 from 1957 to 1968: the "Asian flu" of 1957 involved replacement of several genes from human H1N1, but the NP in this H2N2 was derived from the previous human H1N1.
+
+    * H3N2 from 1968 to 2013: the "Hong Kong flu" of 1968 involved replacement of several genes from human H2N2, but the NP in this H3N2 was derived from the previous human H2N2.
+
+    * H1N1 from 1977 to 2008: the seasonal H1N1 reappeared in 1977, apparently due to revival of the human H1N1 from about 1954. The dates for these sequences therefore need to have 24 years substracted in order to conform to a molecular clock (see `dos Reis et al, 2009`_). This seasonal H1N1 went extinct in early 2009 due to the appareance of the 2009 swine-origin pandemic H1N1.
 
 Only sequences encoding unique proteins are retained, and a maximum of 5 sequences per year of any given subtype are retained to make the trees not too large. Anomalous sequences are removed, based on those specified by `Krasnitz et al, 2008`_, and also those that I find to be in strong violation of the molecular clock based on an analysis of non-date-stamped trees built with `RAxML`_ with `Path-O-Gen`_. Specifically, the analysis was done as follows:
 
@@ -54,6 +66,7 @@ Only sequences encoding unique proteins are retained, and a maximum of 5 sequenc
         /Users/jbloom/standard-RAxML-master/raxmlHPC -w /Users/jbloom/mutpath/examples/influenza_NP_1918_Descended/RAxML_output -n Human_NP_proteins -p 1 -m PROTCATJTT -s Human_NP_proteins.fasta
 
        The trees were then visually inspected using `Path-O-Gen`_, and clear outliers from the molecular clock were removed by adding them to *JDB_Anomalies.txt* and re-running the analysis.
+
 
 Swine lineages
 ~~~~~~~~~~~~~~
@@ -128,13 +141,11 @@ Note that these ``.trees`` files are not included in the `mutpath`_ repository o
 Building the trajectories
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Three trajectories were then built:
+Two trajectories were then built:
 
     1) For human H3N2, the trajectory from A/Aichi/2/1968 (H3N2) to A/Texas/JMM_49/2012 (H3N2).
 
-    2) For human (seasonal) H1N1, the trajectory from A/Memphis/13/1978 (H1N1) to A/Taiwan/11526/2008 (H1N1).
-
-    3) For swine, the trajectory from A/swine/Wisconsin/1/1957 (H1N1) to A/swine/Indiana/A00968365/2012 (H1N1).
+    2) For swine, the trajectory from A/swine/Wisconsin/1/1957 (H1N1) to A/swine/Indiana/A00968365/2012 (H1N1).
 
 The human H3N2 trajectory was built using the command::
 
@@ -166,13 +177,6 @@ and the contents of *make_digraph_infile_human_H3N2.txt* are::
     lasttipdate 2012.93
     persistencefile human_H3N2_persistence.txt
 
-The human H1N1 trajectory was built similarly, using::
-
-    mutpath_get_paths.py get_paths_infile_human_H1N1.txt
-    mutpath_make_digraph.py make_digraph_infile_human_H1N1.txt
-
-where the input files *get_paths_infile_human_H1N1.txt* and *make_digraph_infile_human_H1N1.txt* are modified to specify the correct human H1N1 sequences and dates.
-
 The swine trajectory was built using::
 
     mutpath_get_paths.py get_paths_infile_swine.txt
@@ -182,16 +186,13 @@ where the input files *get_paths_infile_swine.txt* and *make_digraph_infile_swin
 
 The key output of these runs are the `DOT`_ files displaying the trajectories, which can be visualized using `GraphViz`_::
 
-    human_H1N1_trajectory.dot 
     human_H3N2_trajectory.dot 
     swine_trajectory.dot
 
 These `DOT`_ files were opened with `GraphViz`_ and used to save PDF and JPG files::
 
-    human_H1N1_trajectory.pdf
     human_H3N2_trajectory.pdf 
     swine_trajectory.pdf
-    human_H1N1_trajectory.jpg
     human_H3N2_trajectory.jpg 
     swine_trajectory.jpg
 
@@ -208,16 +209,6 @@ swine influenza mutational trajectory
    Mutational trajectory for swine influenza.
 
 
-Human H1N1 mutational trajectory
-***********************************
-
-.. figure:: ../examples/influenza_NP_1918_Descended/human_H1N1_trajectory.jpg
-   :align: center
-   :alt: human_H1N1_trajectory.jpg
-   :width: 55%
-
-   Mutational trajectory for human H1N1.
-
 Human H3N2 mutational trajectory
 ***********************************
 
@@ -230,12 +221,10 @@ Human H3N2 mutational trajectory
 
 
 
-
-
 Building the maximum clade credibility tree
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In addition, the ``mutpath_get_paths.py`` runs created the merged ``.trees`` file *merged_Combined_NP_proteins.fasta*, which was used to build the maximum clade credibility tree *maxcladecredibility.trees* using `TreeAnnotator`_ with the command::
+In addition, the ``mutpath_get_paths.py`` runs created the merged ``.trees`` file *merged_Combined_NP_proteins.fasta*, which was used to build the maximum clade credibility tree *maxcladecredibility.trees* using `TreeAnnotator`_ (version 1.7.5) with the command::
 
     ~/BEASTv1.7.5/bin/treeannotator merged_Combined_NP_proteins_compact.trees maxcladecredibility.trees
 
@@ -254,7 +243,7 @@ This tree is shown below:
    :alt: handannotated_maxcladecredibility.jpg
    :width: 85%
 
-   Maximum clade credibility tree of NPs descended from 1918 virus. The swine trajectory is in blue, the human H1N1 in green, and the human H3N2 in red.
+   Maximum clade credibility tree of NPs descended from 1918 virus. The swine trajectory is in green and the human H3N2 in red.
 
 
 .. _`mapmuts`: https://github.com/jbloom/mapmuts
@@ -276,3 +265,4 @@ This tree is shown below:
 .. _`DOT` : http://www.graphviz.org/doc/info/lang.html
 .. _`Gong et al, 2013`: http://elife.elifesciences.org/content/2/e00631
 .. _`on GitHub`: https://github.com/jbloom/mutpath
+.. _`Python`: http://www.python.org/ 
