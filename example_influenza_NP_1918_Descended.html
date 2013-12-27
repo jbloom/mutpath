@@ -26,6 +26,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="mutpath 0.1 documentation" href="index.html" />
+    <link rel="up" title="Examples" href="examples.html" />
     <link rel="next" title="mutpath Python API" href="pythonapi.html" />
     <link rel="prev" title="influenza human H3N2 NP" href="example_influenza_human_H3N2_NP.html" /> 
   </head>
@@ -45,7 +46,8 @@
         <li class="right" >
           <a href="example_influenza_human_H3N2_NP.html" title="influenza human H3N2 NP"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li>
+          <li><a href="examples.html" accesskey="U">Examples</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -56,23 +58,26 @@
             
   <div class="section" id="influenza-np-1918-descended">
 <h1>influenza NP 1918 descended<a class="headerlink" href="#influenza-np-1918-descended" title="Permalink to this headline">¶</a></h1>
-<p>This analysis is found in the <tt class="docutils literal"><span class="pre">./examples/influenza_NP_1918_Descendend/</span></tt> subdirectory of the main <a class="reference external" href="https://github.com/jbloom/mutpath">mutpath</a> repository <a class="reference external" href="https://github.com/jbloom/mutpath">on GitHub</a>.  In repository <a class="reference external" href="https://github.com/jbloom/mutpath">on GitHub</a>, the large <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> output <tt class="docutils literal"><span class="pre">*.trees</span></tt> files are not included due to their very large file size.</p>
-<p>This analysis involves influenza NPs descended directly from the 1918 virus.
-These are
-human seasonal H1N1 (1918-1957, 1977-2008),
-human H2N2 (1957-1968), humanH3N2 (1968-2013), and North American swine lineages.</p>
-<p>This analysis utilizes the <a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> and <a class="reference external" href="https://github.com/jbloom/mutpath">mutpath</a> packages.</p>
-<p>The analysis proceeded as follows:</p>
-<blockquote>
-<div><ol class="arabic simple">
-<li>Construction of sequence sets from these lineages where outlier / mis-annotated sequences have been removed. These aligned sequences are found in <em>Combined_NP_proteins.fasta</em>.</li>
-<li>Construction of phylogenetic trees with mutations mapped to branches for the sequences in <em>Combined_NP_proteins.fasta</em> using <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> starting with the input file <em>Combined_NP_proteins.xml</em>. The construction of trees and mutational paths using the <a class="reference external" href="https://github.com/jbloom/mutpath">mutpath</a> package. Note that the actual <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> output files are not included in the repository due to the very large file size.</li>
-</ol>
-</div></blockquote>
+<p>This analysis is found in the <tt class="docutils literal"><span class="pre">./examples/influenza_NP_1918_Descended/</span></tt> subdirectory of the main <a class="reference external" href="https://github.com/jbloom/mutpath">mutpath</a> repository <a class="reference external" href="https://github.com/jbloom/mutpath">on GitHub</a>.  In the repository <a class="reference external" href="https://github.com/jbloom/mutpath">on GitHub</a>, the <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> output <tt class="docutils literal"><span class="pre">*.trees</span></tt> files are not included due to their very large file size &#8211; but the files can be regenerated from the input data files provided here.</p>
+<p>This analysis examines the evolution of nucleoprotein (NP) from influenza viruses descended from the 1918 virus.</p>
+<div class="section" id="software-used">
+<h2>Software used<a class="headerlink" href="#software-used" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/jbloom/mutpath">mutpath</a> (version 0.1): the main software package for building the trajectory from the <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> output.</li>
+<li><a class="reference external" href="http://www.python.org/">Python</a> (version 2.6.8)</li>
+<li><a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> (version 1.8pre Prelease r5356)</li>
+<li><a class="reference external" href="http://beast.bio.ed.ac.uk/BEAGLE">BEAGLE</a> (revision 1093)</li>
+<li><a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> (version 7.6.3)</li>
+<li><a class="reference external" href="http://beast.bio.ed.ac.uk/TreeAnnotator">TreeAnnotator</a> (version 1.7.5)</li>
+<li><a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a> (version 1.4.0): to visualize phylogenetic trees</li>
+<li><a class="reference external" href="http://www.graphviz.org/">GraphViz</a> (version 2.30.1): to visualize mutational trajectories</li>
+<li><a class="reference external" href="https://github.com/jbloom/mapmuts">mapmuts</a> (version 1.0): used by the <a class="reference external" href="http://www.python.org/">Python</a> scripts to parse the sequence sets.</li>
+</ul>
+</div>
 <div class="section" id="construction-of-sequence-sets">
 <h2>Construction of sequence sets<a class="headerlink" href="#construction-of-sequence-sets" title="Permalink to this headline">¶</a></h2>
-<p>The first step was the construction of aligned coding sequence sets for the human and swine lineages. The ultimate set of aligned sequences are in <em>Combined_NP_nts.fasta</em> and <em>Combined_NP_proteins.fasta</em>.</p>
-<p>Separate analyses were done for the human and swine lineages. The sets are constructed by the scripts <em>get_human_seqs.py</em> and <em>get_swine_seqs.py</em> which construct the files <em>Human_NP_nts.fasta</em>, <em>Human_NP_proteins.fasta</em>, <em>Swine_NP_nts.fasta</em>, and <em>Swine_NP_proteins.fasta</em>. These two files were then concatenated to create <em>Combined_NP_nts.fasta</em> and <em>Combined_NP_proteins.fasta</em>. These scripts use the following input files:</p>
+<p>The first step is construction of aligned coding sequence sets for the human and swine lineages. The ultimate set of aligned sequences are in <em>Combined_NP_nts.fasta</em> and <em>Combined_NP_proteins.fasta</em>.</p>
+<p>Separate analyses were done for the human and swine lineages. The sets are constructed by the scripts <em>get_human_seqs.py</em> and <em>get_swine_seqs.py</em> which construct the files <em>Human_NP_nts.fasta</em>, <em>Human_NP_proteins.fasta</em>, <em>Swine_NP_nts.fasta</em>, and <em>Swine_NP_proteins.fasta</em>. The swine and human files were then concatenated to create <em>Combined_NP_nts.fasta</em> and <em>Combined_NP_proteins.fasta</em>. These scripts use the following input files:</p>
 <blockquote>
 <div><ul class="simple">
 <li><em>NPseqs.fasta</em> is the set of all unique full-length influenza A coding DNA sequences as downloaded from the <a class="reference external" href="http://www.ncbi.nlm.nih.gov/genomes/FLU/FLU.html">Influenza Virus Resource</a> on June-25-2013.</li>
@@ -84,12 +89,15 @@ human H2N2 (1957-1968), humanH3N2 (1968-2013), and North American swine lineages
 <div class="section" id="human-lineages">
 <h3>Human lineages<a class="headerlink" href="#human-lineages" title="Permalink to this headline">¶</a></h3>
 <p>The retained sequences are all human NPs that are descended directly from the 1918
-viruses in the human lineage. This is H1N1 from 1918 to 1957, then
-H2N2 from 1957 to 1968, and then H3N2 from 1968 to 2013. It also includes
-human H1N1 sequences isolated between 1977 and 2008 (human seasonal H1N1), with
-24 years are subtracted from the year based on the idea that these viruses
-appear to have been frozen since 1953 before reappearing as described
-in <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/19787384">dos Reis et al, 2009</a>.</p>
+viruses in the human lineage. These are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>H1N1 from 1918 to 1957: these include the 1918 virus and its direct descendents.</li>
+<li>H2N2 from 1957 to 1968: the &#8220;Asian flu&#8221; of 1957 involved replacement of several genes from human H1N1, but the NP in this H2N2 was derived from the previous human H1N1.</li>
+<li>H3N2 from 1968 to 2013: the &#8220;Hong Kong flu&#8221; of 1968 involved replacement of several genes from human H2N2, but the NP in this H3N2 was derived from the previous human H2N2.</li>
+<li>H1N1 from 1977 to 2008: the seasonal H1N1 reappeared in 1977, apparently due to revival of the human H1N1 from about 1954. The dates for these sequences therefore need to have 24 years substracted in order to conform to a molecular clock (see <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/19787384">dos Reis et al, 2009</a>). This seasonal H1N1 went extinct in early 2009 due to the appareance of the 2009 swine-origin pandemic H1N1.</li>
+</ul>
+</div></blockquote>
 <p>Only sequences encoding unique proteins are retained, and a maximum of 5 sequences per year of any given subtype are retained to make the trees not too large. Anomalous sequences are removed, based on those specified by <a class="reference external" href="http://jvi.asm.org/content/82/17/8947.abstract">Krasnitz et al, 2008</a>, and also those that I find to be in strong violation of the molecular clock based on an analysis of non-date-stamped trees built with <a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> with <a class="reference external" href="http://tree.bio.ed.ac.uk/software/pathogen/">Path-O-Gen</a>. Specifically, the analysis was done as follows:</p>
 <blockquote>
 <div><ol class="arabic">
@@ -169,11 +177,10 @@ mutpath_compact_trees.py run4/Combined_NP_proteins.trees</pre>
 </div>
 <div class="section" id="building-the-trajectories">
 <h3>Building the trajectories<a class="headerlink" href="#building-the-trajectories" title="Permalink to this headline">¶</a></h3>
-<p>Three trajectories were then built:</p>
+<p>Two trajectories were then built:</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li>For human H3N2, the trajectory from A/Aichi/2/1968 (H3N2) to A/Texas/JMM_49/2012 (H3N2).</li>
-<li>For human (seasonal) H1N1, the trajectory from A/Memphis/13/1978 (H1N1) to A/Taiwan/11526/2008 (H1N1).</li>
 <li>For swine, the trajectory from A/swine/Wisconsin/1/1957 (H1N1) to A/swine/Indiana/A00968365/2012 (H1N1).</li>
 </ol>
 </div></blockquote>
@@ -204,27 +211,19 @@ mutationdates human_H3N2_mutationdates
 lasttipdate 2012.93
 persistencefile human_H3N2_persistence.txt</pre>
 </div>
-<p>The human H1N1 trajectory was built similarly, using:</p>
-<div class="highlight-python"><pre>mutpath_get_paths.py get_paths_infile_human_H1N1.txt
-mutpath_make_digraph.py make_digraph_infile_human_H1N1.txt</pre>
-</div>
-<p>where the input files <em>get_paths_infile_human_H1N1.txt</em> and <em>make_digraph_infile_human_H1N1.txt</em> are modified to specify the correct human H1N1 sequences and dates.</p>
 <p>The swine trajectory was built using:</p>
 <div class="highlight-python"><pre>mutpath_get_paths.py get_paths_infile_swine.txt
 mutpath_make_digraph.py make_digraph_infile_swine.txt</pre>
 </div>
 <p>where the input files <em>get_paths_infile_swine.txt</em> and <em>make_digraph_infile_swine.txt</em> are modified to specify the correct swine sequences and dates.</p>
 <p>The key output of these runs are the <a class="reference external" href="http://www.graphviz.org/doc/info/lang.html">DOT</a> files displaying the trajectories, which can be visualized using <a class="reference external" href="http://www.graphviz.org/">GraphViz</a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">human_H1N1_trajectory</span><span class="o">.</span><span class="n">dot</span>
-<span class="n">human_H3N2_trajectory</span><span class="o">.</span><span class="n">dot</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">human_H3N2_trajectory</span><span class="o">.</span><span class="n">dot</span>
 <span class="n">swine_trajectory</span><span class="o">.</span><span class="n">dot</span>
 </pre></div>
 </div>
 <p>These <a class="reference external" href="http://www.graphviz.org/doc/info/lang.html">DOT</a> files were opened with <a class="reference external" href="http://www.graphviz.org/">GraphViz</a> and used to save PDF and JPG files:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">human_H1N1_trajectory</span><span class="o">.</span><span class="n">pdf</span>
-<span class="n">human_H3N2_trajectory</span><span class="o">.</span><span class="n">pdf</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">human_H3N2_trajectory</span><span class="o">.</span><span class="n">pdf</span>
 <span class="n">swine_trajectory</span><span class="o">.</span><span class="n">pdf</span>
-<span class="n">human_H1N1_trajectory</span><span class="o">.</span><span class="n">jpg</span>
 <span class="n">human_H3N2_trajectory</span><span class="o">.</span><span class="n">jpg</span>
 <span class="n">swine_trajectory</span><span class="o">.</span><span class="n">jpg</span>
 </pre></div>
@@ -237,13 +236,6 @@ mutpath_make_digraph.py make_digraph_infile_swine.txt</pre>
 <p class="caption">Mutational trajectory for swine influenza.</p>
 </div>
 </div>
-<div class="section" id="human-h1n1-mutational-trajectory">
-<h4>Human H1N1 mutational trajectory<a class="headerlink" href="#human-h1n1-mutational-trajectory" title="Permalink to this headline">¶</a></h4>
-<div class="figure align-center">
-<img alt="human_H1N1_trajectory.jpg" src="_images/human_H1N1_trajectory.jpg" style="width: 55%;" />
-<p class="caption">Mutational trajectory for human H1N1.</p>
-</div>
-</div>
 <div class="section" id="human-h3n2-mutational-trajectory">
 <h4>Human H3N2 mutational trajectory<a class="headerlink" href="#human-h3n2-mutational-trajectory" title="Permalink to this headline">¶</a></h4>
 <div class="figure align-center">
@@ -254,7 +246,7 @@ mutpath_make_digraph.py make_digraph_infile_swine.txt</pre>
 </div>
 <div class="section" id="building-the-maximum-clade-credibility-tree">
 <h3>Building the maximum clade credibility tree<a class="headerlink" href="#building-the-maximum-clade-credibility-tree" title="Permalink to this headline">¶</a></h3>
-<p>In addition, the <tt class="docutils literal"><span class="pre">mutpath_get_paths.py</span></tt> runs created the merged <tt class="docutils literal"><span class="pre">.trees</span></tt> file <em>merged_Combined_NP_proteins.fasta</em>, which was used to build the maximum clade credibility tree <em>maxcladecredibility.trees</em> using <a class="reference external" href="http://beast.bio.ed.ac.uk/TreeAnnotator">TreeAnnotator</a> with the command:</p>
+<p>In addition, the <tt class="docutils literal"><span class="pre">mutpath_get_paths.py</span></tt> runs created the merged <tt class="docutils literal"><span class="pre">.trees</span></tt> file <em>merged_Combined_NP_proteins.fasta</em>, which was used to build the maximum clade credibility tree <em>maxcladecredibility.trees</em> using <a class="reference external" href="http://beast.bio.ed.ac.uk/TreeAnnotator">TreeAnnotator</a> (version 1.7.5) with the command:</p>
 <div class="highlight-python"><pre>~/BEASTv1.7.5/bin/treeannotator merged_Combined_NP_proteins_compact.trees maxcladecredibility.trees</pre>
 </div>
 <p>This tree was then manually edited using <tt class="docutils literal"><span class="pre">mutpath_annotate_tree.py</span></tt> to create <tt class="docutils literal"><span class="pre">annotated_maxcladecredibility.trees</span></tt> by the command:</p>
@@ -266,7 +258,7 @@ mutpath_make_digraph.py make_digraph_infile_swine.txt</pre>
 <p>This tree is shown below:</p>
 <div class="figure align-center">
 <img alt="handannotated_maxcladecredibility.jpg" src="_images/handannotated_maxcladecredibility.jpg" style="width: 85%;" />
-<p class="caption">Maximum clade credibility tree of NPs descended from 1918 virus. The swine trajectory is in blue, the human H1N1 in green, and the human H3N2 in red.</p>
+<p class="caption">Maximum clade credibility tree of NPs descended from 1918 virus. The swine trajectory is in green and the human H3N2 in red.</p>
 </div>
 </div>
 </div>
@@ -281,6 +273,7 @@ mutpath_make_digraph.py make_digraph_infile_swine.txt</pre>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">influenza NP 1918 descended</a><ul>
+<li><a class="reference internal" href="#software-used">Software used</a></li>
 <li><a class="reference internal" href="#construction-of-sequence-sets">Construction of sequence sets</a><ul>
 <li><a class="reference internal" href="#human-lineages">Human lineages</a></li>
 <li><a class="reference internal" href="#swine-lineages">Swine lineages</a></li>
@@ -291,7 +284,6 @@ mutpath_make_digraph.py make_digraph_infile_swine.txt</pre>
 <li><a class="reference internal" href="#running-beast">Running BEAST</a></li>
 <li><a class="reference internal" href="#building-the-trajectories">Building the trajectories</a><ul>
 <li><a class="reference internal" href="#swine-influenza-mutational-trajectory">swine influenza mutational trajectory</a></li>
-<li><a class="reference internal" href="#human-h1n1-mutational-trajectory">Human H1N1 mutational trajectory</a></li>
 <li><a class="reference internal" href="#human-h3n2-mutational-trajectory">Human H3N2 mutational trajectory</a></li>
 </ul>
 </li>
@@ -307,7 +299,7 @@ mutpath_make_digraph.py make_digraph_infile_swine.txt</pre>
                         title="previous chapter">influenza human H3N2 NP</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="pythonapi.html"
-                        title="next chapter"><tt class="docutils literal"><span class="pre">mutpath</span></tt> Python API</a></p>
+                        title="next chapter">mutpath Python API</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/example_influenza_NP_1918_Descended.txt"
@@ -345,7 +337,8 @@ mutpath_make_digraph.py make_digraph_infile_swine.txt</pre>
         <li class="right" >
           <a href="example_influenza_human_H3N2_NP.html" title="influenza human H3N2 NP"
              >previous</a> |</li>
-        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Examples</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
