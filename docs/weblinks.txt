@@ -1,0 +1,18 @@
+.. _`BEAGLE`: http://beast.bio.ed.ac.uk/BEAGLE
+.. _`BEAST`: http://beast.bio.ed.ac.uk/Main_Page
+.. _`on GitHub`: https://github.com/jbloom/mutpath
+.. _`Jesse Bloom`: http://labs.fhcrc.org/bloom/
+.. _`matplotlib`: http://matplotlib.org/
+.. _`MUSCLE`: http://www.drive5.com/muscle/
+.. _`Marc Suchard`: http://faculty.biomath.ucla.edu/msuchard/
+.. _`Gong et al, 2013`: http://elife.elifesciences.org/content/2/e00631
+.. _`on GitHub`: https://github.com/jbloom/mutpath
+.. _`on GitHub Pages`: http://jbloom.github.com/mutpath/
+.. _`Figure 2A`: http://elife.elifesciences.org/content/2/e00631/F2
+.. _`Python`: http://www.python.org/
+.. _`GraphViz`: http://www.graphviz.org/
+.. _`TreeAnnotator`: http://beast.bio.ed.ac.uk/TreeAnnotator
+.. _`FigTree` : http://tree.bio.ed.ac.uk/software/figtree/
+.. _`Tracer`: http://beast.bio.ed.ac.uk/Main_Page
+.. _`DOT` : http://www.graphviz.org/doc/info/lang.html
+.. _`mutpath` : https://github.com/jbloom/mutpath/

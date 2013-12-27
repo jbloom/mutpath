@@ -1,5 +1,5 @@
 ==========================================
-``mutpath_make_digraph.py`` script
+mutpath_make_digraph.py
 ==========================================
 
 Script for building mutational trajectory directed graphs.
@@ -91,16 +91,5 @@ This script creates the following output files:
 * *persistencefile* is a text file giving the persistence (time to next node) for nodes specified in *nodenamefile* and that occur in at least *labelcutoff* of the paths.
 
 
-
-.. _`BEAGLE`: http://beast.bio.ed.ac.uk/BEAGLE
-.. _`BEAST`: http://beast.bio.ed.ac.uk/Main_Page
-.. _`TreeAnnotator`: http://beast.bio.ed.ac.uk/TreeAnnotator
-.. _`on GitHub`: https://github.com/jbloom/mutpath
-.. _`Jesse Bloom`: http://labs.fhcrc.org/bloom/
-.. _`matplotlib`: http://matplotlib.org/
-.. _`MUSCLE`: http://www.drive5.com/muscle/
-.. _`on GitHub Pages`: http://jbloom.github.com/mutpath/
-.. _`GraphViz`: http://www.graphviz.org/
-.. _`DOT` : http://www.graphviz.org/doc/info/lang.html
-.. _`matplotlib`: http://matplotlib.org/
+.. include:: weblinks.txt
 

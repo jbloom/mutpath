@@ -1,5 +1,5 @@
 =========================================
-``mutpath_annotate_tree.py`` script
+mutpath_annotate_tree.py 
 =========================================
 
 Script for annotating a `BEAST`_ ``.trees`` file (such as a maximum clade credibility tree from `TreeAnnotator`_) so that it is better formatted for visualization by `FigTree`_. 
@@ -31,11 +31,4 @@ The input file is a text file. Empty lines or lines beginning with # are ignored
 
 After running the script on this input file, two tips will be annotated as Aichi/1968 and Brisbane/2007, and the others will not be annotated.
 
-.. _`BEAGLE`: http://beast.bio.ed.ac.uk/BEAGLE
-.. _`BEAST`: http://beast.bio.ed.ac.uk/Main_Page
-.. _`on GitHub`: https://github.com/jbloom/mutpath
-.. _`Jesse Bloom`: http://labs.fhcrc.org/bloom/
-.. _`matplotlib`: http://matplotlib.org/
-.. _`MUSCLE`: http://www.drive5.com/muscle/
-.. _`TreeAnnotator`: http://beast.bio.ed.ac.uk/TreeAnnotator
-.. _`FigTree` : http://tree.bio.ed.ac.uk/software/figtree/
+.. include:: weblinks.txt

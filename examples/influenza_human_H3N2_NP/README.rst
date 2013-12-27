@@ -2,7 +2,7 @@
 influenza human H3N2 NP
 =============================================================
 
-This analysis is found in the ``./examples/influenza_human_H3N2_NP/`` subdirectory in the ``mutpath`` package which can be obtained `on GitHub`_. This is an example analysis using ``mutpath`` on the nucleoprotein (NP) from human H3N2 influenza to build a mutational trajectory at the protein level.
+This analysis is found in the ``./examples/influenza_human_H3N2_NP/`` subdirectory in the `mutpath`_ package which can be obtained `on GitHub`_. This is an example analysis using `mutpath`_ on the nucleoprotein (NP) from human H3N2 influenza to build a mutational trajectory at the protein level.
 
 This example essentially recapitulates the analysis in `Gong et al, 2013`_, although it is not the exact code used for that paper and so may not be a completely precise match.
 
@@ -95,7 +95,7 @@ to extract the protein mutational paths. This created an output file listing the
 
 Making and annotating the maximum clade credibility tree
 ------------------------------------------------------------
-The maximum clade credibility tree was constructed from the ``prot_trees_merged.trees`` files built by ``mutpath_get_trees.py`` using `TreeAnnotator`_. The commands was::
+The maximum clade credibility tree was constructed from the ``prot_trees_merged.trees`` files built by ``mutpath_get_trees.py`` using `TreeAnnotator`_ (version 1.6.1). The commands was::
 
     ~/BEASTv1.6.1/bin/treeannotator prot_trees_merged.trees prot_maxcladecredibility.trees
 
@@ -123,7 +123,7 @@ The mutational trajectory was created with ``mutpath_make_digraph.py`` from the 
 
 This created a mutational trajectory in protein sequence space.
 The trajectory was written in the `DOT`_ language in the file ``prot_trajectory.dot``.
-It was then visualized using ``GraphViz`` (version 2.30), which was also used to save the image files ``prot_trajectory.pdf`` and ``prot_trajectory.jpg``. The script also created the following additional output files which contain information about the mutation dates and node persistence times::
+It was then visualized using `GraphViz`_ (version 2.30), which was also used to save the image files ``prot_trajectory.pdf`` and ``prot_trajectory.jpg``. The script also created the following additional output files which contain information about the mutation dates and node persistence times::
 
     prot_mutationdates.pdf
     prot_mutationdates.txt
@@ -157,3 +157,4 @@ The ``prot_mutationdates.pdf`` file was used to create ``prot_mutationdates.jpg`
 .. _`GraphViz`: http://www.graphviz.org/
 .. _`DOT` : http://www.graphviz.org/doc/info/lang.html
 .. _`Gong et al, 2013`: http://elife.elifesciences.org/content/2/e00631
+.. _`mutpath` : https://github.com/jbloom/mutpath/

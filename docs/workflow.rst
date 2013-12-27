@@ -1,12 +1,12 @@
 Typical workflow
 =================================================================
-``mutpath`` installs a number of scripts that perform the main operations of the package. A mutational path can be built by using these scripts along with `BEAST`_. By default, the ``mutpath`` scripts are installed so that they can be run directory from the command line, taking a user-specified and created input text file.
+`mutpath`_ installs a number of scripts that perform the main operations of the package. A mutational path can be built by using these scripts along with `BEAST`_. By default, the `mutpath`_ scripts are installed so that they can be run directory from the command line, taking a user-specified and created input text file.
 
 The scripts themselves are documented individually in the following sections. This section gives an overall workflow of how these scripts can be used in conjunction with `BEAST`_.
 
 Create the `BEAST`_ XML file
 -------------------------------
-You may have your own strategy to create the `BEAST`_ input XML file. If not, ``mutpath`` has a script to do this.
+You may have your own strategy to create the `BEAST`_ input XML file. If not, `mutpath`_ has a script to do this.
 
 Specifically, you can use ``mutpath_parse_to_beastxml.py`` to create an input `BEAST`_ XML file from the FASTA sequence files. You can do this by manually creating the text input file and then running::
 
@@ -66,15 +66,4 @@ After running ``mutpath_get_paths.py`` to create the ``.txt`` file containing th
 
 This will generate a `DOT`_ file containing the mutational trajectory as a directed graph through protein sequence space that can be visualized in `GraphViz`_. You can also use `GraphViz`_ to save this trajectory in a PDF or other file format. In addition, this script will output information about the dates of mutations and the times for which nodes persisted.
 
-
-.. _`BEAGLE`: http://beast.bio.ed.ac.uk/BEAGLE
-.. _`BEAST`: http://beast.bio.ed.ac.uk/Main_Page
-.. _`Tracer`: http://beast.bio.ed.ac.uk/Main_Page
-.. _`TreeAnnotator` : http://beast.bio.ed.ac.uk/TreeAnnotator
-.. _`on GitHub`: https://github.com/jbloom/mutpath
-.. _`Jesse Bloom`: http://labs.fhcrc.org/bloom/
-.. _`matplotlib`: http://matplotlib.org/
-.. _`MUSCLE`: http://www.drive5.com/muscle/
-.. _`FigTree` : http://tree.bio.ed.ac.uk/software/figtree/
-.. _`GraphViz`: http://www.graphviz.org/
-.. _`DOT` : http://www.graphviz.org/doc/info/lang.html
+.. include:: weblinks.txt
