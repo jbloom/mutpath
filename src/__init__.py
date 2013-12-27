@@ -5,3 +5,4 @@ space using mutation-mapped trees written by BEAST (using the MarkovJumps
 feature).
 
 Written by Jesse Bloom."""
+__version__ = '0.1'
