@@ -16,3 +16,4 @@
 .. _`Tracer`: http://beast.bio.ed.ac.uk/Main_Page
 .. _`DOT` : http://www.graphviz.org/doc/info/lang.html
 .. _`mutpath` : https://github.com/jbloom/mutpath/
+.. _`GPLv3`: http://www.gnu.org/licenses/gpl.html

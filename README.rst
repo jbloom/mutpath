@@ -4,7 +4,11 @@
 
 `mutpath`_ documentation is available at http://jbloom.github.com/mutpath/
 
-`mutpath`_ was written by `Jesse Bloom`_. It takes advantage of the MarkovJumps feature added to `BEAST`_ by `Marc Suchard`_. The reference for this approach to building mutational paths is `Gong et al, 2013`_.
+`mutpath`_ was written by `Jesse Bloom`_. It takes advantage of the MarkovJumps feature added to `BEAST`_ by `Marc Suchard`_. 
+
+If you use this software package, please cite the following reference for `mutpath`_'s approach to building mutational paths: `Gong et al, 2013`_.
+
+`mutpath`_ is free software under the `GPLv3`_ license.
 
 Specific examples of usage included in this package:
 
@@ -18,3 +22,4 @@ Specific examples of usage included in this package:
 .. _`Jesse Bloom`: http://research.fhcrc.org/bloom/en.html
 .. _`Marc Suchard`: http://faculty.biomath.ucla.edu/msuchard/
 .. _`Figure 2A`: http://elife.elifesciences.org/content/2/e00631/F2
+.. _`GPLv3`: http://www.gnu.org/licenses/gpl.html
