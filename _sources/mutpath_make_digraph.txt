@@ -39,7 +39,7 @@ The input file should contain a series of keys (strings without spaces) that are
 
 * *dotfile* should specify the name of the output ``.dot`` file created by the script. This file is written in the `DOT`_ language, and can be visualized using `GraphViz`_. If this file already exists, it is overwritten.
 
-* *minweight* specifies the minimum weight (probability of being on the trajectory) that a node or edge must possess to be displayed. You might want to set this to a value of 0.01 or 0.01 to avoid making a hugh *dotfile* due to lots of very low weight nodes and edges. If you set it to zero, all nodes and edges with any nonzero weight will be included.
+* *minweight* specifies the minimum weight (probability of being on the trajectory) that a node or edge must possess to be displayed. You might want to set this to a value of 0.01 or 0.02 to avoid making a hugh *dotfile* due to lots of very low weight nodes and edges. If you set it to zero, all nodes and edges with any nonzero weight will be included.
 
 * *labelcutoff* specifies the minimum weight that an edge must possess in order for it to be labeled with text showing the mutation for that edge. In addition, all nodes with weights >= *labelcutoff* have an incoming and outgoing edge that is also labeled. If there is not an actual labeled graph edge with a weight >= *labelcutoff* to such nodes, then a line spanning several nodes is drawn in another color to connect. Generally, you want *labelcutoff* > 0.5, and it is possible that the program will run into problems if this is not the case.
 

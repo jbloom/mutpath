@@ -26,7 +26,8 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="mutpath 0.1 documentation" href="index.html" />
-    <link rel="next" title="influenza human H3N2 NP" href="example_influenza_human_H3N2_NP.html" />
+    <link rel="up" title="Scripts" href="scripts.html" />
+    <link rel="next" title="Examples" href="examples.html" />
     <link rel="prev" title="mutpath_annotate_tree.py" href="mutpath_annotate_tree.html" /> 
   </head>
   <body>
@@ -40,12 +41,13 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="example_influenza_human_H3N2_NP.html" title="influenza human H3N2 NP"
+          <a href="examples.html" title="Examples"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="mutpath_annotate_tree.html" title="mutpath_annotate_tree.py"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li>
+          <li><a href="scripts.html" accesskey="U">Scripts</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -87,7 +89,7 @@ run the script with that input file as an argument:</p>
 </li>
 <li><p class="first"><em>dotfile</em> should specify the name of the output <tt class="docutils literal"><span class="pre">.dot</span></tt> file created by the script. This file is written in the <a class="reference external" href="http://www.graphviz.org/doc/info/lang.html">DOT</a> language, and can be visualized using <a class="reference external" href="http://www.graphviz.org/">GraphViz</a>. If this file already exists, it is overwritten.</p>
 </li>
-<li><p class="first"><em>minweight</em> specifies the minimum weight (probability of being on the trajectory) that a node or edge must possess to be displayed. You might want to set this to a value of 0.01 or 0.01 to avoid making a hugh <em>dotfile</em> due to lots of very low weight nodes and edges. If you set it to zero, all nodes and edges with any nonzero weight will be included.</p>
+<li><p class="first"><em>minweight</em> specifies the minimum weight (probability of being on the trajectory) that a node or edge must possess to be displayed. You might want to set this to a value of 0.01 or 0.02 to avoid making a hugh <em>dotfile</em> due to lots of very low weight nodes and edges. If you set it to zero, all nodes and edges with any nonzero weight will be included.</p>
 </li>
 <li><p class="first"><em>labelcutoff</em> specifies the minimum weight that an edge must possess in order for it to be labeled with text showing the mutation for that edge. In addition, all nodes with weights &gt;= <em>labelcutoff</em> have an incoming and outgoing edge that is also labeled. If there is not an actual labeled graph edge with a weight &gt;= <em>labelcutoff</em> to such nodes, then a line spanning several nodes is drawn in another color to connect. Generally, you want <em>labelcutoff</em> &gt; 0.5, and it is possible that the program will run into problems if this is not the case.</p>
 </li>
@@ -158,8 +160,8 @@ persistencefile persistence.txt</pre>
   <p class="topless"><a href="mutpath_annotate_tree.html"
                         title="previous chapter">mutpath_annotate_tree.py</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="example_influenza_human_H3N2_NP.html"
-                        title="next chapter">influenza human H3N2 NP</a></p>
+  <p class="topless"><a href="examples.html"
+                        title="next chapter">Examples</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/mutpath_make_digraph.txt"
@@ -192,12 +194,13 @@ persistencefile persistence.txt</pre>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="example_influenza_human_H3N2_NP.html" title="influenza human H3N2 NP"
+          <a href="examples.html" title="Examples"
              >next</a> |</li>
         <li class="right" >
           <a href="mutpath_annotate_tree.html" title="mutpath_annotate_tree.py"
              >previous</a> |</li>
-        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">mutpath 0.1 documentation</a> &raquo;</li>
+          <li><a href="scripts.html" >Scripts</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
