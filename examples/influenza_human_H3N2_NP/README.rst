@@ -2,11 +2,14 @@
 influenza human H3N2 NP
 =============================================================
 
-This analysis is found in the ``./examples/influenza_human_H3N2_NP/`` subdirectory in the `mutpath`_ package which can be obtained `on GitHub`_. This is an example analysis using `mutpath`_ on the nucleoprotein (NP) from human H3N2 influenza to build a mutational trajectory at the protein level.
+Construction of a mutational path through protein sequence space for the nucleoprotein (NP) of human H3N2 influenza.
 
-This example essentially recapitulates the analysis in `Gong et al, 2013`_, although it is not the exact code used for that paper and so may not be a completely precise match.
+This analysis is found in the ``./examples/influenza_human_H3N2_NP/`` subdirectory in the `mutpath`_ package `on GitHub`_. 
 
-In repository `on GitHub`_, the large `BEAST`_ output ``*.trees`` files are not included due to their very large file size.
+This analysis essentially recapitulates that in `Gong et al, 2013`_, although it is not the exact code used for that paper and so may not be a completely precise match.
+
+This analysis was performed by `Jesse Bloom`_.
+
 
 Input sequence data
 ---------------------

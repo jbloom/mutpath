@@ -1,10 +1,12 @@
 ===========================================
 influenza NP 1918 descended
 ===========================================
+An analysis of the evolution of nucleoprotein (NP) from influenza viruses (human and swine) descended from the 1918 virus.
 
-This analysis is found in the ``./examples/influenza_NP_1918_Descended/`` subdirectory of the main `mutpath`_ repository `on GitHub`_.  In the repository `on GitHub`_, the `BEAST`_ output ``*.trees`` files are not included due to their very large file size -- but the files can be regenerated from the input data files provided here.
+This analysis is found in the ``./examples/influenza_NP_1918_Descended/`` subdirectory of the main `mutpath`_ repository `on GitHub`_.  
 
-This analysis examines the evolution of nucleoprotein (NP) from influenza viruses descended from the 1918 virus.
+This analysis was performed by `Jesse Bloom`_.
+
 
 Software used
 -----------------
@@ -266,3 +268,4 @@ This tree is shown below:
 .. _`Gong et al, 2013`: http://elife.elifesciences.org/content/2/e00631
 .. _`on GitHub`: https://github.com/jbloom/mutpath
 .. _`Python`: http://www.python.org/ 
+.. _`Jesse Bloom`: http://research.fhcrc.org/bloom/en.html
