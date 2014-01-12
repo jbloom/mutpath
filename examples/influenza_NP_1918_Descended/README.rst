@@ -39,7 +39,7 @@ Separate analyses were done for the human and swine lineages. The sets are const
 
     * *Aichi68-NP.fasta* is the coding DNA sequence for A/Aichi/2/1968 (H3N2) NP as taken from reverse-genetics plasmid pHWAichi68-NP.
 
-    * *JVI_82_8947_Anomalies.txt* is a list of the strain names for the sequences identified as anomalous (either frozen in time or recombinant) in Appendices 1 and 2 of `Krasnitz et al, 2008`.
+    * *JVI_82_8947_Anomalies.txt* is a list of the strain names for the sequences identified as anomalous (either frozen in time or recombinant) in Appendices 1 and 2 of `Krasnitz et al, 2008`_.
 
     * *JDB_Anomalies.txt* is a list of strain names that I (Jesse D. Bloom, JDB) have found appear to be anomalous based on their tree positioning using analyses with `RAxML`_ and `Path-O-Gen`_ as described below.
 
