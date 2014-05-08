@@ -30,7 +30,7 @@
 :mod:`io` Module
 ----------------
 
-.. automodule:: io
+.. automodule:: src.io
     :members:
     :undoc-members:
     :show-inheritance:

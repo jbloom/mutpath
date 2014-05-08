@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,7 +13,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -60,10 +58,12 @@
 <h1>mutpath_compact_trees.py<a class="headerlink" href="#mutpath-compact-trees-py" title="Permalink to this headline">¶</a></h1>
 <p>Script compacting <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> <tt class="docutils literal"><span class="pre">.trees</span></tt> files produced using the Markov Jumps mutation mapping feature.</p>
 <p>Run this script by typing the script name followed by the name of the <tt class="docutils literal"><span class="pre">.trees</span></tt> file that you want to compact, for example:</p>
-<div class="highlight-python"><pre>mutpath_compact_trees.py largefile.trees</pre>
+<div class="highlight-python"><div class="highlight"><pre>mutpath_compact_trees.py largefile.trees
+</pre></div>
 </div>
 <p>Or if the script is not executable on your platform:</p>
-<div class="highlight-python"><pre>python mutpath_compact_trees.py largefile.trees</pre>
+<div class="highlight-python"><div class="highlight"><pre>python mutpath_compact_trees.py largefile.trees
+</pre></div>
 </div>
 <p>These commands will create a more compact version of the file called <tt class="docutils literal"><span class="pre">largefile_compact.trees</span></tt>.</p>
 <div class="section" id="motivation-and-details">
@@ -82,12 +82,13 @@
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>Here is example usage of this script to shrink a file called <tt class="docutils literal"><span class="pre">prots.trees</span></tt> into the more compact <tt class="docutils literal"><span class="pre">prots_compact.trees</span></tt>, and then delete the larger <tt class="docutils literal"><span class="pre">prots.trees</span></tt> file:</p>
-<div class="highlight-python"><pre>% du -h prots.trees
+<div class="highlight-python"><div class="highlight"><pre>% du -h prots.trees
 939M    prots.trees
 % mutpath_compact_trees.py prots.trees
 % du -h prots_compact.trees
 40M prots_compact.trees
-% rm prots.trees</pre>
+% rm prots.trees
+</pre></div>
 </div>
 </div>
 </div>
@@ -156,7 +157,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2013, Jesse Bloom.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

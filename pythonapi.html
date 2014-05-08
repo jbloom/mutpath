@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,7 +13,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -228,7 +226,8 @@ we create. It is overwritten if it already exists.</p>
 These sequences are assumed to have dates assigned,
 and are specified following a terminal underscore,
 such as:</p>
-<div class="highlight-python"><pre>A/Nanchang/933/1995_1995.00</pre>
+<div class="highlight-python"><div class="highlight"><pre>A/Nanchang/933/1995_1995.00
+</pre></div>
 </div>
 <p><em>datatype</em> the data type for the sequences, might be
 &#8216;nucleotide&#8217; or &#8216;amino acid&#8217;.</p>
@@ -254,8 +253,8 @@ prior on rate.</li>
 </dd></dl>
 
 </div>
-<div class="section" id="module-io">
-<span id="io-module"></span><h2><a class="reference internal" href="#module-io" title="io"><tt class="xref py py-mod docutils literal"><span class="pre">io</span></tt></a> Module<a class="headerlink" href="#module-io" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-src.io">
+<span id="io-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">io</span></tt> Module<a class="headerlink" href="#module-src.io" title="Permalink to this headline">¶</a></h2>
 <p>Module for performing input/output operations.</p>
 <p>Functions are:</p>
 <p><em>ParseInfile</em> : reads key / value pairs from an input file.</p>
@@ -267,8 +266,8 @@ prior on rate.</li>
 <p><em>ParseFileList</em> : reads file list specified by input dictionary.</p>
 <p>Written by Jesse Bloom.</p>
 <dl class="function">
-<dt id="io.ParseBoolValue">
-<tt class="descclassname">io.</tt><tt class="descname">ParseBoolValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseBoolValue" title="Permalink to this definition">¶</a></dt>
+<dt id="src.io.ParseBoolValue">
+<tt class="descclassname">src.io.</tt><tt class="descname">ParseBoolValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#src.io.ParseBoolValue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets Boolean argument from input dictionary.</p>
 <p><em>d</em> is a dictionary of key/value string pairs as returned by
 <strong>ParseInfile</strong>.</p>
@@ -301,8 +300,8 @@ something other than <em>True</em> or <em>False</em>.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="io.ParseFileList">
-<tt class="descclassname">io.</tt><tt class="descname">ParseFileList</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseFileList" title="Permalink to this definition">¶</a></dt>
+<dt id="src.io.ParseFileList">
+<tt class="descclassname">src.io.</tt><tt class="descname">ParseFileList</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#src.io.ParseFileList" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets list of files from input dictionary.</p>
 <p><em>d</em> is a dictionary of key/value string pairs as returned by
 <strong>ParseInfile</strong>.</p>
@@ -314,8 +313,8 @@ exist in <em>d</em>, raises and KeyError.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="io.ParseFloatValue">
-<tt class="descclassname">io.</tt><tt class="descname">ParseFloatValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseFloatValue" title="Permalink to this definition">¶</a></dt>
+<dt id="src.io.ParseFloatValue">
+<tt class="descclassname">src.io.</tt><tt class="descname">ParseFloatValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#src.io.ParseFloatValue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets float argument from input dictionary.</p>
 <p><em>d</em> a dictionary of key/value string pairs as returned by
 <strong>ParseInfile</strong>.</p>
@@ -348,8 +347,8 @@ something other than an integer.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="io.ParseInfile">
-<tt class="descclassname">io.</tt><tt class="descname">ParseInfile</tt><big>(</big><em>f</em><big>)</big><a class="headerlink" href="#io.ParseInfile" title="Permalink to this definition">¶</a></dt>
+<dt id="src.io.ParseInfile">
+<tt class="descclassname">src.io.</tt><tt class="descname">ParseInfile</tt><big>(</big><em>f</em><big>)</big><a class="headerlink" href="#src.io.ParseInfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads key / value pairs from an input file.</p>
 <p><em>f</em> should be a readable file-like object.</p>
 <p>Starting at the current position in <em>f</em>, reads all remaining lines
@@ -388,8 +387,8 @@ duplicate key, and exception is raised.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="io.ParseIntValue">
-<tt class="descclassname">io.</tt><tt class="descname">ParseIntValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseIntValue" title="Permalink to this definition">¶</a></dt>
+<dt id="src.io.ParseIntValue">
+<tt class="descclassname">src.io.</tt><tt class="descname">ParseIntValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#src.io.ParseIntValue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets integer argument from input dictionary.</p>
 <p><em>d</em> is a dictionary of key/value string pairs as returned by
 <strong>ParseInfile</strong>.</p>
@@ -418,8 +417,8 @@ something other than an integer.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="io.ParseSeqValue">
-<tt class="descclassname">io.</tt><tt class="descname">ParseSeqValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseSeqValue" title="Permalink to this definition">¶</a></dt>
+<dt id="src.io.ParseSeqValue">
+<tt class="descclassname">src.io.</tt><tt class="descname">ParseSeqValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#src.io.ParseSeqValue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads sequence from FASTA file specified by input dictionary.</p>
 <p><em>d</em> is a dictionary of key/value string pairs as returned by
 <strong>ParseInfile</strong>.</p>
@@ -432,8 +431,8 @@ does not specify exactly one sequence.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="io.ParseStringValue">
-<tt class="descclassname">io.</tt><tt class="descname">ParseStringValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#io.ParseStringValue" title="Permalink to this definition">¶</a></dt>
+<dt id="src.io.ParseStringValue">
+<tt class="descclassname">src.io.</tt><tt class="descname">ParseStringValue</tt><big>(</big><em>d</em>, <em>key</em><big>)</big><a class="headerlink" href="#src.io.ParseStringValue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads string argument specified by input dictionary.</p>
 <p><em>d</em> is a dictionary of the key/value string pairs as returned by
 <strong>ParseInfile</strong>.</p>
@@ -789,7 +788,8 @@ file into memory at once.</p>
 the FASTA file.  The &#8220;name&#8221; of a sequence is the string immediately following
 the &#8220;&gt;&#8221; in the FASTA file header for a sequence, terminated by a space character
 (space, tab, or return).  So for example, the header:</p>
-<div class="highlight-python"><pre>&gt;E_coli_thioredoxin: the thioredoxin protein from E. coli</pre>
+<div class="highlight-python"><div class="highlight"><pre>&gt;E_coli_thioredoxin: the thioredoxin protein from E. coli
+</pre></div>
 </div>
 <p>would correspond to a name of &#8220;E_coli_thioredoxin&#8221;.  &#8216;namelist&#8217; specifies
 a list of these names.</p>
@@ -1254,7 +1254,7 @@ with values giving the corresponding value for the ancestral branch.</li>
 
 <dl class="function">
 <dt id="tree.PrintAllTreeInformation">
-<tt class="descclassname">tree.</tt><tt class="descname">PrintAllTreeInformation</tt><big>(</big><em>tree</em>, <em>f=&lt;open file '&lt;stdout&gt;'</em>, <em>mode 'w' at 0x100261150&gt;</em><big>)</big><a class="headerlink" href="#tree.PrintAllTreeInformation" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">tree.</tt><tt class="descname">PrintAllTreeInformation</tt><big>(</big><em>tree</em>, <em>f=&lt;open file '&lt;stdout&gt;'</em>, <em>mode 'w' at 0x10ab29150&gt;</em><big>)</big><a class="headerlink" href="#tree.PrintAllTreeInformation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints information about all nodes, names, and sequences in a tree.</p>
 <p><em>tree</em> is a <em>Tree</em> object specifying a phylogenetic tree.</p>
 <p><em>f</em> is a writeable filelike object.  By default, it is set to <em>sys.stdout</em>.
@@ -1269,7 +1269,7 @@ as &#8220;ROOT&#8221; if the node is a root node, and otherwise as a string of
 comma delimited &#8220;LEFT&#8221; and &#8220;RIGHT&#8221; characters indicating how the node
 is reached from the root node.  If no name is assigned for the node,
 the name is printed as &#8220;None&#8221;. For example, the function might write:</p>
-<div class="highlight-python"><pre>&gt;ROOT INTERIOR None 
+<div class="highlight-python"><div class="highlight"><pre>&gt;ROOT INTERIOR None 
 None
 &gt;LEFT INTERIOR None
 None
@@ -1278,7 +1278,8 @@ MTAGCKL
 &gt;LEFT,RIGHT TIP A/PR/8/34 (H1N1)
 MTAGNL
 &gt;RIGHT TIP A/Aichi/1968 (H3N2)
-MSGGNL</pre>
+MSGGNL
+</pre></div>
 </div>
 </dd></dl>
 
@@ -1422,10 +1423,12 @@ tip or internal node.</p>
 If the string specifies the full tree, the trailing semicolon
 and the parentheses surrounding the root must already be
 removed.  In other words, the tree:</p>
-<div class="highlight-python"><pre>(((One:0.2,Two:0.3):0.3,(Three:0.5,Four:0.3):0.2):0.3,Five:0.7):0.0;</pre>
+<div class="highlight-python"><div class="highlight"><pre>(((One:0.2,Two:0.3):0.3,(Three:0.5,Four:0.3):0.2):0.3,Five:0.7):0.0;
+</pre></div>
 </div>
 <p>is not acceptable, but the tree:</p>
-<div class="highlight-python"><pre>((One:0.2,Two:0.3):0.3,(Three:0.5,Four:0.3):0.2):0.3,Five:0.7</pre>
+<div class="highlight-python"><div class="highlight"><pre>((One:0.2,Two:0.3):0.3,(Three:0.5,Four:0.3):0.2):0.3,Five:0.7
+</pre></div>
 </div>
 <p>is acceptable.  The same limitations to the Newick tree apply
 as are listed in the documentation string for the <em>__init__</em>
@@ -1650,12 +1653,13 @@ matching those listed in <em>replace_with_null</em> having been removed.</p>
 <p><em>treefile</em> is a string giving the name of a BEAST <tt class="docutils literal"><span class="pre">.trees</span></tt> file.</p>
 <p>A <tt class="docutils literal"><span class="pre">.trees</span></tt> file (such as that created by BEAST) contains a block
 called &#8216;Translate&#8217; under the &#8216;Begin trees&#8217; heading, such as:</p>
-<div class="highlight-python"><pre>Begin trees;
+<div class="highlight-python"><div class="highlight"><pre>Begin trees;
     Translate
-        1 'A/Aichi/2/1968_1968.50',
-        2 'A/Akita/1/94_1994.50',
-        3 'A/nt/60/1968_1968.50'
-        ;</pre>
+        1 &#39;A/Aichi/2/1968_1968.50&#39;,
+        2 &#39;A/Akita/1/94_1994.50&#39;,
+        3 &#39;A/nt/60/1968_1968.50&#39;
+        ;
+</pre></div>
 </div>
 <p>This block is assigning the numbers used in the Newick strings to the
 full strain names.</p>
@@ -1742,7 +1746,7 @@ is true for <em>endstrain</em>.</p>
 mutations. All times are measured in units before the most recent tip node
 (so the root node would have the largest value of time). Here is an example
 of a path that might be produced:</p>
-<div class="highlight-python"><pre>startstrain_name A/Aichi/2/1968_1968.50
+<div class="highlight-python"><div class="highlight"><pre>startstrain_name A/Aichi/2/1968_1968.50
 startstrain_seq ATGGCAATGGGCTAA 
 startstrain_time 42.5
 endstrain_name A/Brisbane/10/2007_2007.10
@@ -1755,7 +1759,8 @@ A6G : 42.713
 commonancestor_to_endstrain_path
 G9T : 31.732
 G4A : 25.1343
-C12A : 10.134</pre>
+C12A : 10.134
+</pre></div>
 </div>
 <p>In this output string, the first three entries give the name, sequence, and
 time for <em>startstrain</em>. The next three do the same for <em>endstrain</em>. The next
@@ -1857,7 +1862,7 @@ entries are the mutation and then the time.</li>
 </div></blockquote>
 <p>The format of <em>pathfile</em> is as follows. This file should list
 mutational paths as:</p>
-<div class="highlight-python"><pre>MUTPATH 1
+<div class="highlight-python"><div class="highlight"><pre>MUTPATH 1
 startstrain_name A/Aichi/2/1968_1968.50
 startstrain_seq ATGGCAATGGGCTAA 
 startstrain_time 42.5
@@ -1889,7 +1894,8 @@ commonancestor_to_endstrain_path
 G4A : 21.1343
 C5A : 19.531
 A5C : 19.402
-C12A : 9.134</pre>
+C12A : 9.134
+</pre></div>
 </div>
 <p>The file lists each of the paths numbered starting at 1. 
 Within each path, the mutations are indicated with numbering starting 
@@ -2002,7 +2008,7 @@ print to <em>sys.stdout</em> after processing every <em>printprogress</em> paths
 
 <dl class="function">
 <dt id="trajectory.WriteGraphVizTrajectory">
-<tt class="descclassname">trajectory.</tt><tt class="descname">WriteGraphVizTrajectory</tt><big>(</big><em>t</em>, <em>graphvizfile</em>, <em>minweight</em>, <em>labelcutoff</em>, <em>nodenames=None</em>, <em>nodesize=0.90000000000000002</em>, <em>ranksep=0.10000000000000001</em>, <em>nodesep=0.20000000000000001</em>, <em>penwidth=10</em>, <em>fontsize=40</em>, <em>arrowsize=1.3999999999999999</em>, <em>fontname='Helvetica-Bold'</em>, <em>rankdir='TB'</em>, <em>startendasdiamonds=True</em><big>)</big><a class="headerlink" href="#trajectory.WriteGraphVizTrajectory" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">trajectory.</tt><tt class="descname">WriteGraphVizTrajectory</tt><big>(</big><em>t</em>, <em>graphvizfile</em>, <em>minweight</em>, <em>labelcutoff</em>, <em>nodenames=None</em>, <em>nodesize=0.9</em>, <em>ranksep=0.1</em>, <em>nodesep=0.2</em>, <em>penwidth=10</em>, <em>fontsize=40</em>, <em>arrowsize=1.4</em>, <em>fontname='Helvetica-Bold'</em>, <em>rankdir='TB'</em>, <em>startendasdiamonds=True</em><big>)</big><a class="headerlink" href="#trajectory.WriteGraphVizTrajectory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes a GraphViz visualization of a <em>Trajectory</em> object.</p>
 <p>This function creates a file <em>graphvizfile</em> that can be used to visualize the
 directed graph represented by a <em>Trajectory</em> object <em>t</em>. Graphviz is a freely
@@ -2221,7 +2227,7 @@ interval.</li>
 <li><a class="reference internal" href="#module-__init__"><tt class="docutils literal"><span class="pre">mutpath</span></tt> Package</a></li>
 <li><a class="reference internal" href="#module-align"><tt class="docutils literal"><span class="pre">align</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-beast"><tt class="docutils literal"><span class="pre">beast</span></tt> Module</a></li>
-<li><a class="reference internal" href="#module-io"><tt class="docutils literal"><span class="pre">io</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-src.io"><tt class="docutils literal"><span class="pre">io</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-plot"><tt class="docutils literal"><span class="pre">plot</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-sequtils"><tt class="docutils literal"><span class="pre">sequtils</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-tree"><tt class="docutils literal"><span class="pre">tree</span></tt> Module</a><ul>
@@ -2299,7 +2305,7 @@ interval.</li>
     </div>
     <div class="footer">
         &copy; Copyright 2013, Jesse Bloom.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

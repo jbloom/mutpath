@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,7 +13,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -63,10 +61,12 @@
 below in this documentation. If you name this input file <tt class="docutils literal"><span class="pre">infile.txt</span></tt>, then you would
 run the script with the single
 input file as an argument:</p>
-<div class="highlight-python"><pre>mutpath_parse_to_beastxml.py infile.txt</pre>
+<div class="highlight-python"><div class="highlight"><pre>mutpath_parse_to_beastxml.py infile.txt
+</pre></div>
 </div>
 <p>If the script is not executable on your platform, you can use:</p>
-<div class="highlight-python"><pre>python mutpath_parse_to_beastxml.py infile.txt</pre>
+<div class="highlight-python"><div class="highlight"><pre>python mutpath_parse_to_beastxml.py infile.txt
+</pre></div>
 </div>
 <p>Various variables must be specified in the script input file as described below.</p>
 <p>This script goes through a FASTA file and parses out the
@@ -84,22 +84,28 @@ outliers for exclusion use the <em>excludeseqs</em> option. This requires
 running the script once to identify the outliers, and then running
 it again with <em>excludeseqs</em> set to those sequences.</p>
 <p>The sequences are provided in the FASTA input files specified by <em>seqfile</em>, <em>startseq</em>, and <em>endseq</em> and should have headers of the following format:</p>
-<div class="highlight-python"><pre>&gt;cds:AEB71984 A/Boston/99/2009 2009/04/27 NP</pre>
+<div class="highlight-python"><div class="highlight"><pre>&gt;cds:AEB71984 A/Boston/99/2009 2009/04/27 NP
+</pre></div>
 </div>
 <p>or:</p>
-<div class="highlight-python"><pre>&gt;cds:AEB71984 A/Boston/99/2009 2009-04-27 NP</pre>
+<div class="highlight-python"><div class="highlight"><pre>&gt;cds:AEB71984 A/Boston/99/2009 2009-04-27 NP
+</pre></div>
 </div>
 <p>or:</p>
-<div class="highlight-python"><pre>&gt;cds:BAA00478 A/Texas/1/1977 1977-- NP</pre>
+<div class="highlight-python"><div class="highlight"><pre>&gt;cds:BAA00478 A/Texas/1/1977 1977-- NP
+</pre></div>
 </div>
 <p>or:</p>
-<div class="highlight-python"><pre>&gt;cds:BAA00478 A/Texas/1/1977 1977// NP</pre>
+<div class="highlight-python"><div class="highlight"><pre>&gt;cds:BAA00478 A/Texas/1/1977 1977// NP
+</pre></div>
 </div>
 <p>The strain names are extracted and the dates appended after an underscore:</p>
-<div class="highlight-python"><pre>A/Boston/99/2009_2009.32</pre>
+<div class="highlight-python"><div class="highlight"><pre>A/Boston/99/2009_2009.32
+</pre></div>
 </div>
 <p>or:</p>
-<div class="highlight-python"><pre>A/Texas/1/1977_1977.0.50</pre>
+<div class="highlight-python"><div class="highlight"><pre>A/Texas/1/1977_1977.0.50
+</pre></div>
 </div>
 <p>In the creation of the output file specified by <em>outfileprefix</em>, any square brackets <em>[</em> or <em>]</em> are converted to regular parentheses <em>(</em> or <em>)</em> because square brackets cause problems for <a class="reference external" href="http://beast.bio.ed.ac.uk/TreeAnnotator">TreeAnnotator</a> in later analyses. Any spaces in the sequence names are converted to underscores.</p>
 <p>You are asked to specify a starting sequence <em>startseq</em> which serves as
@@ -130,13 +136,16 @@ have identical names in this format, then they are named as strain_2_date, etc.<
 <p>The input file format is a .txt file that specifies the following entries:</p>
 <p><em>seqfile</em>  is the name of a FASTA file containing the large set of sequences to be analyzed.
 These sequences should have headers in the following format:</p>
-<div class="highlight-python"><pre>&gt;cds:AEB71984 A/Boston/99/2009 2009/04/27 NP</pre>
+<div class="highlight-python"><div class="highlight"><pre>&gt;cds:AEB71984 A/Boston/99/2009 2009/04/27 NP
+</pre></div>
 </div>
 <p>or:</p>
-<div class="highlight-python"><pre>&gt;cds:BAA00478 A/Texas/1/1977 1977// NP</pre>
+<div class="highlight-python"><div class="highlight"><pre>&gt;cds:BAA00478 A/Texas/1/1977 1977// NP
+</pre></div>
 </div>
 <p>or:</p>
-<div class="highlight-python"><pre>&gt;cds:AEB71984 A/Boston/99/2009 2009-04-27 NP</pre>
+<div class="highlight-python"><div class="highlight"><pre>&gt;cds:AEB71984 A/Boston/99/2009 2009-04-27 NP
+</pre></div>
 </div>
 <p>In particular, the second entry is presumed to give the strain name,
 and the third entry must give the date of isolation, including at least
@@ -181,10 +190,11 @@ should list the full header for each sequence to be excluded on a separate line,
 with the headers in the same format they appear in <em>seqfile</em>, <em>endseq</em>, or <em>startseq</em>. It is OK if there is more text after the header, meaning that you can copy directly from the <em>divergenceranking</em> text files.
 You can assign <em>excludeseqs</em> to either an empty but existing
 file or to None if you don&#8217;t want to exclude anything. For example, here is a valid file:</p>
-<div class="highlight-python"><pre>cds:ADX87378 A/Beijing/080302/2009 2009/08/03 NP    0.93574
+<div class="highlight-python"><div class="highlight"><pre>cds:ADX87378 A/Beijing/080302/2009 2009/08/03 NP    0.93574
 cds:ADX21092 A/Cambodia/NHRCC00010/2009 2009/10/15 NP   0.93712
 cds:AAK18005 A/Hong Kong/497/97 1997// NP   0.93775
-cds:ACX46212 A/Darwin/4/2005 2005/06/01 NP  0.93775</pre>
+cds:ACX46212 A/Darwin/4/2005 2005/06/01 NP  0.93775
+</pre></div>
 </div>
 <p><em>outfileprefix</em> is the prefix that is assigned to the .fasta, .nex, and .xml
 files created by this script.</p>
@@ -203,7 +213,7 @@ sure the value that you set here is consistent with your choice for <em>translat
 <div class="section" id="example-input-file">
 <h2>Example input file<a class="headerlink" href="#example-input-file" title="Permalink to this headline">¶</a></h2>
 <p>Here is an example input file. In the input files, any lines beginning with a # character or that are empty are ignored. Otherwise entries should be specified by the name of the variable being specified followed by the specified value:</p>
-<div class="highlight-python"><pre># input file for mutpath_parse_to_beastxml.py
+<div class="highlight-python"><div class="highlight"><pre># input file for mutpath_parse_to_beastxml.py
 # Builds a BEAST XML file from translated nucleotide sequences.
 seqfile NPhumanH3N2.fasta
 startseq Aichi1968_NP.fasta
@@ -219,7 +229,8 @@ chainlength 20000000
 screenloginterval 1000
 fileloginterval 10000
 usemarkovjumps True
-sitemodel JTT</pre>
+sitemodel JTT
+</pre></div>
 </div>
 </div>
 </div>
@@ -288,7 +299,7 @@ sitemodel JTT</pre>
     </div>
     <div class="footer">
         &copy; Copyright 2013, Jesse Bloom.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

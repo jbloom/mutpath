@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,7 +13,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -59,6 +57,7 @@
   <div class="section" id="influenza-np-1918-descended">
 <h1>influenza NP 1918 descended<a class="headerlink" href="#influenza-np-1918-descended" title="Permalink to this headline">¶</a></h1>
 <p>An analysis of the evolution of nucleoprotein (NP) from influenza viruses (human and swine) descended from the 1918 virus.</p>
+<p>This is the analysis used to create the mutational paths in <a class="reference external" href="http://jbloom.github.io/mutpath/example_influenza_NP_1918_Descended.html">Gong and Bloom, 2014</a>.</p>
 <p>This analysis is found in the <tt class="docutils literal"><span class="pre">./examples/influenza_NP_1918_Descended/</span></tt> subdirectory of the main <a class="reference external" href="https://github.com/jbloom/mutpath">mutpath</a> repository <a class="reference external" href="https://github.com/jbloom/mutpath">on GitHub</a>.</p>
 <p>This analysis was performed by <a class="reference external" href="http://research.fhcrc.org/bloom/en.html">Jesse Bloom</a>.</p>
 <div class="section" id="software-used">
@@ -103,12 +102,14 @@ viruses in the human lineage. These are:</p>
 <blockquote>
 <div><ol class="arabic">
 <li><p class="first">Extract the human NP sequences descended from the 1918 virus into <em>Human_NP_nts.fasta</em> and <em>Human_NP_proteins.fasta</em>:</p>
-<div class="highlight-python"><pre>python get_human_seqs.py</pre>
+<div class="highlight-python"><div class="highlight"><pre>python get_human_seqs.py
+</pre></div>
 </div>
 </li>
 <li><p class="first">Build a <a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> tree (no date stamping) to allow visual inspection for possible outliers, and write this tree to the <tt class="docutils literal"><span class="pre">RAxML_output</span></tt> subdirectory:</p>
-<div class="highlight-python"><pre>/Users/jbloom/standard-RAxML-master/raxmlHPC -w /Users/jbloom/mutpath/examples/influenza_NP_1918_Descended/RAxML_output -n Human_NP_nts -p 1 -m GTRCAT -s Human_NP_nts.fasta
-/Users/jbloom/standard-RAxML-master/raxmlHPC -w /Users/jbloom/mutpath/examples/influenza_NP_1918_Descended/RAxML_output -n Human_NP_proteins -p 1 -m PROTCATJTT -s Human_NP_proteins.fasta</pre>
+<div class="highlight-python"><div class="highlight"><pre>/Users/jbloom/standard-RAxML-master/raxmlHPC -w /Users/jbloom/mutpath/examples/influenza_NP_1918_Descended/RAxML_output -n Human_NP_nts -p 1 -m GTRCAT -s Human_NP_nts.fasta
+/Users/jbloom/standard-RAxML-master/raxmlHPC -w /Users/jbloom/mutpath/examples/influenza_NP_1918_Descended/RAxML_output -n Human_NP_proteins -p 1 -m PROTCATJTT -s Human_NP_proteins.fasta
+</pre></div>
 </div>
 <p>The trees were then visually inspected using <a class="reference external" href="http://tree.bio.ed.ac.uk/software/pathogen/">Path-O-Gen</a>, and clear outliers from the molecular clock were removed by adding them to <em>JDB_Anomalies.txt</em> and re-running the analysis.</p>
 </li>
@@ -124,12 +125,14 @@ to <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/197681
 <blockquote>
 <div><ol class="arabic">
 <li><p class="first">Extract the swine NP sequences descended from the 1918 virus into <em>Swine_NP_nts.fasta</em> and <em>Swine_NP_proteins.fasta</em>:</p>
-<div class="highlight-python"><pre>python get_swine_seqs.py</pre>
+<div class="highlight-python"><div class="highlight"><pre>python get_swine_seqs.py
+</pre></div>
 </div>
 </li>
 <li><p class="first">Build a <a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> tree (no date stamping) to allow visual inspection for possible outliers, and write this tree to the <tt class="docutils literal"><span class="pre">RAxML_output</span></tt> subdirectory:</p>
-<div class="highlight-python"><pre>/Users/jbloom/standard-RAxML-master/raxmlHPC -w /Users/jbloom/mutpath/examples/influenza_NP_1918_Descended/RAxML_output -n Swine_NP_nts -p 1 -m GTRCAT -s Swine_NP_nts.fasta
-/Users/jbloom/standard-RAxML-master/raxmlHPC -w /Users/jbloom/mutpath/examples/influenza_NP_1918_Descended/RAxML_output -n Swine_NP_proteins -p 1 -m PROTCATJTT -s Swine_NP_proteins.fasta</pre>
+<div class="highlight-python"><div class="highlight"><pre>/Users/jbloom/standard-RAxML-master/raxmlHPC -w /Users/jbloom/mutpath/examples/influenza_NP_1918_Descended/RAxML_output -n Swine_NP_nts -p 1 -m GTRCAT -s Swine_NP_nts.fasta
+/Users/jbloom/standard-RAxML-master/raxmlHPC -w /Users/jbloom/mutpath/examples/influenza_NP_1918_Descended/RAxML_output -n Swine_NP_proteins -p 1 -m PROTCATJTT -s Swine_NP_proteins.fasta
+</pre></div>
 </div>
 <p>The trees were then visually inspected using <a class="reference external" href="http://tree.bio.ed.ac.uk/software/pathogen/">Path-O-Gen</a>, and clear outliers from the molecular clock were removed by adding them to <em>JDB_Anomalies.txt</em> and re-running the analysis.</p>
 </li>
@@ -139,12 +142,14 @@ to <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/197681
 <div class="section" id="combined-human-and-swine-lineages">
 <h3>Combined human and swine lineages<a class="headerlink" href="#combined-human-and-swine-lineages" title="Permalink to this headline">¶</a></h3>
 <p>The human and swine files were combined into <em>Combined_NP_nts.fasta</em> and <em>Combined_NP_proteins.fasta</em>:</p>
-<div class="highlight-python"><pre>cat Human_NP_nts.fasta Swine_NP_nts.fasta &gt; Combined_NP_nts.fasta
-cat Human_NP_proteins.fasta Swine_NP_proteins.fasta &gt; Combined_NP_proteins.fasta</pre>
+<div class="highlight-python"><div class="highlight"><pre>cat Human_NP_nts.fasta Swine_NP_nts.fasta &gt; Combined_NP_nts.fasta
+cat Human_NP_proteins.fasta Swine_NP_proteins.fasta &gt; Combined_NP_proteins.fasta
+</pre></div>
 </div>
 <p><a class="reference external" href="https://github.com/stamatak/standard-RAxML">RAxML</a> was then used to build a tree (no date stamping) with:</p>
-<div class="highlight-python"><pre>/Users/jbloom/standard-RAxML-master/raxmlHPC -w /Users/jbloom/mutpath/examples/influenza_NP_1918_Descended/RAxML_output -n Combined_NP_nts -p 1 -m GTRCAT -s Combined_NP_nts.fasta
-/Users/jbloom/standard-RAxML-master/raxmlHPC -w /Users/jbloom/mutpath/examples/influenza_NP_1918_Descended/RAxML_output -n Combined_NP_proteins -p 1 -m PROTCATJTT -s Combined_NP_proteins.fasta</pre>
+<div class="highlight-python"><div class="highlight"><pre>/Users/jbloom/standard-RAxML-master/raxmlHPC -w /Users/jbloom/mutpath/examples/influenza_NP_1918_Descended/RAxML_output -n Combined_NP_nts -p 1 -m GTRCAT -s Combined_NP_nts.fasta
+/Users/jbloom/standard-RAxML-master/raxmlHPC -w /Users/jbloom/mutpath/examples/influenza_NP_1918_Descended/RAxML_output -n Combined_NP_proteins -p 1 -m PROTCATJTT -s Combined_NP_proteins.fasta
+</pre></div>
 </div>
 <p>This tree was then visually analyzed using <a class="reference external" href="http://tree.bio.ed.ac.uk/software/pathogen/">Path-O-Gen</a> to confirm that it appears to be fairly clock-like given the date stamps for the tips.</p>
 </div>
@@ -155,23 +160,26 @@ cat Human_NP_proteins.fasta Swine_NP_proteins.fasta &gt; Combined_NP_proteins.fa
 <h3>Running <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a><a class="headerlink" href="#running-beast" title="Permalink to this headline">¶</a></h3>
 <p>The file <em>Combined_NP_proteins.xml</em> was constructed from the sequences in <em>Combined_NP_proteins.fasta</em> as a <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> input file using a combination of <a class="reference external" href="http://beast.bio.ed.ac.uk/BEAUti">BEAUTI</a> and hand-annotation. This XML file specifies date-stamped sequences, a strict molecular clock, and a JTT model of substitution.</p>
 <p>This file was then used as the input for four different runs of <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">BEAST</a> (version 1.8pre Prelease r5356) using the <a class="reference external" href="http://beast.bio.ed.ac.uk/BEAGLE">BEAGLE</a> (revision 1093) library, which were performed in the subdirectories <tt class="docutils literal"><span class="pre">run1/</span></tt>, <tt class="docutils literal"><span class="pre">run2/</span></tt>, etc. These runs were performed on the FHCRC&#8217;s rhino cluster using <tt class="docutils literal"><span class="pre">sbatch</span></tt> with the command:</p>
-<div class="highlight-python"><pre>sbatch run.sbatch</pre>
+<div class="highlight-python"><div class="highlight"><pre>sbatch run.sbatch
+</pre></div>
 </div>
 <p>where the contents of the <tt class="docutils literal"><span class="pre">run.sbatch</span></tt> file was as follows:</p>
-<div class="highlight-python"><pre>#!/bin/sh
+<div class="highlight-python"><div class="highlight"><pre>#!/bin/sh
 #SBATCH
 #PBS -l walltime=480:00:00
-echo "Starting..."
+echo &quot;Starting...&quot;
 java -Xmx4048m -Xms4048m -Djava.library.path=/home/jbloom/BEAGLE_libs/lib -cp ~/BEAST/build/dist/beast.jar dr.app.beast.BeastMain -beagle Combined_NP_proteins.xml
-echo "Finished."</pre>
+echo &quot;Finished.&quot;
+</pre></div>
 </div>
 <p>The identical command was executed in all four run directories.</p>
 <p>Inspection of the <tt class="docutils literal"><span class="pre">.log</span></tt> files with <a class="reference external" href="http://beast.bio.ed.ac.uk/Main_Page">Tracer</a> indicated that the runs (each of 20 million steps with trees saved every 10,000 steps) appeared to have equilibrated after about 2.5 million steps (the first 250 saved trees). If these are removed as burn-in and the four runs are combined, the effective sample sizes seem adequate to suggest MCMC convergence.</p>
 <p>Each of the <tt class="docutils literal"><span class="pre">.trees</span></tt> files were compacted:</p>
-<div class="highlight-python"><pre>mutpath_compact_trees.py run1/Combined_NP_proteins.trees
+<div class="highlight-python"><div class="highlight"><pre>mutpath_compact_trees.py run1/Combined_NP_proteins.trees
 mutpath_compact_trees.py run2/Combined_NP_proteins.trees
 mutpath_compact_trees.py run3/Combined_NP_proteins.trees
-mutpath_compact_trees.py run4/Combined_NP_proteins.trees</pre>
+mutpath_compact_trees.py run4/Combined_NP_proteins.trees
+</pre></div>
 </div>
 <p>This created the files <tt class="docutils literal"><span class="pre">run1/Combined_NP_proteins_compact.trees</span></tt>, etc.</p>
 <p>Note that these <tt class="docutils literal"><span class="pre">.trees</span></tt> files are not included in the <a class="reference external" href="https://github.com/jbloom/mutpath">mutpath</a> repository on GitHub due to large file sizes.</p>
@@ -186,11 +194,12 @@ mutpath_compact_trees.py run4/Combined_NP_proteins.trees</pre>
 </ol>
 </div></blockquote>
 <p>The human H3N2 trajectory was built using the command:</p>
-<div class="highlight-python"><pre>mutpath_get_paths.py get_paths_infile_human_H3N2.txt
-mutpath_make_digraph.py make_digraph_infile_human_H3N2.txt</pre>
+<div class="highlight-python"><div class="highlight"><pre>mutpath_get_paths.py get_paths_infile_human_H3N2.txt
+mutpath_make_digraph.py make_digraph_infile_human_H3N2.txt
+</pre></div>
 </div>
 <p>where the contents of <tt class="docutils literal"><span class="pre">get_paths_infile_human_H3N2.txt</span></tt> are:</p>
-<div class="highlight-python"><pre># input file to mutpath_get_paths.py
+<div class="highlight-python"><div class="highlight"><pre># input file to mutpath_get_paths.py
 intreefiles run1/Combined_NP_proteins_compact.trees run2/Combined_NP_proteins_compact.trees run3/Combined_NP_proteins_compact.trees run4/Combined_NP_proteins_compact.trees
 burnin 250
 mergedtreesfile merged_Combined_NP_proteins_compact.trees
@@ -198,10 +207,11 @@ fastafile Combined_NP_proteins.fasta
 seqtype protein
 startseq 1968.50_COUNT1_STRAIN_A/Aichi/2/1968_HOST_Human_SUBTYPE_H3N2_DATE_1968.50
 endseq 2012.93_COUNT98_STRAIN_A/Texas/JMM_49/2012_HOST_Human_SUBTYPE_H3N2_DATE_2012.93
-mutpathsfile human_H3N2_mutpaths.txt</pre>
+mutpathsfile human_H3N2_mutpaths.txt
+</pre></div>
 </div>
 <p>and the contents of <em>make_digraph_infile_human_H3N2.txt</em> are:</p>
-<div class="highlight-python"><pre># input file to mutpath_make_digraph.py
+<div class="highlight-python"><div class="highlight"><pre># input file to mutpath_make_digraph.py
 mutpathfile human_H3N2_mutpaths.txt
 translateseqs False
 dotfile human_H3N2_trajectory.dot
@@ -210,11 +220,13 @@ labelcutoff 0.6
 nodenamefile None
 mutationdates human_H3N2_mutationdates
 lasttipdate 2012.93
-persistencefile human_H3N2_persistence.txt</pre>
+persistencefile human_H3N2_persistence.txt
+</pre></div>
 </div>
 <p>The swine trajectory was built using:</p>
-<div class="highlight-python"><pre>mutpath_get_paths.py get_paths_infile_swine.txt
-mutpath_make_digraph.py make_digraph_infile_swine.txt</pre>
+<div class="highlight-python"><div class="highlight"><pre>mutpath_get_paths.py get_paths_infile_swine.txt
+mutpath_make_digraph.py make_digraph_infile_swine.txt
+</pre></div>
 </div>
 <p>where the input files <em>get_paths_infile_swine.txt</em> and <em>make_digraph_infile_swine.txt</em> are modified to specify the correct swine sequences and dates.</p>
 <p>The key output of these runs are the <a class="reference external" href="http://www.graphviz.org/doc/info/lang.html">DOT</a> files displaying the trajectories, which can be visualized using <a class="reference external" href="http://www.graphviz.org/">GraphViz</a>:</p>
@@ -233,14 +245,14 @@ mutpath_make_digraph.py make_digraph_infile_swine.txt</pre>
 <div class="section" id="swine-influenza-mutational-trajectory">
 <h4>swine influenza mutational trajectory<a class="headerlink" href="#swine-influenza-mutational-trajectory" title="Permalink to this headline">¶</a></h4>
 <div class="figure align-center">
-<img alt="swine_trajectory.jpg" src="_images/swine_trajectory.jpg" style="width: 45%;" />
+<a class="reference internal image-reference" href="_images/swine_trajectory.jpg"><img alt="swine_trajectory.jpg" src="_images/swine_trajectory.jpg" style="width: 45%;" /></a>
 <p class="caption">Mutational trajectory for swine influenza.</p>
 </div>
 </div>
 <div class="section" id="human-h3n2-mutational-trajectory">
 <h4>Human H3N2 mutational trajectory<a class="headerlink" href="#human-h3n2-mutational-trajectory" title="Permalink to this headline">¶</a></h4>
 <div class="figure align-center">
-<img alt="human_H3N2_trajectory.jpg" src="_images/human_H3N2_trajectory.jpg" style="width: 55%;" />
+<a class="reference internal image-reference" href="_images/human_H3N2_trajectory.jpg"><img alt="human_H3N2_trajectory.jpg" src="_images/human_H3N2_trajectory.jpg" style="width: 55%;" /></a>
 <p class="caption">Mutational trajectory for human H3N2. Note that the beginning of this trajectory is slightly different from that in <a class="reference external" href="http://elife.elifesciences.org/content/2/e00631">Gong et al, 2013</a> possibly because of the inclusion of additional sequences from H2N2 that contribute to the early part of the phylogenetic tree.</p>
 </div>
 </div>
@@ -248,17 +260,20 @@ mutpath_make_digraph.py make_digraph_infile_swine.txt</pre>
 <div class="section" id="building-the-maximum-clade-credibility-tree">
 <h3>Building the maximum clade credibility tree<a class="headerlink" href="#building-the-maximum-clade-credibility-tree" title="Permalink to this headline">¶</a></h3>
 <p>In addition, the <tt class="docutils literal"><span class="pre">mutpath_get_paths.py</span></tt> runs created the merged <tt class="docutils literal"><span class="pre">.trees</span></tt> file <em>merged_Combined_NP_proteins.fasta</em>, which was used to build the maximum clade credibility tree <em>maxcladecredibility.trees</em> using <a class="reference external" href="http://beast.bio.ed.ac.uk/TreeAnnotator">TreeAnnotator</a> (version 1.7.5) with the command:</p>
-<div class="highlight-python"><pre>~/BEASTv1.7.5/bin/treeannotator merged_Combined_NP_proteins_compact.trees maxcladecredibility.trees</pre>
+<div class="highlight-python"><div class="highlight"><pre>~/BEASTv1.7.5/bin/treeannotator merged_Combined_NP_proteins_compact.trees maxcladecredibility.trees
+</pre></div>
 </div>
 <p>This tree was then manually edited using <tt class="docutils literal"><span class="pre">mutpath_annotate_tree.py</span></tt> to create <tt class="docutils literal"><span class="pre">annotated_maxcladecredibility.trees</span></tt> by the command:</p>
-<div class="highlight-python"><pre>mutpath_annotate_tree.py annotate_tree_infile.txt</pre>
+<div class="highlight-python"><div class="highlight"><pre>mutpath_annotate_tree.py annotate_tree_infile.txt
+</pre></div>
 </div>
 <p>The output file <tt class="docutils literal"><span class="pre">annotated_maxcladecredibility.trees</span></tt> was then opened in <a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a> where it was saved to <tt class="docutils literal"><span class="pre">handannotated_maxcladecredibility.trees</span></tt> and annotated further by hand. The image was then saved using <a class="reference external" href="http://tree.bio.ed.ac.uk/software/figtree/">FigTree</a> as <tt class="docutils literal"><span class="pre">handannotated_maxcladecredibility.pdf</span></tt> and then converted to a JPG with:</p>
-<div class="highlight-python"><pre>convert -density 400 handannotated_maxcladecredibility.pdf handannotated_maxcladecredibility.jpg</pre>
+<div class="highlight-python"><div class="highlight"><pre>convert -density 400 handannotated_maxcladecredibility.pdf handannotated_maxcladecredibility.jpg
+</pre></div>
 </div>
 <p>This tree is shown below:</p>
 <div class="figure align-center">
-<img alt="handannotated_maxcladecredibility.jpg" src="_images/handannotated_maxcladecredibility.jpg" style="width: 85%;" />
+<a class="reference internal image-reference" href="_images/handannotated_maxcladecredibility.jpg"><img alt="handannotated_maxcladecredibility.jpg" src="_images/handannotated_maxcladecredibility.jpg" style="width: 85%;" /></a>
 <p class="caption">Maximum clade credibility tree of NPs descended from 1918 virus. The swine trajectory is in green and the human H3N2 in red.</p>
 </div>
 </div>
@@ -344,7 +359,7 @@ mutpath_make_digraph.py make_digraph_infile_swine.txt</pre>
     </div>
     <div class="footer">
         &copy; Copyright 2013, Jesse Bloom.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,7 +13,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -74,10 +72,12 @@ if there are mutational cycles), the node or edge is only considered to have
 occurred once in that path for the purposes of assigning the weights.</p>
 <p>To run this script, create an input file of the format described below. Then
 run the script with that input file as an argument:</p>
-<div class="highlight-python"><pre>mutpath_make_digraph.py infile.txt</pre>
+<div class="highlight-python"><div class="highlight"><pre>mutpath_make_digraph.py infile.txt
+</pre></div>
 </div>
 <p>If the script is not executable on your platform, you can use:</p>
-<div class="highlight-python"><pre>python mutpath_make_digraph.py infile.txt</pre>
+<div class="highlight-python"><div class="highlight"><pre>python mutpath_make_digraph.py infile.txt
+</pre></div>
 </div>
 <div class="section" id="input-file-format">
 <h2>Input file format<a class="headerlink" href="#input-file-format" title="Permalink to this headline">¶</a></h2>
@@ -94,14 +94,15 @@ run the script with that input file as an argument:</p>
 <li><p class="first"><em>labelcutoff</em> specifies the minimum weight that an edge must possess in order for it to be labeled with text showing the mutation for that edge. In addition, all nodes with weights &gt;= <em>labelcutoff</em> have an incoming and outgoing edge that is also labeled. If there is not an actual labeled graph edge with a weight &gt;= <em>labelcutoff</em> to such nodes, then a line spanning several nodes is drawn in another color to connect. Generally, you want <em>labelcutoff</em> &gt; 0.5, and it is possible that the program will run into problems if this is not the case.</p>
 </li>
 <li><p class="first"><em>nodenamefile</em> is a <tt class="docutils literal"><span class="pre">*.fasta</span></tt> file that allows you to specify names for specific nodes in the trajectory. These names are written on each specified node that also has a weight &gt;= <em>labelcutoff</em> (nodes in <em>nodenamefile</em> with weights &lt; <em>labelcutoff</em> are not labeled). If you do not want to use this option, then set this parameter to None. Otherwise, it should be the name of an existing text file. Each header should specify the name given to a node, and the sequences are the sequences of that node. Note that if <em>translateseqs</em> is True then <em>nodenamefile</em> should specify the names for the protein sequences, not the gene sequences, as the trajectory itself will be in protein sequence space in that case. For example, the file below specifies node names for four sequences, two as string names and two as numbers:</p>
-<div class="highlight-python"><pre>&gt;Aichi/1968
+<div class="highlight-python"><div class="highlight"><pre>&gt;Aichi/1968
 MASTVW
 &gt;Brisbane/2007
 MATWVG
 &gt;1
 MATTVW
 &gt;2
-MATWVG</pre>
+MATWVG
+</pre></div>
 </div>
 <p>When naming the nodes, you must know the protein sequence that they have. The node name is assigned to the node in the mutational path that has that sequence.</p>
 </li>
@@ -116,7 +117,7 @@ MATWVG</pre>
 <div class="section" id="example-input-file">
 <h2>Example input file<a class="headerlink" href="#example-input-file" title="Permalink to this headline">¶</a></h2>
 <p>Here is an example input file:</p>
-<div class="highlight-python"><pre># input file for mutpath_make_digraph.py
+<div class="highlight-python"><div class="highlight"><pre># input file for mutpath_make_digraph.py
 mutpathfile prot_mutpaths.txt
 translateseqs False
 dotfile prot_trajectory.dot
@@ -125,7 +126,8 @@ labelcutoff 0.6
 nodenamefile nodenames.fasta
 mutationdates prot_mutationdates
 lasttipdate 2010.69
-persistencefile persistence.txt</pre>
+persistencefile persistence.txt
+</pre></div>
 </div>
 </div>
 <div class="section" id="output-files">
@@ -205,7 +207,7 @@ persistencefile persistence.txt</pre>
     </div>
     <div class="footer">
         &copy; Copyright 2013, Jesse Bloom.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>
