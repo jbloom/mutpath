@@ -71,6 +71,7 @@ def main():
         re.compile('c\_allTransitions\[\d+\]\=\d+\.\d+'),
         re.compile('\&states="[A-Z]+"\,'),
         re.compile('\&states="[A-Z]+"'),
+        re.compile('states="[A-Z]+"'),
         re.compile('\[\]'),
         ]
     history_match = re.compile('history\_all\=\{')
